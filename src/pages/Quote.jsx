@@ -87,7 +87,7 @@ export default function Quote() {
         particleCount: 80,
         spread: 60,
         origin: { y: 0.6 },
-        colors: ['#c59b27', '#18191b', '#b8860b']
+        colors: ['#15b498', '#0f2a4a', '#1f66a8']
       });
     }, 600);
   };
@@ -116,45 +116,45 @@ export default function Quote() {
         breadcrumbs={[{ name: 'Request a Quote' }]}
       />
 
-      <section className="py-20 bg-[#faf8f5]">
+      <section className="py-20 bg-[#f7f9fc]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#e4e2dd] shadow-xl">
+          <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#dbe4ee] shadow-xl">
             {submittedId ? (
               <div className="text-center py-10 space-y-6">
                 <CheckCircle2 className="w-16 h-16 text-emerald-600 mx-auto" />
                 <div className="space-y-2">
-                  <span className="text-xs uppercase tracking-widest font-bold text-[#b8860b]">
+                  <span className="text-xs uppercase tracking-widest font-bold text-[#1f66a8]">
                     Proposal Reference #{submittedId}
                   </span>
-                  <h3 className="font-serif text-3xl font-bold text-[#18191b]">
+                  <h3 className="font-serif text-3xl font-bold text-[#0f2a4a]">
                     Proposal Specifications Logged
                   </h3>
-                  <p className="text-sm text-[#686a71] max-w-lg mx-auto">
+                  <p className="text-sm text-[#56667a] max-w-lg mx-auto">
                     Thank you, <strong>{formData.fullName}</strong>. Your custom print configuration has been stored locally. A dedicated account manager from our Naraina facility will prepare your customized SLA rate card.
                   </p>
                 </div>
 
-                <div className="p-6 bg-[#faf8f5] rounded-2xl border border-[#e4e2dd] max-w-md mx-auto text-xs text-left space-y-2">
+                <div className="p-6 bg-[#f7f9fc] rounded-2xl border border-[#dbe4ee] max-w-md mx-auto text-xs text-left space-y-2">
                   <div className="flex justify-between">
-                    <span className="text-[#686a71]">Client:</span>
+                    <span className="text-[#56667a]">Client:</span>
                     <span className="font-semibold">{formData.fullName} {formData.companyName ? `(${formData.companyName})` : ''}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#686a71]">Division:</span>
+                    <span className="text-[#56667a]">Division:</span>
                     <span className="font-semibold">{formData.service}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#686a71]">Substrate & Finish:</span>
+                    <span className="text-[#56667a]">Substrate & Finish:</span>
                     <span className="font-semibold">{formData.paperGSM} • {formData.finish}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#686a71]">Batch Units:</span>
+                    <span className="text-[#56667a]">Batch Units:</span>
                     <span className="font-semibold">{formData.quantity} units</span>
                   </div>
                   {formData.uploadedFileName && (
                     <div className="flex justify-between">
-                      <span className="text-[#686a71]">Attached Artwork:</span>
+                      <span className="text-[#56667a]">Attached Artwork:</span>
                       <span className="font-semibold">{formData.uploadedFileName}</span>
                     </div>
                   )}
@@ -170,7 +170,7 @@ export default function Quote() {
                   </button>
                   <button
                     onClick={() => setSubmittedId(null)}
-                    className="px-8 py-3.5 rounded-full bg-[#18191b] text-white font-semibold text-xs uppercase tracking-wider hover:bg-[#27282b] transition-all"
+                    className="px-8 py-3.5 rounded-full bg-[#0f2a4a] text-white font-semibold text-xs uppercase tracking-wider hover:bg-[#17375e] transition-all"
                   >
                     Configure Another Batch
                   </button>
@@ -181,12 +181,12 @@ export default function Quote() {
                 
                 {/* Step 1: Client Information */}
                 <div>
-                  <h4 className="font-serif text-lg font-bold text-[#18191b] border-b border-[#e4e2dd] pb-3 mb-4">
+                  <h4 className="font-serif text-lg font-bold text-[#0f2a4a] border-b border-[#dbe4ee] pb-3 mb-4">
                     1. Stakeholder & Company Details
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
                         Full Name <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -194,15 +194,15 @@ export default function Quote() {
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                         placeholder="e.g. Rajesh Mehra"
-                        className={`w-full px-4 py-2.5 rounded-xl bg-[#faf8f5] border text-xs text-[#18191b] focus:outline-none ${
-                          errors.fullName ? 'border-red-400' : 'border-[#e4e2dd] focus:border-[#b8860b]'
+                        className={`w-full px-4 py-2.5 rounded-xl bg-[#f7f9fc] border text-xs text-[#0f2a4a] focus:outline-none ${
+                          errors.fullName ? 'border-red-400' : 'border-[#dbe4ee] focus:border-[#1f66a8]'
                         }`}
                       />
                       {errors.fullName && <p className="text-[11px] text-red-500 mt-1">{errors.fullName}</p>}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
                         Company / Organization
                       </label>
                       <input
@@ -210,12 +210,12 @@ export default function Quote() {
                         value={formData.companyName}
                         onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                         placeholder="e.g. Tata SIA / Radisson Hospitality"
-                        className="w-full px-4 py-2.5 rounded-xl bg-[#faf8f5] border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#f7f9fc] border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
                         Corporate Email <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -223,26 +223,26 @@ export default function Quote() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="rajesh@company.com"
-                        className={`w-full px-4 py-2.5 rounded-xl bg-[#faf8f5] border text-xs text-[#18191b] focus:outline-none ${
-                          errors.email ? 'border-red-400' : 'border-[#e4e2dd] focus:border-[#b8860b]'
+                        className={`w-full px-4 py-2.5 rounded-xl bg-[#f7f9fc] border text-xs text-[#0f2a4a] focus:outline-none ${
+                          errors.email ? 'border-red-400' : 'border-[#dbe4ee] focus:border-[#1f66a8]'
                         }`}
                       />
                       {errors.email && <p className="text-[11px] text-red-500 mt-1">{errors.email}</p>}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
                         Mobile Number (India) <span className="text-red-500">*</span>
                       </label>
                       <div className="relative">
-                        <span className="absolute left-3.5 top-2.5 text-xs font-semibold text-[#686a71]">+91</span>
+                        <span className="absolute left-3.5 top-2.5 text-xs font-semibold text-[#56667a]">+91</span>
                         <input
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           placeholder="96500 44234"
-                          className={`w-full pl-12 pr-4 py-2.5 rounded-xl bg-[#faf8f5] border text-xs text-[#18191b] focus:outline-none ${
-                            errors.phone ? 'border-red-400' : 'border-[#e4e2dd] focus:border-[#b8860b]'
+                          className={`w-full pl-12 pr-4 py-2.5 rounded-xl bg-[#f7f9fc] border text-xs text-[#0f2a4a] focus:outline-none ${
+                            errors.phone ? 'border-red-400' : 'border-[#dbe4ee] focus:border-[#1f66a8]'
                           }`}
                         />
                       </div>
@@ -253,18 +253,18 @@ export default function Quote() {
 
                 {/* Step 2: Production Specifications */}
                 <div>
-                  <h4 className="font-serif text-lg font-bold text-[#18191b] border-b border-[#e4e2dd] pb-3 mb-4">
+                  <h4 className="font-serif text-lg font-bold text-[#0f2a4a] border-b border-[#dbe4ee] pb-3 mb-4">
                     2. Production Configuration & Quantities
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
                         Primary Division
                       </label>
                       <select
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-[#faf8f5] border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#f7f9fc] border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none"
                       >
                         {services.map(s => (
                           <option key={s.id} value={s.title}>{s.title}</option>
@@ -273,13 +273,13 @@ export default function Quote() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
                         Preferred Paper / Substrate
                       </label>
                       <select
                         value={formData.paperGSM}
                         onChange={(e) => setFormData({ ...formData, paperGSM: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-[#faf8f5] border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#f7f9fc] border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none"
                       >
                         <option value="450 GSM French Cotton Pulp Board">450 GSM French Cotton Pulp Board</option>
                         <option value="350 GSM Velvet Matte Cardstock">350 GSM Velvet Matte Cardstock</option>
@@ -292,13 +292,13 @@ export default function Quote() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
                         Artisanal Finish
                       </label>
                       <select
                         value={formData.finish}
                         onChange={(e) => setFormData({ ...formData, finish: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-[#faf8f5] border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#f7f9fc] border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none"
                       >
                         <option value="Velvet Matte + Gold Foil Stamping">Velvet Matte + Gold Foil Stamping</option>
                         <option value="Raised Spot UV Gloss Highlights">Raised Spot UV Gloss Highlights</option>
@@ -312,7 +312,7 @@ export default function Quote() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
                         Estimated Batch Quantity
                       </label>
                       <input
@@ -320,19 +320,19 @@ export default function Quote() {
                         value={formData.quantity}
                         onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
                         placeholder="e.g. 250, 500, 2500, 10000"
-                        className="w-full px-4 py-2.5 rounded-xl bg-[#faf8f5] border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#f7f9fc] border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
                         Target Dispatch Date
                       </label>
                       <input
                         type="date"
                         value={formData.deliveryDate}
                         onChange={(e) => setFormData({ ...formData, deliveryDate: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-[#faf8f5] border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#f7f9fc] border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none"
                       />
                     </div>
                   </div>
@@ -340,12 +340,12 @@ export default function Quote() {
 
                 {/* Step 3: Project Notes & Optional Artwork Attachment */}
                 <div>
-                  <h4 className="font-serif text-lg font-bold text-[#18191b] border-b border-[#e4e2dd] pb-3 mb-4">
+                  <h4 className="font-serif text-lg font-bold text-[#0f2a4a] border-b border-[#dbe4ee] pb-3 mb-4">
                     3. Project Notes & Artwork Attachment (Demo)
                   </h4>
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
                         Detailed Project Requirements & Instructions <span className="text-red-500">*</span>
                       </label>
                       <textarea
@@ -353,33 +353,33 @@ export default function Quote() {
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         placeholder="Please mention exact sizes (e.g., 89x54mm, A4), Pantone ink codes, orientation, packaging requirements, or delivery location..."
-                        className={`w-full px-4 py-2.5 rounded-xl bg-[#faf8f5] border text-xs text-[#18191b] focus:outline-none ${
-                          errors.message ? 'border-red-400' : 'border-[#e4e2dd] focus:border-[#b8860b]'
+                        className={`w-full px-4 py-2.5 rounded-xl bg-[#f7f9fc] border text-xs text-[#0f2a4a] focus:outline-none ${
+                          errors.message ? 'border-red-400' : 'border-[#dbe4ee] focus:border-[#1f66a8]'
                         }`}
                       />
                       {errors.message && <p className="text-[11px] text-red-500 mt-1">{errors.message}</p>}
                     </div>
 
                     {/* File Upload Box (Demo Mock) */}
-                    <div className="p-5 border-2 border-dashed border-[#e4e2dd] rounded-2xl bg-[#faf8f5] text-center space-y-2 hover:border-[#b8860b] transition-colors relative">
+                    <div className="p-5 border-2 border-dashed border-[#dbe4ee] rounded-2xl bg-[#f7f9fc] text-center space-y-2 hover:border-[#1f66a8] transition-colors relative">
                       <input
                         type="file"
                         onChange={handleFileChange}
                         className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                       />
-                      <UploadCloud className="w-8 h-8 text-[#b8860b] mx-auto" />
-                      <p className="text-xs font-semibold text-[#18191b]">
+                      <UploadCloud className="w-8 h-8 text-[#1f66a8] mx-auto" />
+                      <p className="text-xs font-semibold text-[#0f2a4a]">
                         {formData.uploadedFileName ? `Attached: ${formData.uploadedFileName}` : 'Click or drag artwork files here (PDF, AI, EPS, PSD, ZIP)'}
                       </p>
-                      <p className="text-[11px] text-[#686a71]">Up to 50MB. Vector curves with 3mm bleed recommended.</p>
+                      <p className="text-[11px] text-[#56667a]">Up to 50MB. Vector curves with 3mm bleed recommended.</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Submit Action */}
-                <div className="pt-4 border-t border-[#e4e2dd] flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div className="flex items-center gap-2 text-xs text-[#686a71]">
-                    <ShieldCheck className="w-4 h-4 text-[#b8860b]" />
+                <div className="pt-4 border-t border-[#dbe4ee] flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="flex items-center gap-2 text-xs text-[#56667a]">
+                    <ShieldCheck className="w-4 h-4 text-[#1f66a8]" />
                     <span>Non-disclosure & Pantone accuracy guarantee included.</span>
                   </div>
 
@@ -396,7 +396,7 @@ export default function Quote() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="flex-1 sm:flex-none px-8 py-3.5 rounded-xl bg-[#18191b] hover:bg-[#c59b27] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md disabled:opacity-50 flex items-center justify-center gap-2"
+                      className="flex-1 sm:flex-none px-8 py-3.5 rounded-xl bg-[#0f2a4a] hover:bg-[#15b498] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md disabled:opacity-50 flex items-center justify-center gap-2"
                     >
                       {isSubmitting ? <span>Calculating...</span> : <>
                         <Send className="w-3.5 h-3.5" />

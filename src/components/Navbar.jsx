@@ -53,28 +53,18 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isTransparent
             ? 'bg-transparent text-white py-5 border-b border-white/10'
-            : 'bg-[#faf8f5]/95 backdrop-blur-md text-[#18191b] py-3.5 shadow-sm border-b border-[#e4e2dd]'
+            : 'bg-[#f7f9fc]/95 backdrop-blur-md text-[#0f2a4a] py-3.5 shadow-sm border-b border-[#dbe4ee]'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-[#c59b27] text-white flex items-center justify-center font-serif font-bold text-lg transition-all shadow-md">
-                GE
-              </div>
-              <div className="flex flex-col">
-                <span className={`font-serif text-lg sm:text-xl font-bold tracking-tight transition-colors leading-none ${
-                  isTransparent ? 'text-white' : 'text-[#18191b] group-hover:text-[#b8860b]'
-                }`}>
-                  GANESHA
-                </span>
-                <span className={`text-[10px] uppercase tracking-[0.25em] font-semibold mt-1 ${
-                  isTransparent ? 'text-white/70' : 'text-[#686a71]'
-                }`}>
-                  Enterprises • New Delhi
-                </span>
-              </div>
+            <Link to="/" className="flex items-center shrink-0" aria-label="Ganesha Enterprises home">
+              <img
+                src="/logo.png"
+                alt="Ganesha Enterprises"
+                className="h-12 sm:h-14 w-auto rounded-lg bg-[#f8f8f8] px-2 py-1 shadow-md"
+              />
             </Link>
 
             {/* Desktop Navigation Links */}
@@ -88,12 +78,12 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                   <NavLink
                     to={link.path}
                     className={({ isActive }) =>
-                      `px-3.5 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-200 inline-flex items-center gap-1 rounded-full ${
+                      `px-3.5 py-2 text-xs font-semibold whitespace-nowrap uppercase tracking-wider transition-all duration-200 inline-flex items-center gap-1 rounded-full ${
                         isActive
-                          ? 'text-[#c59b27] bg-white/10 backdrop-blur-sm'
+                          ? 'text-[#15b498] bg-white/10 backdrop-blur-sm'
                           : isTransparent
-                            ? 'text-white/90 hover:text-[#c59b27] hover:bg-white/10'
-                            : 'text-[#18191b] hover:text-[#b8860b] hover:bg-black/5'
+                            ? 'text-white/90 hover:text-[#15b498] hover:bg-white/10'
+                            : 'text-[#0f2a4a] hover:text-[#1f66a8] hover:bg-black/5'
                       }`
                     }
                   >
@@ -109,36 +99,36 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
             {/* Desktop Action Buttons */}
             <div className="hidden lg:flex items-center gap-3">
               {/* Search Trigger */}
-              <button
+              {/* <button
                 onClick={onOpenSearch}
                 aria-label="Search catalog"
                 className={`p-2.5 rounded-full transition-colors ${
                   isTransparent
-                    ? 'text-white hover:text-[#c59b27] hover:bg-white/10'
-                    : 'text-[#18191b] hover:text-[#b8860b] hover:bg-black/5'
+                    ? 'text-white hover:text-[#15b498] hover:bg-white/10'
+                    : 'text-[#0f2a4a] hover:text-[#1f66a8] hover:bg-black/5'
                 }`}
                 title="Search Products & Services"
               >
                 <Search className="w-4 h-4" />
-              </button>
+              </button> */}
 
               {/* Direct Phone / WhatsApp Quick Pill */}
               <a
                 href="tel:9650044234"
-                className={`hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                className={`hidden xl:inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   isTransparent
-                    ? 'text-white bg-white/10 border border-white/20 hover:border-[#c59b27]'
-                    : 'text-[#18191b] bg-white border border-[#e4e2dd] hover:border-[#b8860b]'
+                    ? 'text-white bg-white/10 border border-white/20 hover:border-[#15b498]'
+                    : 'text-[#0f2a4a] bg-white border border-[#dbe4ee] hover:border-[#1f66a8]'
                 }`}
               >
-                <Phone className="w-3.5 h-3.5 text-[#c59b27]" />
+                <Phone className="w-3.5 h-3.5 text-[#15b498]" />
                 <span>+91 96500 44234</span>
               </a>
 
               {/* Request a Quote CTA */}
               <button
                 onClick={() => onOpenQuote()}
-                className="px-5 py-2.5 rounded-full bg-[#c59b27] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#d4aa36] transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 flex items-center gap-1.5"
+                className="px-5 py-2.5 whitespace-nowrap shrink-0 rounded-full bg-[#1f66a8] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#19558f] transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 flex items-center gap-1.5"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Request a Quote</span>
@@ -147,19 +137,19 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
 
             {/* Mobile Actions & Hamburger */}
             <div className="flex items-center gap-2 lg:hidden">
-              <button
+              {/* <button
                 onClick={onOpenSearch}
                 aria-label="Search"
                 className={`p-2 rounded-full transition-colors ${
-                  isTransparent ? 'text-white hover:bg-white/10' : 'text-[#18191b] hover:bg-black/5'
+                  isTransparent ? 'text-white hover:bg-white/10' : 'text-[#0f2a4a] hover:bg-black/5'
                 }`}
               >
                 <Search className="w-5 h-5" />
-              </button>
+              </button> */}
 
               <button
                 onClick={() => onOpenQuote()}
-                className="px-3 py-1.5 rounded-full bg-[#c59b27] text-white text-[11px] font-semibold uppercase tracking-wider shadow-sm"
+                className="px-3 py-1.5 rounded-full bg-[#1f66a8] text-white text-[11px] font-semibold uppercase tracking-wider shadow-sm"
               >
                 Quote
               </button>
@@ -168,7 +158,7 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle Menu"
                 className={`p-2 rounded-xl transition-colors ${
-                  isTransparent ? 'text-white hover:bg-white/10' : 'text-[#18191b] hover:bg-black/5'
+                  isTransparent ? 'text-white hover:bg-white/10' : 'text-[#0f2a4a] hover:bg-black/5'
                 }`}
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -186,9 +176,9 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-30 bg-[#faf8f5] pt-24 pb-8 px-6 overflow-y-auto lg:hidden animate-fadeIn">
+        <div className="fixed inset-0 z-30 bg-[#f7f9fc] pt-24 pb-8 px-6 overflow-y-auto lg:hidden animate-fadeIn">
           <div className="flex flex-col space-y-4">
-            <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold border-b border-[#e4e2dd] pb-2">
+            <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold border-b border-[#dbe4ee] pb-2">
               Navigation Menu
             </span>
 
@@ -198,8 +188,8 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                 to={link.path}
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
-                  `text-lg font-serif font-bold py-2 border-b border-[#eceae5] flex items-center justify-between ${
-                    isActive ? 'text-[#b8860b]' : 'text-[#18191b]'
+                  `text-lg font-serif font-bold py-2 border-b border-[#e6edf5] flex items-center justify-between ${
+                    isActive ? 'text-[#1f66a8]' : 'text-[#0f2a4a]'
                   }`
                 }
               >
@@ -214,9 +204,9 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                   setMobileMenuOpen(false);
                   onOpenQuote();
                 }}
-                className="w-full py-3.5 rounded-2xl bg-[#18191b] text-white font-semibold text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg"
+                className="w-full py-3.5 rounded-2xl bg-[#0f2a4a] text-white font-semibold text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg"
               >
-                <Sparkles className="w-4 h-4 text-[#c59b27]" />
+                <Sparkles className="w-4 h-4 text-[#15b498]" />
                 Request a Custom Quote
               </button>
 
@@ -232,15 +222,15 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
 
               <a
                 href={`tel:${company.contact.phone.replace(/[^0-9]/g, '')}`}
-                className="w-full py-3 rounded-2xl bg-white border border-[#e4e2dd] text-[#18191b] font-semibold text-sm flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-2xl bg-white border border-[#dbe4ee] text-[#0f2a4a] font-semibold text-sm flex items-center justify-center gap-2"
               >
-                <Phone className="w-4 h-4 text-[#b8860b]" />
+                <Phone className="w-4 h-4 text-[#1f66a8]" />
                 Call +91 96500 44234
               </a>
             </div>
 
-            <div className="pt-6 text-xs text-[#686a71] space-y-1">
-              <p className="font-semibold text-[#18191b]">{company.name}</p>
+            <div className="pt-6 text-xs text-[#56667a] space-y-1">
+              <p className="font-semibold text-[#0f2a4a]">{company.name}</p>
               <p>{company.contact.address.line1}, {company.contact.address.city}</p>
               <p>{company.contact.email}</p>
             </div>

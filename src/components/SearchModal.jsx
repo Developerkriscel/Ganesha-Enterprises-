@@ -69,31 +69,31 @@ export default function SearchModal({ isOpen, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/60 backdrop-blur-md transition-opacity animate-fadeIn">
       <div 
-        className="w-full max-w-2xl bg-[#faf8f5] rounded-2xl shadow-2xl border border-[#e4e2dd] overflow-hidden flex flex-col max-h-[80vh]"
+        className="w-full max-w-2xl bg-[#f7f9fc] rounded-2xl shadow-2xl border border-[#dbe4ee] overflow-hidden flex flex-col max-h-[80vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center gap-3 px-6 py-4 border-b border-[#e4e2dd] bg-white">
-          <Search className="w-5 h-5 text-[#b8860b]" />
+        <div className="flex items-center gap-3 px-6 py-4 border-b border-[#dbe4ee] bg-white">
+          <Search className="w-5 h-5 text-[#1f66a8]" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search products, services, portfolio, journals..."
-            className="w-full bg-transparent text-lg text-[#18191b] placeholder-[#686a71]/60 focus:outline-none"
+            className="w-full bg-transparent text-lg text-[#0f2a4a] placeholder-[#56667a]/60 focus:outline-none"
           />
           {query && (
             <button 
               onClick={() => setQuery('')}
-              className="p-1 text-[#686a71] hover:text-[#18191b] rounded-full hover:bg-[#f4f1ea]"
+              className="p-1 text-[#56667a] hover:text-[#0f2a4a] rounded-full hover:bg-[#edf3f9]"
             >
               <X className="w-4 h-4" />
             </button>
           )}
           <button 
             onClick={onClose}
-            className="ml-2 text-xs font-semibold px-2.5 py-1 bg-[#f4f1ea] text-[#686a71] rounded-md border border-[#e4e2dd] hover:bg-[#18191b] hover:text-[#faf8f5] transition-colors"
+            className="ml-2 text-xs font-semibold px-2.5 py-1 bg-[#edf3f9] text-[#56667a] rounded-md border border-[#dbe4ee] hover:bg-[#0f2a4a] hover:text-[#f7f9fc] transition-colors"
           >
             ESC
           </button>
@@ -103,13 +103,13 @@ export default function SearchModal({ isOpen, onClose }) {
         <div className="overflow-y-auto p-6 space-y-6">
           {!query && (
             <div className="text-center py-10 space-y-3">
-              <p className="text-sm font-medium text-[#686a71] tracking-wide uppercase">Quick Suggestions</p>
+              <p className="text-sm font-medium text-[#56667a] tracking-wide uppercase">Quick Suggestions</p>
               <div className="flex flex-wrap gap-2 justify-center max-w-md mx-auto">
                 {['Visiting Cards', 'Employee Welcome Kit', 'Polo T-Shirts', 'Acrylic Calendars', 'Luxury Packaging', 'Vistara Uniforms'].map((term) => (
                   <button
                     key={term}
                     onClick={() => setQuery(term)}
-                    className="text-xs px-3 py-1.5 rounded-full bg-white border border-[#e4e2dd] text-[#18191b] hover:border-[#b8860b] hover:bg-[#faf8f5] transition-colors"
+                    className="text-xs px-3 py-1.5 rounded-full bg-white border border-[#dbe4ee] text-[#0f2a4a] hover:border-[#1f66a8] hover:bg-[#f7f9fc] transition-colors"
                   >
                     {term}
                   </button>
@@ -120,14 +120,14 @@ export default function SearchModal({ isOpen, onClose }) {
 
           {query && !hasResults && (
             <div className="text-center py-12">
-              <p className="text-[#18191b] font-medium text-lg">No results found for "{query}"</p>
-              <p className="text-sm text-[#686a71] mt-1">Try searching for "visiting cards", "welcome kit", "t-shirts", or "standees"</p>
+              <p className="text-[#0f2a4a] font-medium text-lg">No results found for "{query}"</p>
+              <p className="text-sm text-[#56667a] mt-1">Try searching for "visiting cards", "welcome kit", "t-shirts", or "standees"</p>
             </div>
           )}
 
           {matchedProducts.length > 0 && (
             <div>
-              <div className="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-[#b8860b]">
+              <div className="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-[#1f66a8]">
                 <Package className="w-4 h-4" />
                 <span>Products ({matchedProducts.length})</span>
               </div>
@@ -136,21 +136,21 @@ export default function SearchModal({ isOpen, onClose }) {
                   <div
                     key={p.id}
                     onClick={() => handleSelect(`/products/${p.slug}`)}
-                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-[#f4f1ea] border border-[#eceae5] hover:border-[#b8860b] cursor-pointer transition-all duration-200 group"
+                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-[#edf3f9] border border-[#e6edf5] hover:border-[#1f66a8] cursor-pointer transition-all duration-200 group"
                   >
                     <div className="flex items-center gap-3">
                       <img 
                         src={p.image} 
                         alt={p.name}
                         onError={(e) => { e.currentTarget.src = p.backupImage; }}
-                        className="w-11 h-11 object-cover rounded-lg border border-[#eceae5]" 
+                        className="w-11 h-11 object-cover rounded-lg border border-[#e6edf5]" 
                       />
                       <div>
-                        <h4 className="text-sm font-semibold text-[#18191b] group-hover:text-[#b8860b] transition-colors">{p.name}</h4>
-                        <p className="text-xs text-[#686a71]">{p.categoryName} • MOQ: {p.moq}</p>
+                        <h4 className="text-sm font-semibold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors">{p.name}</h4>
+                        <p className="text-xs text-[#56667a]">{p.categoryName} • MOQ: {p.moq}</p>
                       </div>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#686a71] group-hover:text-[#b8860b] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-[#56667a] group-hover:text-[#1f66a8] group-hover:translate-x-1 transition-all" />
                   </div>
                 ))}
               </div>
@@ -159,7 +159,7 @@ export default function SearchModal({ isOpen, onClose }) {
 
           {matchedServices.length > 0 && (
             <div>
-              <div className="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-[#b8860b]">
+              <div className="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-[#1f66a8]">
                 <Wrench className="w-4 h-4" />
                 <span>Services ({matchedServices.length})</span>
               </div>
@@ -168,13 +168,13 @@ export default function SearchModal({ isOpen, onClose }) {
                   <div
                     key={s.id}
                     onClick={() => handleSelect(`/services/${s.slug}`)}
-                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-[#f4f1ea] border border-[#eceae5] hover:border-[#b8860b] cursor-pointer transition-all duration-200 group"
+                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-[#edf3f9] border border-[#e6edf5] hover:border-[#1f66a8] cursor-pointer transition-all duration-200 group"
                   >
                     <div>
-                      <h4 className="text-sm font-semibold text-[#18191b] group-hover:text-[#b8860b] transition-colors">{s.title}</h4>
-                      <p className="text-xs text-[#686a71]">{s.tagline}</p>
+                      <h4 className="text-sm font-semibold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors">{s.title}</h4>
+                      <p className="text-xs text-[#56667a]">{s.tagline}</p>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#686a71] group-hover:text-[#b8860b] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-[#56667a] group-hover:text-[#1f66a8] group-hover:translate-x-1 transition-all" />
                   </div>
                 ))}
               </div>
@@ -183,7 +183,7 @@ export default function SearchModal({ isOpen, onClose }) {
 
           {matchedPortfolio.length > 0 && (
             <div>
-              <div className="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-[#b8860b]">
+              <div className="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-[#1f66a8]">
                 <Image className="w-4 h-4" />
                 <span>Portfolio Projects ({matchedPortfolio.length})</span>
               </div>
@@ -192,13 +192,13 @@ export default function SearchModal({ isOpen, onClose }) {
                   <div
                     key={item.id}
                     onClick={() => handleSelect(`/portfolio#${item.id}`)}
-                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-[#f4f1ea] border border-[#eceae5] hover:border-[#b8860b] cursor-pointer transition-all duration-200 group"
+                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-[#edf3f9] border border-[#e6edf5] hover:border-[#1f66a8] cursor-pointer transition-all duration-200 group"
                   >
                     <div>
-                      <h4 className="text-sm font-semibold text-[#18191b] group-hover:text-[#b8860b] transition-colors">{item.title}</h4>
-                      <p className="text-xs text-[#686a71]">Client: {item.client} • {item.category}</p>
+                      <h4 className="text-sm font-semibold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors">{item.title}</h4>
+                      <p className="text-xs text-[#56667a]">Client: {item.client} • {item.category}</p>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#686a71] group-hover:text-[#b8860b] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-[#56667a] group-hover:text-[#1f66a8] group-hover:translate-x-1 transition-all" />
                   </div>
                 ))}
               </div>
@@ -207,7 +207,7 @@ export default function SearchModal({ isOpen, onClose }) {
 
           {matchedBlogs.length > 0 && (
             <div>
-              <div className="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-[#b8860b]">
+              <div className="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-[#1f66a8]">
                 <BookOpen className="w-4 h-4" />
                 <span>Editorial Journals ({matchedBlogs.length})</span>
               </div>
@@ -216,13 +216,13 @@ export default function SearchModal({ isOpen, onClose }) {
                   <div
                     key={b.id}
                     onClick={() => handleSelect(`/blogs/${b.slug}`)}
-                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-[#f4f1ea] border border-[#eceae5] hover:border-[#b8860b] cursor-pointer transition-all duration-200 group"
+                    className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-[#edf3f9] border border-[#e6edf5] hover:border-[#1f66a8] cursor-pointer transition-all duration-200 group"
                   >
                     <div>
-                      <h4 className="text-sm font-semibold text-[#18191b] group-hover:text-[#b8860b] transition-colors">{b.title}</h4>
-                      <p className="text-xs text-[#686a71]">{b.category} • {b.readTime}</p>
+                      <h4 className="text-sm font-semibold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors">{b.title}</h4>
+                      <p className="text-xs text-[#56667a]">{b.category} • {b.readTime}</p>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-[#686a71] group-hover:text-[#b8860b] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-[#56667a] group-hover:text-[#1f66a8] group-hover:translate-x-1 transition-all" />
                   </div>
                 ))}
               </div>

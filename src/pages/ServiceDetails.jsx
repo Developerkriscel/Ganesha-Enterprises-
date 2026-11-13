@@ -22,11 +22,11 @@ export default function ServiceDetails({ onOpenQuote }) {
   if (!service) {
     return (
       <div className="py-32 text-center max-w-lg mx-auto px-4 space-y-4">
-        <h2 className="font-serif text-3xl font-bold text-[#18191b]">Service Specification Not Found</h2>
-        <p className="text-sm text-[#686a71]">The requested printing service division could not be located in our production directory.</p>
+        <h2 className="font-serif text-3xl font-bold text-[#0f2a4a]">Service Specification Not Found</h2>
+        <p className="text-sm text-[#56667a]">The requested printing service division could not be located in our production directory.</p>
         <Link
           to="/services"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#18191b] text-white text-xs font-semibold uppercase tracking-wider"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0f2a4a] text-white text-xs font-semibold uppercase tracking-wider"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Return to All Services</span>
@@ -56,7 +56,7 @@ export default function ServiceDetails({ onOpenQuote }) {
             {/* Main Content Body */}
             <div className="lg:col-span-8 space-y-10">
               {/* Feature Image */}
-              <div className="rounded-3xl overflow-hidden aspect-[16/9] bg-[#18191b] shadow-2xl relative">
+              <div className="rounded-3xl overflow-hidden aspect-[16/9] bg-[#0f2a4a] shadow-2xl relative">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -66,22 +66,22 @@ export default function ServiceDetails({ onOpenQuote }) {
               </div>
 
               {/* Technical Description */}
-              <div className="space-y-4 text-sm sm:text-base text-[#686a71] leading-relaxed">
-                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#18191b]">
+              <div className="space-y-4 text-sm sm:text-base text-[#56667a] leading-relaxed">
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#0f2a4a]">
                   Overview & Engineering Scope
                 </h3>
                 <p>{service.longDescription}</p>
               </div>
 
               {/* Scope Deliverables */}
-              <div className="space-y-4 p-8 rounded-3xl bg-[#faf8f5] border border-[#e4e2dd]">
-                <h4 className="font-serif text-xl font-bold text-[#18191b]">
+              <div className="space-y-4 p-8 rounded-3xl bg-[#f7f9fc] border border-[#dbe4ee]">
+                <h4 className="font-serif text-xl font-bold text-[#0f2a4a]">
                   Standard Corporate Deliverables
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   {service.deliverables.map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#18191b] font-medium">
-                      <CheckCircle2 className="w-4 h-4 text-[#b8860b] shrink-0 mt-0.5" />
+                    <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#0f2a4a] font-medium">
+                      <CheckCircle2 className="w-4 h-4 text-[#1f66a8] shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -90,13 +90,13 @@ export default function ServiceDetails({ onOpenQuote }) {
 
               {/* Craft & Technical Highlights */}
               <div className="space-y-4">
-                <h4 className="font-serif text-xl font-bold text-[#18191b]">
+                <h4 className="font-serif text-xl font-bold text-[#0f2a4a]">
                   Technical Standards & Material Integrity
                 </h4>
                 <div className="space-y-2.5">
                   {service.features.map((feat, idx) => (
-                    <div key={idx} className="p-4 rounded-xl bg-white border border-[#eceae5] text-xs sm:text-sm text-[#686a71] flex items-center gap-3">
-                      <span className="w-2 h-2 rounded-full bg-[#c59b27] shrink-0"></span>
+                    <div key={idx} className="p-4 rounded-xl bg-white border border-[#e6edf5] text-xs sm:text-sm text-[#56667a] flex items-center gap-3">
+                      <span className="w-2 h-2 rounded-full bg-[#1f66a8] shrink-0"></span>
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -106,45 +106,45 @@ export default function ServiceDetails({ onOpenQuote }) {
 
             {/* Sidebar Sticky Specification Card */}
             <div className="lg:col-span-4 sticky top-28 space-y-6">
-              <div className="p-8 rounded-3xl bg-[#faf8f5] border border-[#e4e2dd] shadow-lg space-y-6">
+              <div className="p-8 rounded-3xl bg-[#f7f9fc] border border-[#dbe4ee] shadow-lg space-y-6">
                 <div>
-                  <span className="text-[10px] uppercase tracking-widest text-[#b8860b] font-bold">
+                  <span className="text-[10px] uppercase tracking-widest text-[#1f66a8] font-bold">
                     Division Specs
                   </span>
-                  <h4 className="font-serif text-xl font-bold text-[#18191b] mt-1">
+                  <h4 className="font-serif text-xl font-bold text-[#0f2a4a] mt-1">
                     {service.shortTitle}
                   </h4>
                 </div>
 
-                <div className="space-y-4 text-xs border-y border-[#e4e2dd] py-4">
+                <div className="space-y-4 text-xs border-y border-[#dbe4ee] py-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-[#686a71] flex items-center gap-1.5">
-                      <Clock className="w-4 h-4 text-[#b8860b]" />
+                    <span className="text-[#56667a] flex items-center gap-1.5">
+                      <Clock className="w-4 h-4 text-[#1f66a8]" />
                       Estimated SLA:
                     </span>
-                    <span className="font-bold text-[#18191b] text-right">{service.turnaround}</span>
+                    <span className="font-bold text-[#0f2a4a] text-right">{service.turnaround}</span>
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-[#686a71] flex items-center gap-1.5">
-                      <Package className="w-4 h-4 text-[#b8860b]" />
+                    <span className="text-[#56667a] flex items-center gap-1.5">
+                      <Package className="w-4 h-4 text-[#1f66a8]" />
                       Minimum Batch:
                     </span>
-                    <span className="font-bold text-[#18191b]">{service.minQuantity}</span>
+                    <span className="font-bold text-[#0f2a4a]">{service.minQuantity}</span>
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-[#686a71] flex items-center gap-1.5">
-                      <ShieldCheck className="w-4 h-4 text-[#b8860b]" />
+                    <span className="text-[#56667a] flex items-center gap-1.5">
+                      <ShieldCheck className="w-4 h-4 text-[#1f66a8]" />
                       Proofing:
                     </span>
-                    <span className="font-bold text-[#18191b]">Digital & Physical Swatch</span>
+                    <span className="font-bold text-[#0f2a4a]">Digital & Physical Swatch</span>
                   </div>
                 </div>
 
                 <button
                   onClick={() => onOpenQuote(service.title)}
-                  className="w-full py-4 rounded-full bg-[#18191b] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#c59b27] transition-all shadow-md flex items-center justify-center gap-2"
+                  className="w-full py-4 rounded-full bg-[#0f2a4a] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#15b498] transition-all shadow-md flex items-center justify-center gap-2"
                 >
                   <Sparkles className="w-4 h-4" />
                   <span>Request Custom Quote</span>
@@ -167,26 +167,26 @@ export default function ServiceDetails({ onOpenQuote }) {
       </section>
 
       {/* Related Services */}
-      <section className="py-20 bg-[#faf8f5] border-t border-[#e4e2dd]">
+      <section className="py-20 bg-[#f7f9fc] border-t border-[#dbe4ee]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-10">
-            <h3 className="font-serif text-2xl font-bold text-[#18191b]">
+            <h3 className="font-serif text-2xl font-bold text-[#0f2a4a]">
               Complementary Printing Capabilities
             </h3>
-            <Link to="/services" className="text-xs font-semibold text-[#b8860b] hover:text-[#18191b]">
+            <Link to="/services" className="text-xs font-semibold text-[#1f66a8] hover:text-[#0f2a4a]">
               View All Services →
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {related.map(r => (
-              <div key={r.id} className="p-6 rounded-2xl bg-white border border-[#e4e2dd] hover:border-[#b8860b] transition-all group flex flex-col justify-between">
+              <div key={r.id} className="p-6 rounded-2xl bg-white border border-[#dbe4ee] hover:border-[#1f66a8] transition-all group flex flex-col justify-between">
                 <div>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-[#b8860b]">{r.category}</span>
-                  <h4 className="font-serif text-lg font-bold text-[#18191b] group-hover:text-[#b8860b] transition-colors mt-1">{r.title}</h4>
-                  <p className="text-xs text-[#686a71] mt-2 line-clamp-2">{r.description}</p>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-[#1f66a8]">{r.category}</span>
+                  <h4 className="font-serif text-lg font-bold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors mt-1">{r.title}</h4>
+                  <p className="text-xs text-[#56667a] mt-2 line-clamp-2">{r.description}</p>
                 </div>
-                <Link to={`/services/${r.slug}`} className="mt-4 pt-4 border-t border-[#eceae5] text-xs font-semibold text-[#18191b] inline-flex items-center gap-1 group-hover:text-[#b8860b]">
+                <Link to={`/services/${r.slug}`} className="mt-4 pt-4 border-t border-[#e6edf5] text-xs font-semibold text-[#0f2a4a] inline-flex items-center gap-1 group-hover:text-[#1f66a8]">
                   <span>Explore Specs</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>

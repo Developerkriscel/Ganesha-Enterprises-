@@ -29,6 +29,7 @@ import { blogs } from '../data/blogs';
 import BrandStrip from '../components/BrandStrip';
 import ProductCard from '../components/ProductCard';
 import ServiceCard from '../components/ServiceCard';
+import Carousel from '../components/Carousel';
 
 // ── Animation Variants ──────────────────────────────────────
 const fadeUp = {
@@ -103,13 +104,13 @@ function HeroAutoPlay({ heroTab, setHeroTab, total }) {
   return (
     <button
       onClick={() => setPlaying(p => !p)}
-      className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:border-[#c59b27] shadow-md flex items-center justify-center transition-all hover:scale-110 active:scale-95 group"
+      className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:border-[#15b498] shadow-md flex items-center justify-center transition-all hover:scale-110 active:scale-95 group"
       title={playing ? 'Pause auto-play' : 'Resume auto-play'}
     >
       {playing ? (
-        <Pause className="w-4 h-4 text-[#c59b27] group-hover:text-white transition-colors" />
+        <Pause className="w-4 h-4 text-[#15b498] group-hover:text-white transition-colors" />
       ) : (
-        <Play className="w-4 h-4 text-[#c59b27] group-hover:text-white transition-colors ml-0.5" />
+        <Play className="w-4 h-4 text-[#15b498] group-hover:text-white transition-colors ml-0.5" />
       )}
     </button>
   );
@@ -174,11 +175,11 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
 
   const getIcon = (name) => {
     switch (name) {
-      case 'Palette': return <Palette className="w-6 h-6 text-[#b8860b]" />;
-      case 'Award': return <Award className="w-6 h-6 text-[#b8860b]" />;
-      case 'Zap': return <Zap className="w-6 h-6 text-[#b8860b]" />;
-      case 'Clock': return <Clock className="w-6 h-6 text-[#b8860b]" />;
-      default: return <Printer className="w-6 h-6 text-[#b8860b]" />;
+      case 'Palette': return <Palette className="w-6 h-6 text-[#1f66a8]" />;
+      case 'Award': return <Award className="w-6 h-6 text-[#1f66a8]" />;
+      case 'Zap': return <Zap className="w-6 h-6 text-[#1f66a8]" />;
+      case 'Clock': return <Clock className="w-6 h-6 text-[#1f66a8]" />;
+      default: return <Printer className="w-6 h-6 text-[#1f66a8]" />;
     }
   };
 
@@ -200,11 +201,11 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             <source src="/videos/hero-bg.mp4" type="video/mp4" />
           </video>
           {/* Dark overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#18191b]/75 via-[#18191b]/60 to-[#18191b]/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0f2a4a]/75 via-[#0f2a4a]/60 to-[#0f2a4a]/80"></div>
           {/* Warm golden tint overlay */}
-          <div className="absolute inset-0 bg-[#c59b27]/5 mix-blend-overlay"></div>
+          <div className="absolute inset-0 bg-[#15b498]/5 mix-blend-overlay"></div>
           {/* Bottom fade to the next section */}
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#faf8f5] to-transparent"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#f7f9fc] to-transparent"></div>
         </div>
 
         {/* Subtle Architectural Grain Background */}
@@ -222,7 +223,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg"
               >
-                <span className="w-2 h-2 rounded-full bg-[#c59b27] animate-pulse"></span>
+                <span className="w-2 h-2 rounded-full bg-[#1f66a8] animate-pulse"></span>
                 <span className="text-[11px] font-semibold uppercase tracking-widest text-white/90">
                   Swiss Color Fidelity • New Delhi Production Studio
                 </span>
@@ -237,7 +238,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               >
                 <h1 className="font-serif text-4xl sm:text-6xl xl:text-7xl font-extrabold text-white tracking-tight leading-[1.02] drop-shadow-lg">
                   WE DON'T JUST PRINT. <br />
-                  <span className="gold-gradient-text italic font-normal">WE CREATE</span> IMPRESSIONS.
+                  <span className="brand-gradient-text italic font-normal">WE CREATE</span> IMPRESSIONS.
                 </h1>
               </motion.div>
 
@@ -248,7 +249,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 transition={{ duration: 0.7, delay: 0.6 }}
                 className="text-base sm:text-lg text-white/70 leading-relaxed max-w-xl font-normal"
               >
-                {company.subTagline} Serving corporate pioneers, aviation fleets, and luxury brand houses with masterfully engineered paper, packaging, apparel, and signage.
+                {/* {company.subTagline} Serving corporate pioneers, aviation fleets, and luxury brand houses with masterfully engineered paper, packaging, apparel, and signage. */}
               </motion.p>
 
               {/* Primary Call to Actions */}
@@ -260,7 +261,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               >
                 <Link
                   to="/products"
-                  className="px-8 py-4 rounded-full bg-[#c59b27] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#d4aa36] transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center gap-2 group"
+                  className="px-8 py-4 rounded-full bg-[#1f66a8] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#19558f] transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center gap-2 group"
                 >
                   <span>Explore Our Collection</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -268,9 +269,9 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
 
                 <button
                   onClick={() => onOpenQuote()}
-                  className="px-8 py-4 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-bold uppercase tracking-widest border border-white/25 hover:border-[#c59b27] hover:bg-white/15 transition-all duration-300 shadow-sm flex items-center gap-2"
+                  className="px-8 py-4 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-bold uppercase tracking-widest border border-white/25 hover:border-[#15b498] hover:bg-white/15 transition-all duration-300 shadow-sm flex items-center gap-2"
                 >
-                  <Sparkles className="w-4 h-4 text-[#c59b27]" />
+                  <Sparkles className="w-4 h-4 text-[#15b498]" />
                   <span>Request a Quote</span>
                 </button>
               </motion.div>
@@ -301,9 +302,9 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             <div className="lg:col-span-5 relative">
               {/* Ambient golden orb glow behind the card stack */}
               <div className="absolute -inset-8 pointer-events-none z-0">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-[#c59b27]/10 blur-[80px] animate-pulse"></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] rounded-full border border-[#c59b27]/20 animate-[spin_20s_linear_infinite]"></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] rounded-full border border-[#c59b27]/10 animate-[spin_30s_linear_infinite_reverse]"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-[#15b498]/10 blur-[80px] animate-pulse"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] rounded-full border border-[#15b498]/20 animate-[spin_20s_linear_infinite]"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] rounded-full border border-[#15b498]/10 animate-[spin_30s_linear_infinite_reverse]"></div>
               </div>
 
               <div className="relative z-10" style={{ perspective: '1200px' }}>
@@ -326,7 +327,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                           filter: isActive ? 'none' : `brightness(${0.7 - Math.abs(offset) * 0.1})`
                         }}
                       >
-                        <div className={`w-full h-full rounded-3xl overflow-hidden backdrop-blur-md shadow-2xl border-2 transition-all duration-500 ${isActive ? 'border-[#c59b27] bg-black/35 shadow-[0_0_50px_rgba(197,155,39,0.35)]' : 'border-white/20 bg-black/25'}`}>
+                        <div className={`w-full h-full rounded-3xl overflow-hidden backdrop-blur-md shadow-2xl border-2 transition-all duration-500 ${isActive ? 'border-[#15b498] bg-black/35 shadow-[0_0_50px_rgba(21,180,152,0.35)]' : 'border-white/20 bg-black/25'}`}>
                           <div className="relative w-full h-full">
                             <img
                               src={item.image}
@@ -338,7 +339,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
                             
                             {/* Top tag */}
-                            <div className={`absolute top-5 left-5 px-4 py-1.5 rounded-full backdrop-blur-xl text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 border ${isActive ? 'bg-[#c59b27]/90 text-white border-[#c59b27] shadow-lg' : 'bg-white/10 text-white/90 border-white/20'}`}>
+                            <div className={`absolute top-5 left-5 px-4 py-1.5 rounded-full backdrop-blur-xl text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 border ${isActive ? 'bg-[#15b498]/90 text-white border-[#15b498] shadow-lg' : 'bg-white/10 text-white/90 border-white/20'}`}>
                               {item.tag}
                             </div>
 
@@ -353,7 +354,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                               <div className="flex items-center gap-3 mt-4">
                                 <button
                                   onClick={(e) => { e.stopPropagation(); onOpenQuote(item.title); }}
-                                  className="px-5 py-2.5 rounded-full bg-[#c59b27] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#d4aa36] transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 flex items-center gap-2"
+                                  className="px-5 py-2.5 rounded-full bg-[#1f66a8] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#19558f] transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 flex items-center gap-2"
                                 >
                                   <Sparkles className="w-3.5 h-3.5" />
                                   <span>Get Quote</span>
@@ -390,11 +391,11 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                       >
                         <div className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${
                           idx === heroTab 
-                            ? 'bg-[#c59b27] scale-125 shadow-[0_0_12px_rgba(197,155,39,0.5)]' 
+                            ? 'bg-[#1f66a8] scale-125 shadow-[0_0_12px_rgba(21,180,152,0.5)]' 
                             : 'bg-white/40 hover:bg-white/60'
                         }`} />
                         {idx === heroTab && (
-                          <div className="absolute -inset-1.5 rounded-full border border-[#c59b27]/40 animate-ping"></div>
+                          <div className="absolute -inset-1.5 rounded-full border border-[#15b498]/40 animate-ping"></div>
                         )}
                       </button>
                     ))}
@@ -415,7 +416,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION C: BRAND VALUE PROPOSITIONS & METRICS
           ========================================================= */}
-      <section className="py-20 bg-[#faf8f5] relative">
+      <section className="py-20 bg-[#f7f9fc] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -424,15 +425,15 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             variants={staggerContainer}
             className="text-center max-w-3xl mx-auto mb-16 space-y-3"
           >
-            <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold block">
+            <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold block">
               The Ganesha Production Standard
             </motion.span>
-            <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b]">
+            <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
               Why Leading Enterprises Entrust Their Brand to Us
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#686a71]">
+            {/* <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#56667a]">
               Every project is treated as a strategic tactile artifact. We combine Swiss-grade color calibration with precision industrial finishing.
-            </motion.p>
+            </motion.p> */}
           </motion.div>
 
           <motion.div
@@ -448,26 +449,26 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 custom={idx}
                 variants={fadeUp}
                 whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="p-8 rounded-3xl bg-white border border-[#e4e2dd] hover:border-[#b8860b] shadow-subtle hover:shadow-premium transition-all duration-300 group flex flex-col justify-between"
+                className="p-8 rounded-3xl bg-white border border-[#dbe4ee] hover:border-[#1f66a8] shadow-subtle hover:shadow-premium transition-all duration-300 group flex flex-col justify-between"
               >
                 <div className="space-y-4">
                   <motion.div
                     whileHover={{ rotate: 10, scale: 1.1 }}
                     transition={{ type: 'spring', stiffness: 300 }}
-                    className="w-12 h-12 rounded-2xl bg-[#f4f1ea] group-hover:bg-[#faf8f5] flex items-center justify-center transition-colors"
+                    className="w-12 h-12 rounded-2xl bg-[#edf3f9] group-hover:bg-[#f7f9fc] flex items-center justify-center transition-colors"
                   >
                     {getIcon(prop.icon)}
                   </motion.div>
-                  <h3 className="font-serif text-xl font-bold text-[#18191b] group-hover:text-[#b8860b] transition-colors">
+                  <h3 className="font-serif text-xl font-bold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors">
                     {prop.title}
                   </h3>
-                  <p className="text-xs text-[#686a71] leading-relaxed">
+                  <p className="text-xs text-[#56667a] leading-relaxed">
                     {prop.description}
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-[#f4f1ea] flex items-center gap-1.5 text-xs font-semibold text-[#18191b]">
-                  <CheckCircle2 className="w-4 h-4 text-[#b8860b]" />
+                <div className="pt-6 mt-6 border-t border-[#edf3f9] flex items-center gap-1.5 text-xs font-semibold text-[#0f2a4a]">
+                  <CheckCircle2 className="w-4 h-4 text-[#1f66a8]" />
                   <span>Quality Guaranteed</span>
                 </div>
               </motion.div>
@@ -479,7 +480,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION D: FEATURED PRODUCTS SHOWCASE (Editorial Grid)
           ========================================================= */}
-      <section className="py-24 bg-[#f4f1ea]/60 border-y border-[#e4e2dd]">
+      <section className="py-24 bg-[#edf3f9]/60 border-y border-[#dbe4ee]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -489,21 +490,21 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
           >
             <motion.div variants={fadeLeft} className="max-w-2xl space-y-2">
-              <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold">
+              <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
                 Signature Artifacts
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b]">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
                 Curated Corporate Collection
               </h2>
-              <p className="text-sm text-[#686a71]">
+              {/* <p className="text-sm text-[#56667a]">
                 From boardroom-ready visiting cards and employee welcome kits to heavy pique polos and roll-up standees.
-              </p>
+              </p> */}
             </motion.div>
 
             <motion.div variants={fadeRight}>
               <Link
                 to="/products"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#18191b] hover:text-[#b8860b] transition-colors border-b-2 border-[#18191b] hover:border-[#b8860b] pb-1 w-max"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#0f2a4a] hover:text-[#1f66a8] transition-colors border-b-2 border-[#0f2a4a] hover:border-[#1f66a8] pb-1 w-max"
               >
                 <span>View All 90+ Products</span>
                 <ArrowRight className="w-4 h-4" />
@@ -512,23 +513,16 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           </motion.div>
 
           {/* Editorial Asymmetric Grid */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
-          >
+          <Carousel>
             {featuredProducts.slice(0, 8).map((product, idx) => (
-              <motion.div key={product.id} custom={idx} variants={scaleIn}>
-                <ProductCard
-                  product={product}
-                  onQuoteRequest={onOpenQuote}
-                  priority={idx < 4}
-                />
-              </motion.div>
+              <ProductCard
+                key={product.id}
+                product={product}
+                onQuoteRequest={onOpenQuote}
+                priority={idx < 4}
+              />
             ))}
-          </motion.div>
+          </Carousel>
         </div>
       </section>
 
@@ -547,7 +541,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               variants={fadeLeft}
               className="lg:col-span-6 relative"
             >
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-[#18191b] aspect-[4/3] group">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-[#0f2a4a] aspect-[4/3] group">
                 <img
                   src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1200&auto=format&fit=crop"
                   alt="Ganesha Enterprises Workshop"
@@ -555,7 +549,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                 <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <span className="text-[10px] uppercase tracking-widest text-[#c59b27] font-semibold">
+                  <span className="text-[10px] uppercase tracking-widest text-[#15b498] font-semibold">
                     Plant Overview • Naraina Phase 1
                   </span>
                   <h3 className="font-serif text-2xl font-bold mt-1">
@@ -571,15 +565,15 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.6, type: 'spring' }}
                 whileHover={{ scale: 1.05 }}
-                className="absolute -bottom-6 -right-4 sm:-right-8 bg-[#faf8f5] p-5 rounded-2xl border border-[#e4e2dd] shadow-xl max-w-xs hidden sm:block"
+                className="absolute -bottom-6 -right-4 sm:-right-8 bg-[#f7f9fc] p-5 rounded-2xl border border-[#dbe4ee] shadow-xl max-w-xs hidden sm:block"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#c59b27] text-white flex items-center justify-center font-bold">
+                  <div className="w-10 h-10 rounded-xl bg-[#1f66a8] text-white flex items-center justify-center font-bold">
                     <ShieldCheck className="w-5 h-5" />
                   </div>
                   <div>
-                    <h5 className="font-serif font-bold text-sm text-[#18191b]">MSME & ISO Certified</h5>
-                    <p className="text-[11px] text-[#686a71]">Zero Compromise QA Process</p>
+                    <h5 className="font-serif font-bold text-sm text-[#0f2a4a]">MSME & ISO Certified</h5>
+                    <p className="text-[11px] text-[#56667a]">Zero Compromise QA Process</p>
                   </div>
                 </div>
               </motion.div>
@@ -593,24 +587,24 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               variants={staggerContainer}
               className="lg:col-span-6 space-y-6"
             >
-              <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold block">
+              <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold block">
                 About Ganesha Enterprises
               </motion.span>
 
-              <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b] tracking-tight leading-tight">
+              <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
                 Architecting Tactile Brand Excellence Since 2011.
               </motion.h2>
 
-              <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#686a71] leading-relaxed">
+              <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#56667a] leading-relaxed">
                 At Ganesha Enterprises, we specialize in professional digital printing solutions that combine quality, speed, and creativity — all without stretching your budget. Whether you’re a high-growth startup, an airline pioneer, or a multinational enterprise, we deliver customized print solutions that bring your brand identity to life.
               </motion.p>
 
-              <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#686a71] leading-relaxed">
+              {/* <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#56667a] leading-relaxed">
                 With state-of-the-art machinery, skilled master printers, and an obsession with detail, we handle everything from heavy cotton pulp cardstock to vinyl manifestations, corporate uniforms, and large-format architectural branding.
-              </motion.p>
+              </motion.p> */}
 
               {/* Capabilities Checkmarks */}
-              <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-semibold text-[#18191b]">
+              <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-semibold text-[#0f2a4a]">
                 {[
                   'Pantone® Ink Calibration',
                   'High-DPI Japanese UV Flatbeds',
@@ -625,7 +619,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                     transition={{ delay: 0.3 + idx * 0.1 }}
                     className="flex items-center gap-2"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-[#b8860b] shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#1f66a8] shrink-0" />
                     <span>{item}</span>
                   </motion.div>
                 ))}
@@ -634,7 +628,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               <motion.div variants={fadeUp} className="pt-4 flex items-center gap-4">
                 <Link
                   to="/about"
-                  className="px-6 py-3.5 rounded-full bg-[#18191b] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#c59b27] transition-all duration-300 shadow-md inline-flex items-center gap-2 hover:scale-105 active:scale-95"
+                  className="px-6 py-3.5 rounded-full bg-[#0f2a4a] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#15b498] transition-all duration-300 shadow-md inline-flex items-center gap-2 hover:scale-105 active:scale-95"
                 >
                   <span>Read Full Heritage</span>
                   <ArrowRight className="w-4 h-4" />
@@ -642,7 +636,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
 
                 <Link
                   to="/contact"
-                  className="text-xs font-semibold text-[#18191b] hover:text-[#b8860b] transition-colors"
+                  className="text-xs font-semibold text-[#0f2a4a] hover:text-[#1f66a8] transition-colors"
                 >
                   Schedule Plant Tour
                 </Link>
@@ -656,7 +650,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION F: OUR SERVICES (Comprehensive Printing Services)
           ========================================================= */}
-      <section className="py-24 bg-[#faf8f5] border-t border-[#e4e2dd]">
+      <section className="py-24 bg-[#f7f9fc] border-t border-[#dbe4ee]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -665,13 +659,13 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             variants={staggerContainer}
             className="text-center max-w-3xl mx-auto mb-16 space-y-3"
           >
-            <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold block">
+            <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold block">
               Comprehensive Production Capabilities
             </motion.span>
-            <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b]">
+            <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
               Turnkey Industrial Printing Services
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#686a71]">
+            <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#56667a]">
               Equipped for extreme volume, fine art precision, and rapid emergency turnarounds under one roof.
             </motion.p>
           </motion.div>
@@ -707,7 +701,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           >
             <Link
               to="/services"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white border border-[#e4e2dd] text-[#18191b] hover:border-[#b8860b] hover:text-[#b8860b] text-xs font-bold uppercase tracking-widest shadow-xs transition-all hover:scale-105 active:scale-95"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white border border-[#dbe4ee] text-[#0f2a4a] hover:border-[#1f66a8] hover:text-[#1f66a8] text-xs font-bold uppercase tracking-widest shadow-xs transition-all hover:scale-105 active:scale-95"
             >
               <span>Explore All 8 Specialized Service Divisions</span>
               <ArrowRight className="w-4 h-4" />
@@ -719,7 +713,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION G: PRODUCT CATEGORIES (Discovery Showcase)
           ========================================================= */}
-      <section className="py-24 bg-[#f4f1ea] border-t border-[#e4e2dd]">
+      <section className="py-24 bg-[#edf3f9] border-t border-[#dbe4ee]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -729,13 +723,13 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
           >
             <motion.div variants={fadeLeft} className="max-w-2xl space-y-2">
-              <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold">
+              <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
                 Catalog Navigation
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b]">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
                 Explore by Product Category
               </h2>
-              <p className="text-sm text-[#686a71]">
+              <p className="text-sm text-[#56667a]">
                 Engineered for rapid corporate procurement and tailored bespoke merchandise curation.
               </p>
             </motion.div>
@@ -743,7 +737,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             <motion.div variants={fadeRight}>
               <Link
                 to="/products"
-                className="text-xs font-bold uppercase tracking-widest text-[#18191b] hover:text-[#b8860b] inline-flex items-center gap-1.5 transition-colors"
+                className="text-xs font-bold uppercase tracking-widest text-[#0f2a4a] hover:text-[#1f66a8] inline-flex items-center gap-1.5 transition-colors"
               >
                 <span>Browse All Categories</span>
                 <ArrowRight className="w-4 h-4" />
@@ -767,29 +761,29 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               >
                 <Link
                   to={`/products?category=${cat.id}`}
-                  className="group p-8 rounded-3xl bg-white border border-[#e4e2dd] hover:border-[#b8860b] shadow-subtle hover:shadow-premium transition-all duration-300 flex flex-col justify-between h-full"
+                  className="group p-8 rounded-3xl bg-white border border-[#dbe4ee] hover:border-[#1f66a8] shadow-subtle hover:shadow-premium transition-all duration-300 flex flex-col justify-between h-full"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] uppercase tracking-widest font-semibold text-[#b8860b]">
+                      <span className="text-[11px] uppercase tracking-widest font-semibold text-[#1f66a8]">
                         {cat.count} Products Available
                       </span>
-                      <ArrowUpRight className="w-4 h-4 text-[#686a71] group-hover:text-[#b8860b] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                      <ArrowUpRight className="w-4 h-4 text-[#56667a] group-hover:text-[#1f66a8] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                     </div>
-                    <h3 className="font-serif text-2xl font-bold text-[#18191b] group-hover:text-[#b8860b] transition-colors">
+                    <h3 className="font-serif text-2xl font-bold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors">
                       {cat.name}
                     </h3>
-                    <p className="text-xs text-[#686a71] leading-relaxed">
+                    <p className="text-xs text-[#56667a] leading-relaxed">
                       {cat.description}
                     </p>
                   </div>
 
-                  <div className="pt-6 mt-6 border-t border-[#f4f1ea]">
+                  <div className="pt-6 mt-6 border-t border-[#edf3f9]">
                     <div className="flex flex-wrap gap-1.5">
                       {cat.subcategories?.slice(0, 4).map((sub, i) => (
                         <span
                           key={i}
-                          className="px-2.5 py-1 rounded-md bg-[#faf8f5] text-[10px] text-[#686a71] font-medium"
+                          className="px-2.5 py-1 rounded-md bg-[#f7f9fc] text-[10px] text-[#56667a] font-medium"
                         >
                           {sub}
                         </span>
@@ -806,7 +800,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION I: PORTFOLIO — OUR RECENT WORK (Agency Gallery)
           ========================================================= */}
-      <section className="py-24 bg-white border-t border-[#e4e2dd]">
+      <section className="py-24 bg-white border-t border-[#dbe4ee]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -816,13 +810,13 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
           >
             <motion.div variants={fadeLeft} className="max-w-2xl space-y-2">
-              <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold">
+              <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
                 Proven Track Record
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b]">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
                 Recent Client Commissions
               </h2>
-              <p className="text-sm text-[#686a71]">
+              <p className="text-sm text-[#56667a]">
                 Authentic projects produced for Vistara, NTPC, Air India, Radisson, and prominent corporate networks.
               </p>
             </motion.div>
@@ -830,7 +824,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             <motion.div variants={fadeRight}>
               <Link
                 to="/portfolio"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#18191b] hover:text-[#b8860b] transition-colors border-b-2 border-[#18191b] hover:border-[#b8860b] pb-1 w-max"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#0f2a4a] hover:text-[#1f66a8] transition-colors border-b-2 border-[#0f2a4a] hover:border-[#1f66a8] pb-1 w-max"
               >
                 <span>Explore Complete Gallery</span>
                 <ArrowRight className="w-4 h-4" />
@@ -852,10 +846,10 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 custom={idx}
                 variants={fadeUp}
                 whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="group rounded-3xl bg-[#faf8f5] border border-[#e4e2dd] hover:border-[#b8860b] overflow-hidden transition-all duration-300 hover:shadow-premium flex flex-col justify-between"
+                className="group rounded-3xl bg-[#f7f9fc] border border-[#dbe4ee] hover:border-[#1f66a8] overflow-hidden transition-all duration-300 hover:shadow-premium flex flex-col justify-between"
               >
                 <div 
-                  className="relative aspect-[4/3] bg-[#18191b] overflow-hidden cursor-pointer"
+                  className="relative aspect-[4/3] bg-[#0f2a4a] overflow-hidden cursor-pointer"
                   onClick={() => onOpenLightbox(item)}
                 >
                   <img
@@ -865,8 +859,8 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="px-4 py-2 rounded-full bg-white text-[#18191b] text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                      <Eye className="w-3.5 h-3.5 text-[#b8860b]" />
+                    <span className="px-4 py-2 rounded-full bg-white text-[#0f2a4a] text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                      <Eye className="w-3.5 h-3.5 text-[#1f66a8]" />
                       <span>Inspect Artwork</span>
                     </span>
                   </div>
@@ -877,33 +871,33 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 </div>
 
                 <div className="p-6 space-y-2">
-                  <div className="flex items-center justify-between text-xs text-[#b8860b] font-medium">
+                  <div className="flex items-center justify-between text-xs text-[#1f66a8] font-medium">
                     <span>Client: {item.client}</span>
                     <span>{item.year}</span>
                   </div>
 
                   <h3 
                     onClick={() => onOpenLightbox(item)}
-                    className="font-serif text-lg font-bold text-[#18191b] group-hover:text-[#b8860b] transition-colors cursor-pointer"
+                    className="font-serif text-lg font-bold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors cursor-pointer"
                   >
                     {item.title}
                   </h3>
 
-                  <p className="text-xs text-[#686a71] line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-[#56667a] line-clamp-2 leading-relaxed">
                     {item.scope}
                   </p>
 
-                  <div className="pt-3 border-t border-[#eceae5] flex items-center justify-between">
+                  <div className="pt-3 border-t border-[#e6edf5] flex items-center justify-between">
                     <button
                       onClick={() => onOpenLightbox(item)}
-                      className="text-xs font-semibold text-[#18191b] hover:text-[#b8860b] inline-flex items-center gap-1"
+                      className="text-xs font-semibold text-[#0f2a4a] hover:text-[#1f66a8] inline-flex items-center gap-1"
                     >
                       <span>View Case File</span>
                       <ArrowUpRight className="w-3 h-3" />
                     </button>
                     <button
                       onClick={() => onOpenQuote(item.title)}
-                      className="text-xs font-semibold text-[#b8860b] hover:text-[#18191b]"
+                      className="text-xs font-semibold text-[#1f66a8] hover:text-[#0f2a4a]"
                     >
                       Quote Similar
                     </button>
@@ -918,9 +912,9 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION J: CONTACT & DIRECT QUOTE SECTION
           ========================================================= */}
-      <section className="py-24 bg-[#18191b] text-white relative overflow-hidden">
+      <section className="py-24 bg-[#0f2a4a] text-white relative overflow-hidden">
         {/* Subtle Ambient Radial Light */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#c59b27]/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#15b498]/10 rounded-full blur-[100px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -933,7 +927,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               variants={staggerContainer}
               className="lg:col-span-5 space-y-6"
             >
-              <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#c59b27] font-semibold block">
+              <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#15b498] font-semibold block">
                 Direct Studio Dialogue
               </motion.span>
 
@@ -946,21 +940,21 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               </motion.p>
 
               <motion.div variants={fadeUp} className="space-y-4 pt-4 border-t border-white/10 text-xs text-white/80">
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1 hover:border-[#c59b27]/40 transition-colors">
-                  <div className="text-[10px] uppercase tracking-wider text-[#c59b27] font-semibold">Primary Facility & Address:</div>
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1 hover:border-[#15b498]/40 transition-colors">
+                  <div className="text-[10px] uppercase tracking-wider text-[#15b498] font-semibold">Primary Facility & Address:</div>
                   <p className="font-medium text-white">{company.contact.address.full}</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1 hover:border-[#c59b27]/40 transition-colors">
-                    <div className="text-[10px] uppercase tracking-wider text-[#c59b27] font-semibold">Direct Mobile / Call:</div>
-                    <a href={`tel:${company.contact.phone.replace(/[^0-9]/g, '')}`} className="font-medium text-white hover:text-[#c59b27] block">
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1 hover:border-[#15b498]/40 transition-colors">
+                    <div className="text-[10px] uppercase tracking-wider text-[#15b498] font-semibold">Direct Mobile / Call:</div>
+                    <a href={`tel:${company.contact.phone.replace(/[^0-9]/g, '')}`} className="font-medium text-white hover:text-[#15b498] block">
                       {company.contact.phoneDisplay}
                     </a>
                   </div>
-                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1 hover:border-[#c59b27]/40 transition-colors">
-                    <div className="text-[10px] uppercase tracking-wider text-[#c59b27] font-semibold">Official Inquiries:</div>
-                    <a href={`mailto:${company.contact.email}`} className="font-medium text-white hover:text-[#c59b27] block">
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1 hover:border-[#15b498]/40 transition-colors">
+                    <div className="text-[10px] uppercase tracking-wider text-[#15b498] font-semibold">Official Inquiries:</div>
+                    <a href={`mailto:${company.contact.email}`} className="font-medium text-white hover:text-[#15b498] block">
                       {company.contact.email}
                     </a>
                   </div>
@@ -988,15 +982,15 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               variants={fadeRight}
               className="lg:col-span-7"
             >
-              <div className="bg-[#faf8f5] text-[#18191b] p-8 sm:p-10 rounded-3xl shadow-2xl border border-[#e4e2dd]">
+              <div className="bg-[#f7f9fc] text-[#0f2a4a] p-8 sm:p-10 rounded-3xl shadow-2xl border border-[#dbe4ee]">
                 <div className="space-y-2 mb-6">
-                  <span className="text-xs uppercase tracking-widest font-semibold text-[#b8860b]">
+                  <span className="text-xs uppercase tracking-widest font-semibold text-[#1f66a8]">
                     Fast Turnaround Quote
                   </span>
-                  <h3 className="font-serif text-2xl font-bold text-[#18191b]">
+                  <h3 className="font-serif text-2xl font-bold text-[#0f2a4a]">
                     Request a Custom Project Estimate
                   </h3>
-                  <p className="text-xs text-[#686a71]">
+                  <p className="text-xs text-[#56667a]">
                     Fill in your project requirements. Stored locally with immediate confirmation.
                   </p>
                 </div>
@@ -1008,13 +1002,13 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                     className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3"
                   >
                     <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
-                    <h4 className="font-serif text-xl font-bold text-[#18191b]">Request Submitted Successfully</h4>
-                    <p className="text-xs text-[#686a71]">
+                    <h4 className="font-serif text-xl font-bold text-[#0f2a4a]">Request Submitted Successfully</h4>
+                    <p className="text-xs text-[#56667a]">
                       Thank you, <strong>{quickContact.name}</strong>. Your inquiry has been stored locally. You can also reach our plant manager directly on WhatsApp.
                     </p>
                     <button
                       onClick={() => setQuickSubmitted(false)}
-                      className="px-5 py-2 rounded-full bg-[#18191b] text-white text-xs font-semibold"
+                      className="px-5 py-2 rounded-full bg-[#0f2a4a] text-white text-xs font-semibold"
                     >
                       Submit Another Query
                     </button>
@@ -1023,7 +1017,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                   <form onSubmit={handleQuickSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1">
                           Full Name *
                         </label>
                         <input
@@ -1032,11 +1026,11 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                           value={quickContact.name}
                           onChange={(e) => setQuickContact({ ...quickContact, name: e.target.value })}
                           placeholder="e.g. Vikram Singhania"
-                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none transition-colors"
+                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none transition-colors"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1">
                           Mobile Number *
                         </label>
                         <input
@@ -1045,14 +1039,14 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                           value={quickContact.phone}
                           onChange={(e) => setQuickContact({ ...quickContact, phone: e.target.value })}
                           placeholder="+91 96500 44234"
-                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none transition-colors"
+                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none transition-colors"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1">
                           Email Address
                         </label>
                         <input
@@ -1060,17 +1054,17 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                           value={quickContact.email}
                           onChange={(e) => setQuickContact({ ...quickContact, email: e.target.value })}
                           placeholder="contact@company.com"
-                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none transition-colors"
+                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none transition-colors"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1">
+                        <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1">
                           Required Service
                         </label>
                         <select
                           value={quickContact.service}
                           onChange={(e) => setQuickContact({ ...quickContact, service: e.target.value })}
-                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none transition-colors"
+                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none transition-colors"
                         >
                           {services.map(s => (
                             <option key={s.id} value={s.title}>{s.title}</option>
@@ -1080,7 +1074,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#18191b] mb-1">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1">
                         Project Specifications & Quantity
                       </label>
                       <textarea
@@ -1088,7 +1082,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                         value={quickContact.message}
                         onChange={(e) => setQuickContact({ ...quickContact, message: e.target.value })}
                         placeholder="State your required quantity, target date, preferred paper stock, foil color, or custom apparel sizes..."
-                        className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none transition-colors"
+                        className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none transition-colors"
                       />
                     </div>
 
@@ -1096,14 +1090,14 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                       <button
                         type="button"
                         onClick={() => onOpenQuote()}
-                        className="text-xs font-semibold text-[#b8860b] hover:text-[#18191b] transition-colors"
+                        className="text-xs font-semibold text-[#1f66a8] hover:text-[#0f2a4a] transition-colors"
                       >
                         Open Detailed Modal Form
                       </button>
 
                       <button
                         type="submit"
-                        className="w-full sm:w-auto px-8 py-3 rounded-xl bg-[#18191b] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#c59b27] transition-all shadow-md hover:scale-105 active:scale-95"
+                        className="w-full sm:w-auto px-8 py-3 rounded-xl bg-[#0f2a4a] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#15b498] transition-all shadow-md hover:scale-105 active:scale-95"
                       >
                         Submit Inquiry
                       </button>
@@ -1120,7 +1114,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION K: BLOGS & INSIGHTS (Editorial Journal)
           ========================================================= */}
-      <section className="py-24 bg-[#faf8f5] border-t border-[#e4e2dd]">
+      <section className="py-24 bg-[#f7f9fc] border-t border-[#dbe4ee]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -1130,13 +1124,13 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
           >
             <motion.div variants={fadeLeft} className="max-w-2xl space-y-2">
-              <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold">
+              <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
                 Journal & Industry Insights
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b]">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
                 The Craft of Tactile Impressions
               </h2>
-              <p className="text-sm text-[#686a71]">
+              <p className="text-sm text-[#56667a]">
                 Master printer articles on color theory, sustainable materials, retail merchandise, and corporate branding.
               </p>
             </motion.div>
@@ -1144,7 +1138,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             <motion.div variants={fadeRight}>
               <Link
                 to="/blogs"
-                className="text-xs font-bold uppercase tracking-widest text-[#18191b] hover:text-[#b8860b] inline-flex items-center gap-1.5 transition-colors border-b-2 border-[#18191b] hover:border-[#b8860b] pb-1 w-max"
+                className="text-xs font-bold uppercase tracking-widest text-[#0f2a4a] hover:text-[#1f66a8] inline-flex items-center gap-1.5 transition-colors border-b-2 border-[#0f2a4a] hover:border-[#1f66a8] pb-1 w-max"
               >
                 <span>Explore All 6 Articles</span>
                 <ArrowRight className="w-4 h-4" />
@@ -1165,50 +1159,50 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 custom={idx}
                 variants={fadeUp}
                 whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="group flex flex-col justify-between bg-white rounded-3xl border border-[#e4e2dd] hover:border-[#b8860b] overflow-hidden transition-all duration-300 hover:shadow-premium"
+                className="group flex flex-col justify-between bg-white rounded-3xl border border-[#dbe4ee] hover:border-[#1f66a8] overflow-hidden transition-all duration-300 hover:shadow-premium"
               >
-                <div className="relative aspect-[16/10] bg-[#18191b] overflow-hidden">
+                <div className="relative aspect-[16/10] bg-[#0f2a4a] overflow-hidden">
                   <img
                     src={blog.image}
                     alt={blog.title}
                     onError={(e) => { e.currentTarget.src = blog.backupImage; }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-semibold uppercase tracking-widest text-[#18191b]">
+                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-semibold uppercase tracking-widest text-[#0f2a4a]">
                     {blog.category}
                   </div>
                 </div>
 
                 <div className="p-6 flex flex-col flex-grow justify-between space-y-4">
                   <div className="space-y-2">
-                    <span className="text-[11px] text-[#686a71]">
+                    <span className="text-[11px] text-[#56667a]">
                       {blog.formattedDate} • {blog.readTime}
                     </span>
                     <Link to={`/blogs/${blog.slug}`}>
-                      <h3 className="font-serif text-lg font-bold text-[#18191b] group-hover:text-[#b8860b] transition-colors line-clamp-2">
+                      <h3 className="font-serif text-lg font-bold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors line-clamp-2">
                         {blog.title}
                       </h3>
                     </Link>
-                    <p className="text-xs text-[#686a71] line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-[#56667a] line-clamp-3 leading-relaxed">
                       {blog.excerpt}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#f4f1ea] flex items-center justify-between">
+                  <div className="pt-4 border-t border-[#edf3f9] flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <img
                         src={blog.author.avatar}
                         alt={blog.author.name}
                         className="w-6 h-6 rounded-full object-cover"
                       />
-                      <span className="text-[11px] font-medium text-[#18191b]">
+                      <span className="text-[11px] font-medium text-[#0f2a4a]">
                         {blog.author.name}
                       </span>
                     </div>
 
                     <Link
                       to={`/blogs/${blog.slug}`}
-                      className="text-xs font-semibold text-[#b8860b] hover:text-[#18191b] inline-flex items-center gap-1 transition-colors"
+                      className="text-xs font-semibold text-[#1f66a8] hover:text-[#0f2a4a] inline-flex items-center gap-1 transition-colors"
                     >
                       <span>Read Story</span>
                       <ArrowRight className="w-3.5 h-3.5" />

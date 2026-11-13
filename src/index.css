@@ -9,16 +9,16 @@
   }
   
   body {
-    background-color: #faf8f5;
-    color: #18191b;
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background-color: #f7f9fc;
+    color: #0f2a4a;
+    font-family: 'Poppins', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background-color: #18191b;
-    color: #faf8f5;
+    background-color: #0f2a4a;
+    color: #f7f9fc;
   }
 }
 
@@ -27,14 +27,14 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f4f1ea;
+  background: #edf3f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c59b27;
+  background: #15b498;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9f7b1c;
+  background: #19558f;
 }
 
 /* Glass & Editorial utility */
@@ -42,8 +42,8 @@
   mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 }
 
-.gold-gradient-text {
-  background: linear-gradient(135deg, #b8860b 0%, #d4af37 50%, #996515 100%);
+.brand-gradient-text {
+  background: linear-gradient(135deg, #1f66a8 0%, #15b498 50%, #1f66a8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -55,7 +55,7 @@
 
 /* Grain texture overlay */
 .bg-grain {
-  background-image: radial-gradient(rgba(24, 25, 27, 0.04) 1px, transparent 0);
+  background-image: radial-gradient(rgba(15, 42, 74, 0.04) 1px, transparent 0);
   background-size: 24px 24px;
 }
 

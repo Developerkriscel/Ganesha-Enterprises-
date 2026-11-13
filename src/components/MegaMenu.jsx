@@ -10,7 +10,7 @@ export default function MegaMenu({ isOpen, onClose }) {
 
   return (
     <div 
-      className="absolute top-full left-0 w-full bg-[#faf8f5] border-b border-[#e4e2dd] shadow-2xl py-8 px-6 lg:px-12 z-40 transition-all duration-300 animate-fadeIn"
+      className="absolute top-full left-0 w-full bg-[#f7f9fc] border-b border-[#dbe4ee] shadow-2xl py-8 px-6 lg:px-12 z-40 transition-all duration-300 animate-fadeIn"
       onMouseLeave={onClose}
     >
       <div className="max-w-7xl mx-auto">
@@ -21,17 +21,17 @@ export default function MegaMenu({ isOpen, onClose }) {
               <Link
                 to={`/products?category=${cat.id}`}
                 onClick={onClose}
-                className="font-serif text-sm font-bold text-[#18191b] hover:text-[#b8860b] transition-colors block border-b border-[#e4e2dd] pb-2"
+                className="font-serif text-sm font-bold text-[#0f2a4a] hover:text-[#1f66a8] transition-colors block border-b border-[#dbe4ee] pb-2"
               >
                 {cat.name}
               </Link>
-              <ul className="space-y-2 text-xs text-[#686a71]">
+              <ul className="space-y-2 text-xs text-[#56667a]">
                 {cat.subcategories?.map((sub, idx) => (
                   <li key={idx}>
                     <Link
                       to={`/products?category=${cat.id}&sub=${encodeURIComponent(sub)}`}
                       onClick={onClose}
-                      className="hover:text-[#18191b] hover:translate-x-1 inline-block transition-all"
+                      className="hover:text-[#0f2a4a] hover:translate-x-1 inline-block transition-all"
                     >
                       {sub}
                     </Link>
@@ -42,19 +42,19 @@ export default function MegaMenu({ isOpen, onClose }) {
           ))}
 
           {/* Featured Showcase Column */}
-          <div className="hidden lg:flex flex-col justify-between bg-white p-5 rounded-2xl border border-[#e4e2dd]">
+          <div className="hidden lg:flex flex-col justify-between bg-white p-5 rounded-2xl border border-[#dbe4ee]">
             <div>
-              <div className="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-widest text-[#b8860b] mb-2">
+              <div className="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-widest text-[#1f66a8] mb-2">
                 <Sparkles className="w-3 h-3" />
                 Featured Artifact
               </div>
-              <h4 className="font-serif text-sm font-bold text-[#18191b]">
+              <h4 className="font-serif text-sm font-bold text-[#0f2a4a]">
                 {featured[0]?.name}
               </h4>
-              <p className="text-xs text-[#686a71] mt-1 line-clamp-2">
+              <p className="text-xs text-[#56667a] mt-1 line-clamp-2">
                 {featured[0]?.shortDesc}
               </p>
-              <div className="mt-3 aspect-video rounded-lg overflow-hidden bg-[#f4f1ea]">
+              <div className="mt-3 aspect-video rounded-lg overflow-hidden bg-[#edf3f9]">
                 <img
                   src={featured[0]?.image}
                   alt={featured[0]?.name}
@@ -67,7 +67,7 @@ export default function MegaMenu({ isOpen, onClose }) {
             <Link
               to={`/products/${featured[0]?.slug}`}
               onClick={onClose}
-              className="mt-4 text-xs font-semibold text-[#18191b] hover:text-[#b8860b] inline-flex items-center gap-1 transition-colors"
+              className="mt-4 text-xs font-semibold text-[#0f2a4a] hover:text-[#1f66a8] inline-flex items-center gap-1 transition-colors"
             >
               <span>Explore Specs</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -76,18 +76,18 @@ export default function MegaMenu({ isOpen, onClose }) {
         </div>
 
         {/* Mega Menu Footer Banner */}
-        <div className="mt-8 pt-6 border-t border-[#e4e2dd] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#686a71]">
+        <div className="mt-8 pt-6 border-t border-[#dbe4ee] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#56667a]">
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5 font-medium text-[#18191b]">
-              <CheckCircle2 className="w-4 h-4 text-[#b8860b]" />
+            <span className="flex items-center gap-1.5 font-medium text-[#0f2a4a]">
+              <CheckCircle2 className="w-4 h-4 text-[#1f66a8]" />
               Pantone Precision Inks
             </span>
-            <span className="flex items-center gap-1.5 font-medium text-[#18191b]">
-              <CheckCircle2 className="w-4 h-4 text-[#b8860b]" />
+            <span className="flex items-center gap-1.5 font-medium text-[#0f2a4a]">
+              <CheckCircle2 className="w-4 h-4 text-[#1f66a8]" />
               FSC Certified Substrates
             </span>
-            <span className="flex items-center gap-1.5 font-medium text-[#18191b]">
-              <CheckCircle2 className="w-4 h-4 text-[#b8860b]" />
+            <span className="flex items-center gap-1.5 font-medium text-[#0f2a4a]">
+              <CheckCircle2 className="w-4 h-4 text-[#1f66a8]" />
               24-Hour Express Dispatch
             </span>
           </div>
@@ -95,7 +95,7 @@ export default function MegaMenu({ isOpen, onClose }) {
           <Link
             to="/products"
             onClick={onClose}
-            className="font-semibold text-[#18191b] hover:text-[#b8860b] inline-flex items-center gap-1.5"
+            className="font-semibold text-[#0f2a4a] hover:text-[#1f66a8] inline-flex items-center gap-1.5"
           >
             <span>View Complete Product Catalog (90+ Items)</span>
             <ArrowRight className="w-3.5 h-3.5" />

@@ -74,11 +74,11 @@ export default function Products({ onOpenQuote }) {
         breadcrumbs={[{ name: 'Products' }]}
       />
 
-      <section className="py-16 bg-[#faf8f5]">
+      <section className="py-16 bg-[#f7f9fc]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           
           {/* Controls Bar: Category Tabs & Search */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-[#e4e2dd]">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-[#dbe4ee]">
             {/* Category Pills */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
               {productCategories.map((cat) => (
@@ -87,8 +87,8 @@ export default function Products({ onOpenQuote }) {
                   onClick={() => handleCategoryChange(cat.id)}
                   className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 ${
                     activeCategory === cat.id
-                      ? 'bg-[#18191b] text-white shadow-md'
-                      : 'bg-white border border-[#e4e2dd] text-[#686a71] hover:text-[#18191b] hover:border-[#b8860b]'
+                      ? 'bg-[#0f2a4a] text-white shadow-md'
+                      : 'bg-white border border-[#dbe4ee] text-[#56667a] hover:text-[#0f2a4a] hover:border-[#1f66a8]'
                   }`}
                 >
                   {cat.name}
@@ -99,18 +99,18 @@ export default function Products({ onOpenQuote }) {
             {/* Search & Sort Controls */}
             <div className="flex items-center gap-3">
               <div className="relative flex-grow sm:w-64">
-                <Search className="w-4 h-4 text-[#686a71] absolute left-3.5 top-3" />
+                <Search className="w-4 h-4 text-[#56667a] absolute left-3.5 top-3" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Filter products..."
-                  className="w-full pl-10 pr-8 py-2 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                  className="w-full pl-10 pr-8 py-2 rounded-xl bg-white border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none"
                 />
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery('')}
-                    className="absolute right-2.5 top-2.5 text-[#686a71] hover:text-[#18191b]"
+                    className="absolute right-2.5 top-2.5 text-[#56667a] hover:text-[#0f2a4a]"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -121,7 +121,7 @@ export default function Products({ onOpenQuote }) {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="px-3.5 py-2 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                  className="px-3.5 py-2 rounded-xl bg-white border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none"
                 >
                   <option value="featured">Featured First</option>
                   <option value="name">Alphabetical (A-Z)</option>
@@ -134,7 +134,7 @@ export default function Products({ onOpenQuote }) {
           {/* Subcategory Pills if applicable */}
           {currentCatObj?.subcategories && (
             <div className="flex items-center gap-2 overflow-x-auto pb-1">
-              <span className="text-xs font-semibold text-[#18191b] uppercase tracking-wider shrink-0 mr-1">
+              <span className="text-xs font-semibold text-[#0f2a4a] uppercase tracking-wider shrink-0 mr-1">
                 Sub-Division:
               </span>
               {currentCatObj.subcategories.map((sub, idx) => (
@@ -143,8 +143,8 @@ export default function Products({ onOpenQuote }) {
                   onClick={() => handleSubChange(sub)}
                   className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${
                     activeSub === sub
-                      ? 'bg-[#b8860b] text-white'
-                      : 'bg-white border border-[#eceae5] text-[#686a71] hover:text-[#18191b]'
+                      ? 'bg-[#1f66a8] text-white'
+                      : 'bg-white border border-[#e6edf5] text-[#56667a] hover:text-[#0f2a4a]'
                   }`}
                 >
                   {sub}
@@ -154,7 +154,7 @@ export default function Products({ onOpenQuote }) {
           )}
 
           {/* Result Count and Active Filters Bar */}
-          <div className="flex items-center justify-between text-xs text-[#686a71]">
+          <div className="flex items-center justify-between text-xs text-[#56667a]">
             <span>Showing <strong>{filteredProducts.length}</strong> verified corporate artifacts</span>
             {(activeCategory !== 'all' || activeSub || searchQuery) && (
               <button
@@ -164,7 +164,7 @@ export default function Products({ onOpenQuote }) {
                   setSearchQuery('');
                   setSearchParams({});
                 }}
-                className="text-[#b8860b] font-semibold hover:underline"
+                className="text-[#1f66a8] font-semibold hover:underline"
               >
                 Clear all filters
               </button>
@@ -183,12 +183,12 @@ export default function Products({ onOpenQuote }) {
               ))}
             </div>
           ) : (
-            <div className="py-24 text-center space-y-4 bg-white rounded-3xl border border-[#e4e2dd]">
-              <div className="w-12 h-12 mx-auto rounded-full bg-[#f4f1ea] flex items-center justify-center text-[#b8860b]">
+            <div className="py-24 text-center space-y-4 bg-white rounded-3xl border border-[#dbe4ee]">
+              <div className="w-12 h-12 mx-auto rounded-full bg-[#edf3f9] flex items-center justify-center text-[#1f66a8]">
                 <Search className="w-6 h-6" />
               </div>
-              <h3 className="font-serif text-xl font-bold text-[#18191b]">No Products Matched Your Criteria</h3>
-              <p className="text-xs text-[#686a71] max-w-md mx-auto">
+              <h3 className="font-serif text-xl font-bold text-[#0f2a4a]">No Products Matched Your Criteria</h3>
+              <p className="text-xs text-[#56667a] max-w-md mx-auto">
                 Try clearing search terms or selecting a different category. Our studio produces bespoke custom jobs beyond catalog listings.
               </p>
               <button
@@ -197,7 +197,7 @@ export default function Products({ onOpenQuote }) {
                   setActiveSub('');
                   setSearchQuery('');
                 }}
-                className="px-6 py-2.5 rounded-full bg-[#18191b] text-white text-xs font-semibold uppercase tracking-wider"
+                className="px-6 py-2.5 rounded-full bg-[#0f2a4a] text-white text-xs font-semibold uppercase tracking-wider"
               >
                 Reset Filters
               </button>

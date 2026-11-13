@@ -64,7 +64,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#faf8f5] text-[#18191b] selection:bg-[#18191b] selection:text-[#faf8f5]">
+    <div className="min-h-screen flex flex-col bg-[#f7f9fc] text-[#0f2a4a] selection:bg-[#0f2a4a] selection:text-[#f7f9fc]">
       <ScrollRestoration />
 
       {/* Global Navigation */}

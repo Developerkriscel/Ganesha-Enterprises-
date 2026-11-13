@@ -55,7 +55,7 @@ export default function Services({ onOpenQuote }) {
       />
 
       {/* Services Grid */}
-      <section className="py-20 bg-[#faf8f5]">
+      <section className="py-20 bg-[#f7f9fc]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
@@ -70,16 +70,16 @@ export default function Services({ onOpenQuote }) {
       </section>
 
       {/* Production Workflow: The 5-Step Precision Protocol */}
-      <section className="py-24 bg-white border-y border-[#e4e2dd]">
+      <section className="py-24 bg-white border-y border-[#dbe4ee]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold">
+            <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
               The Protocol
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b]">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
               From Vector Art to Flawless Physical Impression
             </h2>
-            <p className="text-sm text-[#686a71]">
+            <p className="text-sm text-[#56667a]">
               Every client commission follows a rigid 5-stage production roadmap to ensure zero defect rates and punctual SLA dispatch.
             </p>
           </div>
@@ -88,16 +88,16 @@ export default function Services({ onOpenQuote }) {
             {steps.map((s, idx) => (
               <div 
                 key={idx}
-                className="relative p-6 rounded-2xl bg-[#faf8f5] border border-[#e4e2dd] hover:border-[#b8860b] transition-all group flex flex-col justify-between"
+                className="relative p-6 rounded-2xl bg-[#f7f9fc] border border-[#dbe4ee] hover:border-[#1f66a8] transition-all group flex flex-col justify-between"
               >
                 <div>
-                  <div className="font-serif text-3xl font-extrabold text-[#b8860b]/40 group-hover:text-[#b8860b] transition-colors mb-4">
+                  <div className="font-serif text-3xl font-extrabold text-[#1f66a8]/40 group-hover:text-[#1f66a8] transition-colors mb-4">
                     {s.num}
                   </div>
-                  <h3 className="font-serif text-base font-bold text-[#18191b] mb-2 leading-snug">
+                  <h3 className="font-serif text-base font-bold text-[#0f2a4a] mb-2 leading-snug">
                     {s.title}
                   </h3>
-                  <p className="text-xs text-[#686a71] leading-relaxed">
+                  <p className="text-xs text-[#56667a] leading-relaxed">
                     {s.desc}
                   </p>
                 </div>
@@ -108,9 +108,9 @@ export default function Services({ onOpenQuote }) {
       </section>
 
       {/* Emergency Turnaround Banner */}
-      <section className="py-16 bg-[#18191b] text-white">
+      <section className="py-16 bg-[#0f2a4a] text-white">
         <div className="max-w-5xl mx-auto px-4 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c59b27]/20 text-[#c59b27] text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#15b498]/20 text-[#15b498] text-xs font-semibold uppercase tracking-wider">
             <Clock className="w-3.5 h-3.5" />
             24-Hour Emergency Production Protocol
           </div>
@@ -123,7 +123,7 @@ export default function Services({ onOpenQuote }) {
           <div className="pt-2 flex flex-wrap justify-center gap-4">
             <button
               onClick={() => onOpenQuote("Emergency 24-Hour Turnaround")}
-              className="px-8 py-3.5 rounded-full bg-[#c59b27] hover:bg-[#b8860b] text-[#18191b] font-bold text-xs uppercase tracking-wider transition-all shadow-lg"
+              className="px-8 py-3.5 rounded-full bg-[#1f66a8] hover:bg-[#1f66a8] text-[#0f2a4a] font-bold text-xs uppercase tracking-wider transition-all shadow-lg"
             >
               Trigger Priority Run
             </button>

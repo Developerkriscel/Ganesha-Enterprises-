@@ -26,11 +26,11 @@ export default function ProductDetails({ onOpenQuote }) {
   if (!product) {
     return (
       <div className="py-32 text-center max-w-lg mx-auto px-4 space-y-4">
-        <h2 className="font-serif text-3xl font-bold text-[#18191b]">Product Not Found</h2>
-        <p className="text-sm text-[#686a71]">This item may have been archived or re-categorized in our catalog.</p>
+        <h2 className="font-serif text-3xl font-bold text-[#0f2a4a]">Product Not Found</h2>
+        <p className="text-sm text-[#56667a]">This item may have been archived or re-categorized in our catalog.</p>
         <Link
           to="/products"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#18191b] text-white text-xs font-semibold uppercase tracking-wider"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0f2a4a] text-white text-xs font-semibold uppercase tracking-wider"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Return to Catalog</span>
@@ -66,7 +66,7 @@ export default function ProductDetails({ onOpenQuote }) {
             
             {/* Left Product Gallery */}
             <div className="lg:col-span-6 space-y-4 sticky top-28">
-              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-[#f4f1ea] border border-[#e4e2dd] shadow-lg">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-[#edf3f9] border border-[#dbe4ee] shadow-lg">
                 <img
                   src={mainImage || product.image}
                   alt={product.name}
@@ -75,7 +75,7 @@ export default function ProductDetails({ onOpenQuote }) {
                 />
 
                 {product.badge && (
-                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#18191b] text-[#faf8f5] text-[10px] font-semibold uppercase tracking-widest">
+                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#0f2a4a] text-[#f7f9fc] text-[10px] font-semibold uppercase tracking-widest">
                     {product.badge}
                   </div>
                 )}
@@ -86,7 +86,7 @@ export default function ProductDetails({ onOpenQuote }) {
                 <button
                   onClick={() => setMainImage(product.image)}
                   className={`w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ${
-                    mainImage === product.image ? 'border-[#b8860b]' : 'border-transparent opacity-70'
+                    mainImage === product.image ? 'border-[#1f66a8]' : 'border-transparent opacity-70'
                   }`}
                 >
                   <img
@@ -99,7 +99,7 @@ export default function ProductDetails({ onOpenQuote }) {
                 <button
                   onClick={() => setMainImage(product.backupImage)}
                   className={`w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ${
-                    mainImage === product.backupImage ? 'border-[#b8860b]' : 'border-transparent opacity-70'
+                    mainImage === product.backupImage ? 'border-[#1f66a8]' : 'border-transparent opacity-70'
                   }`}
                 >
                   <img
@@ -115,49 +115,49 @@ export default function ProductDetails({ onOpenQuote }) {
             <div className="lg:col-span-6 space-y-8">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs uppercase tracking-widest font-semibold text-[#b8860b]">
+                  <span className="text-xs uppercase tracking-widest font-semibold text-[#1f66a8]">
                     {product.subcategory}
                   </span>
                   <button
                     onClick={handleShare}
-                    className="text-xs text-[#686a71] hover:text-[#18191b] inline-flex items-center gap-1 transition-colors"
+                    className="text-xs text-[#56667a] hover:text-[#0f2a4a] inline-flex items-center gap-1 transition-colors"
                   >
                     <Share2 className="w-3.5 h-3.5" />
                     <span>{copied ? 'Link Copied!' : 'Share Product'}</span>
                   </button>
                 </div>
 
-                <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#18191b]">
+                <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#0f2a4a]">
                   {product.name}
                 </h1>
 
-                <p className="text-sm text-[#686a71] leading-relaxed">
+                <p className="text-sm text-[#56667a] leading-relaxed">
                   {product.description}
                 </p>
               </div>
 
               {/* Quick Spec Highlights */}
-              <div className="grid grid-cols-2 gap-4 p-5 rounded-2xl bg-[#faf8f5] border border-[#e4e2dd]">
+              <div className="grid grid-cols-2 gap-4 p-5 rounded-2xl bg-[#f7f9fc] border border-[#dbe4ee]">
                 <div>
-                  <span className="text-[10px] uppercase tracking-wider text-[#686a71] block">Minimum Order Batch</span>
-                  <span className="font-serif text-lg font-bold text-[#18191b]">{product.moq}</span>
+                  <span className="text-[10px] uppercase tracking-wider text-[#56667a] block">Minimum Order Batch</span>
+                  <span className="font-serif text-lg font-bold text-[#0f2a4a]">{product.moq}</span>
                 </div>
                 <div>
-                  <span className="text-[10px] uppercase tracking-wider text-[#686a71] block">Production SLA</span>
-                  <span className="font-serif text-lg font-bold text-[#18191b]">{product.turnaround}</span>
+                  <span className="text-[10px] uppercase tracking-wider text-[#56667a] block">Production SLA</span>
+                  <span className="font-serif text-lg font-bold text-[#0f2a4a]">{product.turnaround}</span>
                 </div>
               </div>
 
               {/* Technical Specifications Table */}
               <div className="space-y-3">
-                <h4 className="font-serif text-lg font-bold text-[#18191b]">
+                <h4 className="font-serif text-lg font-bold text-[#0f2a4a]">
                   Technical Specifications
                 </h4>
-                <div className="border border-[#e4e2dd] rounded-2xl overflow-hidden divide-y divide-[#eceae5] text-xs">
+                <div className="border border-[#dbe4ee] rounded-2xl overflow-hidden divide-y divide-[#e6edf5] text-xs">
                   {Object.entries(product.specs).map(([key, val]) => (
                     <div key={key} className="flex px-4 py-3 justify-between">
-                      <span className="font-semibold text-[#686a71]">{key}</span>
-                      <span className="text-[#18191b] text-right font-medium max-w-[60%]">{val}</span>
+                      <span className="font-semibold text-[#56667a]">{key}</span>
+                      <span className="text-[#0f2a4a] text-right font-medium max-w-[60%]">{val}</span>
                     </div>
                   ))}
                 </div>
@@ -166,14 +166,14 @@ export default function ProductDetails({ onOpenQuote }) {
               {/* Tactile Finishes Available */}
               {product.finishes && (
                 <div className="space-y-3">
-                  <h4 className="font-serif text-lg font-bold text-[#18191b]">
+                  <h4 className="font-serif text-lg font-bold text-[#0f2a4a]">
                     Available Tactile Finishes
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {product.finishes.map((f, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1.5 rounded-xl bg-white border border-[#e4e2dd] text-xs font-medium text-[#18191b]"
+                        className="px-3 py-1.5 rounded-xl bg-white border border-[#dbe4ee] text-xs font-medium text-[#0f2a4a]"
                       >
                         {f}
                       </span>
@@ -183,10 +183,10 @@ export default function ProductDetails({ onOpenQuote }) {
               )}
 
               {/* Action Buttons */}
-              <div className="pt-4 border-t border-[#e4e2dd] flex flex-col sm:flex-row gap-3">
+              <div className="pt-4 border-t border-[#dbe4ee] flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => onOpenQuote(product.name)}
-                  className="flex-1 py-4 rounded-full bg-[#18191b] hover:bg-[#c59b27] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2"
+                  className="flex-1 py-4 rounded-full bg-[#0f2a4a] hover:bg-[#15b498] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2"
                 >
                   <Sparkles className="w-4 h-4" />
                   <span>Request Custom Quote</span>
@@ -210,13 +210,13 @@ export default function ProductDetails({ onOpenQuote }) {
 
       {/* Related Products */}
       {related.length > 0 && (
-        <section className="py-20 bg-[#faf8f5] border-t border-[#e4e2dd]">
+        <section className="py-20 bg-[#f7f9fc] border-t border-[#dbe4ee]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between mb-10">
-              <h3 className="font-serif text-2xl font-bold text-[#18191b]">
+              <h3 className="font-serif text-2xl font-bold text-[#0f2a4a]">
                 Complementary Corporate Artifacts
               </h3>
-              <Link to="/products" className="text-xs font-semibold text-[#b8860b] hover:text-[#18191b]">
+              <Link to="/products" className="text-xs font-semibold text-[#1f66a8] hover:text-[#0f2a4a]">
                 Explore All Products →
               </Link>
             </div>

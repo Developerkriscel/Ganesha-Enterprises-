@@ -24,7 +24,7 @@ export default function LightboxModal({ item, onClose, onQuoteRequest }) {
       onClick={onClose}
     >
       <div 
-        className="relative max-w-4xl w-full bg-[#18191b] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
+        className="relative max-w-4xl w-full bg-[#0f2a4a] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -45,16 +45,16 @@ export default function LightboxModal({ item, onClose, onQuoteRequest }) {
         </div>
 
         {/* Details Container */}
-        <div className="md:w-2/5 p-8 flex flex-col justify-between text-[#faf8f5] bg-[#18191b] overflow-y-auto">
+        <div className="md:w-2/5 p-8 flex flex-col justify-between text-[#f7f9fc] bg-[#0f2a4a] overflow-y-auto">
           <div className="space-y-4">
-            <span className="text-xs uppercase tracking-widest text-[#c59b27] font-semibold">
+            <span className="text-xs uppercase tracking-widest text-[#15b498] font-semibold">
               {item.category || item.categoryName} {item.year ? `• ${item.year}` : ''}
             </span>
             <h3 className="font-serif text-2xl font-bold text-white">
               {item.title || item.name}
             </h3>
             {item.client && (
-              <p className="text-xs text-[#b8860b] font-medium tracking-wide">
+              <p className="text-xs text-[#1f66a8] font-medium tracking-wide">
                 Client / Partner: <span className="text-white">{item.client}</span>
               </p>
             )}
@@ -68,7 +68,7 @@ export default function LightboxModal({ item, onClose, onQuoteRequest }) {
                 <ul className="text-xs space-y-1.5 text-white/60">
                   {item.deliverables.map((d, i) => (
                     <li key={i} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#c59b27]"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#1f66a8]"></span>
                       {d}
                     </li>
                   ))}
@@ -78,7 +78,7 @@ export default function LightboxModal({ item, onClose, onQuoteRequest }) {
 
             {item.results && (
               <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs text-white/80">
-                <strong className="text-[#c59b27]">Execution Standard:</strong> {item.results}
+                <strong className="text-[#15b498]">Execution Standard:</strong> {item.results}
               </div>
             )}
           </div>
@@ -89,12 +89,12 @@ export default function LightboxModal({ item, onClose, onQuoteRequest }) {
                 onClose();
                 onQuoteRequest(item.title || item.name);
               }}
-              className="w-full py-3 rounded-full bg-[#c59b27] hover:bg-[#b8860b] text-black font-semibold text-xs uppercase tracking-wider transition-colors shadow-lg"
+              className="w-full py-3 rounded-full bg-[#1f66a8] hover:bg-[#1f66a8] text-black font-semibold text-xs uppercase tracking-wider transition-colors shadow-lg"
             >
               Request Quote for Similar Work
             </button>
             <div className="flex items-center justify-center gap-2 text-xs text-white/50">
-              <ShieldCheck className="w-4 h-4 text-[#c59b27]" />
+              <ShieldCheck className="w-4 h-4 text-[#15b498]" />
               Produced at Ganesha Enterprises Naraina Studio
             </div>
           </div>

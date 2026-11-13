@@ -1,23 +1,54 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { 
+  ChevronRight, 
+  Sparkles, 
+  ShieldCheck, 
+  Clock, 
+  Award, 
+  Palette, 
+  ArrowRight,
+  PhoneCall,
+  CheckCircle2
+} from 'lucide-react';
+import { company } from '../data/company';
 
 export default function PageHero({ 
   badge = "Ganesha Enterprises", 
   title, 
   subtitle, 
   breadcrumbs = [],
-  highlight 
+  highlight,
+  image = "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=1200&auto=format&fit=crop",
+  children
 }) {
   return (
     <section className="relative pt-32 pb-16 sm:pb-20 bg-gradient-to-b from-[#f4f1ea] via-[#faf8f5] to-[#faf8f5] border-b border-[#e4e2dd] overflow-hidden">
-      {/* Decorative Grid Texture */}
-      <div className="absolute inset-0 bg-grain opacity-60 pointer-events-none"></div>
+      {/* Editorial Atmospheric Background Photo with Cream Gradient Overlay */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <img 
+          src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1600&auto=format&fit=crop" 
+          alt="Atelier Background" 
+          className="w-full h-full object-cover object-center opacity-20 filter saturate-50 contrast-125"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#f4f1ea]/90 via-[#faf8f5]/85 to-[#faf8f5]"></div>
+      </div>
+
+      {/* Decorative Architectural Grain & Ambient Warm Glow */}
+      <div className="absolute inset-0 bg-grain opacity-60 pointer-events-none z-[1]"></div>
+      <div className="absolute top-1/3 right-1/4 w-[450px] h-[450px] bg-[#c59b27]/10 rounded-full blur-[120px] pointer-events-none z-[1]"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Breadcrumb Trail */}
         {breadcrumbs.length > 0 && (
-          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-[#686a71] mb-6">
+          <motion.nav 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            aria-label="Breadcrumb" 
+            className="flex items-center gap-2 text-xs text-[#686a71] mb-6"
+          >
             <Link to="/" className="hover:text-[#18191b] transition-colors">Home</Link>
             {breadcrumbs.map((crumb, idx) => (
               <React.Fragment key={idx}>
@@ -31,26 +62,165 @@ export default function PageHero({
                 )}
               </React.Fragment>
             ))}
-          </nav>
+          </motion.nav>
         )}
 
-        <div className="max-w-3xl space-y-4">
-          {badge && (
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white text-[#b8860b] border border-[#e4e2dd] text-xs font-semibold uppercase tracking-widest shadow-xs">
-              <Sparkles className="w-3.5 h-3.5" />
-              {badge}
+        {/* Main Hero Split Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          
+          {/* Left Column: Narrative & Typography */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="lg:col-span-7 space-y-5"
+          >
+            {badge && (
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-[#b8860b] border border-[#e4e2dd] text-[11px] font-semibold uppercase tracking-widest shadow-xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#c59b27] animate-pulse" />
+                <span>{badge}</span>
+              </div>
+            )}
+
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#18191b] tracking-tight leading-[1.08]">
+              {title} {highlight && <span className="gold-gradient-text block sm:inline">{highlight}</span>}
+            </h1>
+
+            {subtitle && (
+              <p className="text-base sm:text-lg text-[#686a71] leading-relaxed max-w-2xl">
+                {subtitle}
+              </p>
+            )}
+
+            {/* Custom child content (if provided by specific page) */}
+            {children}
+          </motion.div>
+
+          {/* Right Column: Layered Editorial Photo & Atelier Studio Hub Card */}
+          <motion.div 
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="lg:col-span-5 relative group"
+          >
+            {/* Ambient subtle spinning ring accent */}
+            <div className="absolute -inset-6 pointer-events-none">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full border border-[#c59b27]/25 blur-[1px]"></div>
             </div>
-          )}
 
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#18191b] tracking-tight leading-[1.1]">
-            {title} {highlight && <span className="gold-gradient-text block sm:inline">{highlight}</span>}
-          </h1>
+            {/* Layer 1: Editorial Craftsmanship Photo Peeking Directly Behind the Card */}
+            <div className="absolute -top-3 -right-3 -bottom-3 -left-3 sm:-top-4 sm:-right-4 sm:-bottom-4 sm:-left-4 rounded-[2rem] overflow-hidden -rotate-2 sm:-rotate-3 shadow-2xl border-2 border-[#c59b27]/30 bg-[#18191b] transition-all duration-700 ease-out group-hover:rotate-0 group-hover:scale-[1.02]">
+              <img 
+                src={image} 
+                alt="Bespoke Production Workshop" 
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700 ease-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20"></div>
+              
+              {/* Top & Bottom Badges on the Photo Frame */}
+              <div className="absolute top-3.5 left-5 z-10 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-[#c59b27] border border-white/10 flex items-center gap-1.5 shadow-lg">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#c59b27] animate-pulse"></span>
+                <span>Plant Facility • Naraina Studio</span>
+              </div>
+              <div className="absolute bottom-3.5 right-5 text-[10px] font-semibold tracking-wider text-white/60">
+                Est. 2011 • New Delhi
+              </div>
+            </div>
 
-          {subtitle && (
-            <p className="text-base sm:text-lg text-[#686a71] leading-relaxed max-w-2xl">
-              {subtitle}
-            </p>
-          )}
+            {/* Layer 2: Main Glassmorphic Atelier Hub Card in Front */}
+            <div className="relative bg-white/95 backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-white/80 shadow-2xl hover:border-[#c59b27]/60 transition-all duration-500 overflow-hidden">
+              
+              {/* Shimmer sweep effect on hover */}
+              <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+                <div className="w-[140%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] skew-x-12 group-hover:translate-x-[200%] transition-transform duration-1000 ease-out"></div>
+              </div>
+
+              {/* Card Header: Live Plant Status & Swatch Strip */}
+              <div className="flex items-center justify-between pb-5 border-b border-[#eceae5]">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                  </span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#18191b]">
+                    Studio Plant Active
+                  </span>
+                </div>
+
+                {/* Swiss CMYK + Gold Calibration Swatches */}
+                <div className="flex items-center gap-1.5" title="Pantone® / CMYK / Gold Standard">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#009ee3]" title="Cyan"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#e5007d]" title="Magenta"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#ffed00]" title="Yellow"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#18191b]" title="Key Black"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#c59b27] shadow-sm" title="Metallic Gold"></span>
+                </div>
+              </div>
+
+              {/* Atelier Credentials Matrix */}
+              <div className="grid grid-cols-2 gap-3 py-5">
+                <div className="p-3.5 rounded-2xl bg-[#faf8f5] border border-[#eceae5] space-y-1 group/box hover:border-[#c59b27]/40 transition-colors">
+                  <div className="flex items-center gap-1.5 text-[#b8860b]">
+                    <Palette className="w-4 h-4" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider">Color Fidelity</span>
+                  </div>
+                  <div className="text-xs font-bold text-[#18191b]">Swiss Calibration</div>
+                  <div className="text-[10px] text-[#686a71]">Pantone® Matching</div>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-[#faf8f5] border border-[#eceae5] space-y-1 group/box hover:border-[#c59b27]/40 transition-colors">
+                  <div className="flex items-center gap-1.5 text-[#b8860b]">
+                    <Clock className="w-4 h-4" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider">Fast Turnaround</span>
+                  </div>
+                  <div className="text-xs font-bold text-[#18191b]">24-48h Expedited</div>
+                  <div className="text-[10px] text-[#686a71]">Pan-India Logistics</div>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-[#faf8f5] border border-[#eceae5] space-y-1 group/box hover:border-[#c59b27]/40 transition-colors">
+                  <div className="flex items-center gap-1.5 text-[#b8860b]">
+                    <ShieldCheck className="w-4 h-4" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider">Certified</span>
+                  </div>
+                  <div className="text-xs font-bold text-[#18191b]">MSME & ISO Standard</div>
+                  <div className="text-[10px] text-[#686a71]">Strict QA Inspection</div>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-[#faf8f5] border border-[#eceae5] space-y-1 group/box hover:border-[#c59b27]/40 transition-colors">
+                  <div className="flex items-center gap-1.5 text-[#b8860b]">
+                    <Award className="w-4 h-4" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider">Production</span>
+                  </div>
+                  <div className="text-xs font-bold text-[#18191b]">Est. 2011 • Delhi</div>
+                  <div className="text-[10px] text-[#686a71]">1,000+ Verified Clients</div>
+                </div>
+              </div>
+
+              {/* Direct Plant Manager Hotline Strip */}
+              <div className="pt-4 border-t border-[#eceae5] flex items-center justify-between">
+                <div>
+                  <div className="text-[10px] uppercase tracking-wider text-[#686a71] font-medium">Direct Facility Line:</div>
+                  <a 
+                    href={`tel:${company.contact.phone.replace(/[^0-9]/g, '')}`} 
+                    className="text-xs font-bold text-[#18191b] hover:text-[#c59b27] transition-colors inline-flex items-center gap-1 mt-0.5"
+                  >
+                    <PhoneCall className="w-3 h-3 text-[#c59b27]" />
+                    <span>{company.contact.phoneDisplay}</span>
+                  </a>
+                </div>
+
+                <Link
+                  to="/quote"
+                  className="px-4 py-2 rounded-full bg-[#18191b] text-white text-[11px] font-bold uppercase tracking-wider hover:bg-[#c59b27] transition-all shadow-md hover:scale-105 active:scale-95 flex items-center gap-1.5 group/btn"
+                >
+                  <span>Quick Quote</span>
+                  <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
+                </Link>
+              </div>
+
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </section>

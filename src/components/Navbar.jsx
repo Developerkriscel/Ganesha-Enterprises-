@@ -52,7 +52,7 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isTransparent
-            ? 'bg-transparent text-[#18191b] py-5 border-b border-black/5'
+            ? 'bg-transparent text-white py-5 border-b border-white/10'
             : 'bg-[#faf8f5]/95 backdrop-blur-md text-[#18191b] py-3.5 shadow-sm border-b border-[#e4e2dd]'
         }`}
       >
@@ -60,14 +60,18 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-[#18191b] text-white flex items-center justify-center font-serif font-bold text-lg group-hover:bg-[#c59b27] transition-all shadow-md">
+              <div className="w-10 h-10 rounded-xl bg-[#c59b27] text-white flex items-center justify-center font-serif font-bold text-lg transition-all shadow-md">
                 GE
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-lg sm:text-xl font-bold tracking-tight text-[#18191b] group-hover:text-[#b8860b] transition-colors leading-none">
+                <span className={`font-serif text-lg sm:text-xl font-bold tracking-tight transition-colors leading-none ${
+                  isTransparent ? 'text-white' : 'text-[#18191b] group-hover:text-[#b8860b]'
+                }`}>
                   GANESHA
                 </span>
-                <span className="text-[10px] uppercase tracking-[0.25em] text-[#686a71] font-semibold mt-1">
+                <span className={`text-[10px] uppercase tracking-[0.25em] font-semibold mt-1 ${
+                  isTransparent ? 'text-white/70' : 'text-[#686a71]'
+                }`}>
                   Enterprises • New Delhi
                 </span>
               </div>
@@ -86,8 +90,10 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                     className={({ isActive }) =>
                       `px-3.5 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-200 inline-flex items-center gap-1 rounded-full ${
                         isActive
-                          ? 'text-[#b8860b] bg-[#f4f1ea]'
-                          : 'text-[#18191b] hover:text-[#b8860b] hover:bg-black/5'
+                          ? 'text-[#c59b27] bg-white/10 backdrop-blur-sm'
+                          : isTransparent
+                            ? 'text-white/90 hover:text-[#c59b27] hover:bg-white/10'
+                            : 'text-[#18191b] hover:text-[#b8860b] hover:bg-black/5'
                       }`
                     }
                   >
@@ -106,7 +112,11 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
               <button
                 onClick={onOpenSearch}
                 aria-label="Search catalog"
-                className="p-2.5 rounded-full text-[#18191b] hover:text-[#b8860b] hover:bg-black/5 transition-colors"
+                className={`p-2.5 rounded-full transition-colors ${
+                  isTransparent
+                    ? 'text-white hover:text-[#c59b27] hover:bg-white/10'
+                    : 'text-[#18191b] hover:text-[#b8860b] hover:bg-black/5'
+                }`}
                 title="Search Products & Services"
               >
                 <Search className="w-4 h-4" />
@@ -115,16 +125,20 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
               {/* Direct Phone / WhatsApp Quick Pill */}
               <a
                 href="tel:9650044234"
-                className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-[#18191b] bg-white border border-[#e4e2dd] hover:border-[#b8860b] transition-all"
+                className={`hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                  isTransparent
+                    ? 'text-white bg-white/10 border border-white/20 hover:border-[#c59b27]'
+                    : 'text-[#18191b] bg-white border border-[#e4e2dd] hover:border-[#b8860b]'
+                }`}
               >
-                <Phone className="w-3.5 h-3.5 text-[#b8860b]" />
+                <Phone className="w-3.5 h-3.5 text-[#c59b27]" />
                 <span>+91 96500 44234</span>
               </a>
 
               {/* Request a Quote CTA */}
               <button
                 onClick={() => onOpenQuote()}
-                className="px-5 py-2.5 rounded-full bg-[#18191b] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#c59b27] transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-full bg-[#c59b27] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#d4aa36] transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 flex items-center gap-1.5"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Request a Quote</span>
@@ -136,14 +150,16 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
               <button
                 onClick={onOpenSearch}
                 aria-label="Search"
-                className="p-2 rounded-full text-[#18191b] hover:bg-black/5"
+                className={`p-2 rounded-full transition-colors ${
+                  isTransparent ? 'text-white hover:bg-white/10' : 'text-[#18191b] hover:bg-black/5'
+                }`}
               >
                 <Search className="w-5 h-5" />
               </button>
 
               <button
                 onClick={() => onOpenQuote()}
-                className="px-3 py-1.5 rounded-full bg-[#18191b] text-white text-[11px] font-semibold uppercase tracking-wider"
+                className="px-3 py-1.5 rounded-full bg-[#c59b27] text-white text-[11px] font-semibold uppercase tracking-wider shadow-sm"
               >
                 Quote
               </button>
@@ -151,7 +167,9 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle Menu"
-                className="p-2 rounded-xl text-[#18191b] hover:bg-black/5 transition-colors"
+                className={`p-2 rounded-xl transition-colors ${
+                  isTransparent ? 'text-white hover:bg-white/10' : 'text-[#18191b] hover:bg-black/5'
+                }`}
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>

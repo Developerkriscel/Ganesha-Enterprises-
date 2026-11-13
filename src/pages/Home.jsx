@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { 
   ArrowRight, 
   ArrowUpRight, 
@@ -16,7 +17,9 @@ import {
   Layers,
   Printer,
   Package,
-  Cpu
+  Cpu,
+  Play,
+  Pause
 } from 'lucide-react';
 import { company } from '../data/company';
 import { products, productCategories } from '../data/products';
@@ -26,6 +29,91 @@ import { blogs } from '../data/blogs';
 import BrandStrip from '../components/BrandStrip';
 import ProductCard from '../components/ProductCard';
 import ServiceCard from '../components/ServiceCard';
+
+// ── Animation Variants ──────────────────────────────────────
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 0) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.7, delay: i * 0.12, ease: [0.25, 0.46, 0.45, 0.94] }
+  })
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] } }
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] } }
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: (i = 0) => ({
+    opacity: 1, scale: 1,
+    transition: { duration: 0.6, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }
+  })
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } }
+};
+
+// ── Animated Counter Component ──────────────────────────────
+function AnimatedCounter({ target, suffix = '', duration = 2 }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const num = parseFloat(target.replace(/[^0-9.]/g, ''));
+    const steps = 60;
+    const increment = num / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= num) { setCount(num); clearInterval(timer); }
+      else setCount(Math.floor(current * 10) / 10);
+    }, (duration * 1000) / steps);
+    return () => clearInterval(timer);
+  }, [isInView, target, duration]);
+
+  const display = target.includes('.') ? count.toFixed(1) : Math.floor(count);
+  const prefix = target.replace(/[0-9.]/g, '').replace(suffix, '');
+  return <span ref={ref}>{prefix}{display}{suffix}</span>;
+}
+
+function HeroAutoPlay({ heroTab, setHeroTab, total }) {
+  const [playing, setPlaying] = useState(true);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    if (playing) {
+      intervalRef.current = setInterval(() => {
+        setHeroTab(prev => (prev + 1) % total);
+      }, 3500);
+    }
+    return () => clearInterval(intervalRef.current);
+  }, [playing, total, setHeroTab]);
+
+  return (
+    <button
+      onClick={() => setPlaying(p => !p)}
+      className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:border-[#c59b27] shadow-md flex items-center justify-center transition-all hover:scale-110 active:scale-95 group"
+      title={playing ? 'Pause auto-play' : 'Resume auto-play'}
+    >
+      {playing ? (
+        <Pause className="w-4 h-4 text-[#c59b27] group-hover:text-white transition-colors" />
+      ) : (
+        <Play className="w-4 h-4 text-[#c59b27] group-hover:text-white transition-colors ml-0.5" />
+      )}
+    </button>
+  );
+}
 
 export default function Home({ onOpenQuote, onOpenLightbox }) {
   // Hero active slide / showcase tab
@@ -99,12 +187,28 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION B: CINEMATIC HERO SECTION
           ========================================================= */}
-      <section className="relative min-h-[92vh] lg:min-h-screen flex items-center justify-center pt-28 pb-16 bg-gradient-to-b from-[#f4f1ea] via-[#faf8f5] to-[#faf8f5] overflow-hidden">
-        {/* Subtle Architectural Grain Background */}
-        <div className="absolute inset-0 bg-grain opacity-70 pointer-events-none"></div>
+      <section className="relative min-h-[92vh] lg:min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
+        {/* Fullscreen Background Video */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/videos/hero-bg.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#18191b]/75 via-[#18191b]/60 to-[#18191b]/80"></div>
+          {/* Warm golden tint overlay */}
+          <div className="absolute inset-0 bg-[#c59b27]/5 mix-blend-overlay"></div>
+          {/* Bottom fade to the next section */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#faf8f5] to-transparent"></div>
+        </div>
 
-        {/* Ambient Warm Golden Glow */}
-        <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[550px] h-[550px] bg-[#c59b27]/8 rounded-full blur-[140px] pointer-events-none"></div>
+        {/* Subtle Architectural Grain Background */}
+        <div className="absolute inset-0 bg-grain opacity-30 pointer-events-none z-[1]"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -112,31 +216,51 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             {/* Left Column: Editorial Headline & Narrative */}
             <div className="lg:col-span-7 space-y-6 sm:space-y-8 text-left">
               {/* Prestige Studio Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#e4e2dd] shadow-xs">
+              <motion.div
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg"
+              >
                 <span className="w-2 h-2 rounded-full bg-[#c59b27] animate-pulse"></span>
-                <span className="text-[11px] font-semibold uppercase tracking-widest text-[#18191b]">
+                <span className="text-[11px] font-semibold uppercase tracking-widest text-white/90">
                   Swiss Color Fidelity • New Delhi Production Studio
                 </span>
-              </div>
+              </motion.div>
 
               {/* Editorial Master Headline */}
-              <div className="space-y-2">
-                <h1 className="font-serif text-4xl sm:text-6xl xl:text-7xl font-extrabold text-[#18191b] tracking-tight leading-[1.02]">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="space-y-2"
+              >
+                <h1 className="font-serif text-4xl sm:text-6xl xl:text-7xl font-extrabold text-white tracking-tight leading-[1.02] drop-shadow-lg">
                   WE DON'T JUST PRINT. <br />
                   <span className="gold-gradient-text italic font-normal">WE CREATE</span> IMPRESSIONS.
                 </h1>
-              </div>
+              </motion.div>
 
               {/* Supporting Text */}
-              <p className="text-base sm:text-lg text-[#686a71] leading-relaxed max-w-xl font-normal">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.6 }}
+                className="text-base sm:text-lg text-white/70 leading-relaxed max-w-xl font-normal"
+              >
                 {company.subTagline} Serving corporate pioneers, aviation fleets, and luxury brand houses with masterfully engineered paper, packaging, apparel, and signage.
-              </p>
+              </motion.p>
 
               {/* Primary Call to Actions */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="flex flex-wrap items-center gap-4 pt-2"
+              >
                 <Link
                   to="/products"
-                  className="px-8 py-4 rounded-full bg-[#18191b] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#c59b27] transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center gap-2 group"
+                  className="px-8 py-4 rounded-full bg-[#c59b27] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#d4aa36] transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center gap-2 group"
                 >
                   <span>Explore Our Collection</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -144,96 +268,137 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
 
                 <button
                   onClick={() => onOpenQuote()}
-                  className="px-8 py-4 rounded-full bg-white text-[#18191b] text-xs font-bold uppercase tracking-widest border border-[#e4e2dd] hover:border-[#b8860b] hover:bg-[#faf8f5] transition-all duration-300 shadow-sm flex items-center gap-2"
+                  className="px-8 py-4 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-bold uppercase tracking-widest border border-white/25 hover:border-[#c59b27] hover:bg-white/15 transition-all duration-300 shadow-sm flex items-center gap-2"
                 >
-                  <Sparkles className="w-4 h-4 text-[#b8860b]" />
+                  <Sparkles className="w-4 h-4 text-[#c59b27]" />
                   <span>Request a Quote</span>
                 </button>
-              </div>
+              </motion.div>
 
               {/* Micro Trust Indicators */}
-              <div className="pt-6 border-t border-[#e4e2dd]/80 grid grid-cols-3 gap-4 text-xs">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.0 }}
+                className="pt-6 border-t border-white/15 grid grid-cols-3 gap-4 text-xs"
+              >
                 <div>
-                  <div className="font-serif font-bold text-lg text-[#18191b]">15+ Years</div>
-                  <div className="text-[11px] text-[#686a71]">Production Heritage</div>
+                  <div className="font-serif font-bold text-lg text-white"><AnimatedCounter target="15" suffix="+ Years" /></div>
+                  <div className="text-[11px] text-white/50">Production Heritage</div>
                 </div>
                 <div>
-                  <div className="font-serif font-bold text-lg text-[#18191b]">1,000+</div>
-                  <div className="text-[11px] text-[#686a71]">Verified Brands</div>
+                  <div className="font-serif font-bold text-lg text-white"><AnimatedCounter target="1000" suffix="+" /></div>
+                  <div className="text-[11px] text-white/50">Verified Brands</div>
                 </div>
                 <div>
-                  <div className="font-serif font-bold text-lg text-[#18191b]">99.8%</div>
-                  <div className="text-[11px] text-[#686a71]">SLA On-Time Dispatch</div>
+                  <div className="font-serif font-bold text-lg text-white"><AnimatedCounter target="99.8" suffix="%" /></div>
+                  <div className="text-[11px] text-white/50">SLA On-Time Dispatch</div>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
-            {/* Right Column: Layered Editorial Product Showcase */}
+            {/* Right Column: Immersive 3D Rotating Showcase */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-3xl bg-white p-3 sm:p-4 shadow-2xl border border-[#e4e2dd]">
-                {/* Main Showcase Image */}
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#18191b]">
-                  <img
-                    src={heroShowcases[heroTab].image}
-                    alt={heroShowcases[heroTab].title}
-                    onError={(e) => { e.currentTarget.src = heroShowcases[heroTab].backupImage; }}
-                    className="w-full h-full object-cover transition-all duration-700 ease-out"
-                  />
+              {/* Ambient golden orb glow behind the card stack */}
+              <div className="absolute -inset-8 pointer-events-none z-0">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-[#c59b27]/10 blur-[80px] animate-pulse"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] rounded-full border border-[#c59b27]/20 animate-[spin_20s_linear_infinite]"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] rounded-full border border-[#c59b27]/10 animate-[spin_30s_linear_infinite_reverse]"></div>
+              </div>
+
+              <div className="relative z-10" style={{ perspective: '1200px' }}>
+                {/* Stacked card deck with 3D tilt */}
+                <div className="relative w-full aspect-[4/5] sm:aspect-[3/4]">
+                  {heroShowcases.map((item, idx) => {
+                    const isActive = idx === heroTab;
+                    const offset = idx - heroTab;
+                    return (
+                      <div
+                        key={idx}
+                        onClick={() => setHeroTab(idx)}
+                        className="absolute inset-0 cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.33,1,0.68,1)]"
+                        style={{
+                          transform: isActive
+                            ? 'translateZ(0) rotateY(0deg) scale(1)'
+                            : `translateZ(-${Math.abs(offset) * 80}px) translateX(${offset * 40}px) rotateY(${offset * -8}deg) scale(${1 - Math.abs(offset) * 0.08})`,
+                          zIndex: heroShowcases.length - Math.abs(offset),
+                          opacity: Math.abs(offset) > 2 ? 0 : 1 - Math.abs(offset) * 0.25,
+                          filter: isActive ? 'none' : `brightness(${0.7 - Math.abs(offset) * 0.1})`
+                        }}
+                      >
+                        <div className={`w-full h-full rounded-3xl overflow-hidden backdrop-blur-md shadow-2xl border-2 transition-all duration-500 ${isActive ? 'border-[#c59b27] bg-black/35 shadow-[0_0_50px_rgba(197,155,39,0.35)]' : 'border-white/20 bg-black/25'}`}>
+                          <div className="relative w-full h-full">
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              onError={(e) => { e.currentTarget.src = item.backupImage; }}
+                              className="w-full h-full object-cover opacity-50 mix-blend-screen transition-all duration-700"
+                            />
+                            {/* Glass gradient overlay allowing video to show through */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+                            
+                            {/* Top tag */}
+                            <div className={`absolute top-5 left-5 px-4 py-1.5 rounded-full backdrop-blur-xl text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 border ${isActive ? 'bg-[#c59b27]/90 text-white border-[#c59b27] shadow-lg' : 'bg-white/10 text-white/90 border-white/20'}`}>
+                              {item.tag}
+                            </div>
+
+                            {/* Bottom info — only on active card */}
+                            <div className={`absolute bottom-0 left-0 right-0 p-6 sm:p-8 transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+                                {item.title}
+                              </h3>
+                              <p className="text-xs sm:text-sm text-white/80 mt-2 line-clamp-2 max-w-md drop-shadow-[0_1px_6px_rgba(0,0,0,0.8)]">
+                                {item.desc}
+                              </p>
+                              <div className="flex items-center gap-3 mt-4">
+                                <button
+                                  onClick={(e) => { e.stopPropagation(); onOpenQuote(item.title); }}
+                                  className="px-5 py-2.5 rounded-full bg-[#c59b27] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#d4aa36] transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 flex items-center gap-2"
+                                >
+                                  <Sparkles className="w-3.5 h-3.5" />
+                                  <span>Get Quote</span>
+                                </button>
+                                <Link
+                                  to="/products"
+                                  className="px-5 py-2.5 rounded-full bg-white/15 backdrop-blur-md text-white text-[11px] font-bold uppercase tracking-widest hover:bg-white/25 transition-all border border-white/25 flex items-center gap-2"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <Eye className="w-3.5 h-3.5" />
+                                  <span>Explore</span>
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Playback control + dot indicators */}
+                <div className="mt-6 flex items-center justify-center gap-6">
+                  {/* Auto-play toggle */}
+                  <HeroAutoPlay heroTab={heroTab} setHeroTab={setHeroTab} total={heroShowcases.length} />
                   
-                  {/* Subtle Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-
-                  {/* Active Showcase Pill */}
-                  <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-[#18191b]">
-                    {heroShowcases[heroTab].tag}
+                  {/* Dot navigation */}
+                  <div className="flex items-center gap-2">
+                    {heroShowcases.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setHeroTab(idx)}
+                        className="group relative"
+                      >
+                        <div className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${
+                          idx === heroTab 
+                            ? 'bg-[#c59b27] scale-125 shadow-[0_0_12px_rgba(197,155,39,0.5)]' 
+                            : 'bg-white/40 hover:bg-white/60'
+                        }`} />
+                        {idx === heroTab && (
+                          <div className="absolute -inset-1.5 rounded-full border border-[#c59b27]/40 animate-ping"></div>
+                        )}
+                      </button>
+                    ))}
                   </div>
-
-                  {/* Active Showcase Info */}
-                  <div className="absolute bottom-4 left-4 right-4 z-10 text-white">
-                    <h3 className="font-serif text-xl sm:text-2xl font-bold">
-                      {heroShowcases[heroTab].title}
-                    </h3>
-                    <p className="text-xs text-white/80 mt-1 line-clamp-2">
-                      {heroShowcases[heroTab].desc}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Interactive Thumbnail Selector Tabs */}
-                <div className="grid grid-cols-4 gap-2 mt-3">
-                  {heroShowcases.map((item, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setHeroTab(idx)}
-                      className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all ${
-                        heroTab === idx 
-                          ? 'border-[#c59b27] scale-95 shadow-md' 
-                          : 'border-transparent opacity-60 hover:opacity-100'
-                      }`}
-                    >
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        onError={(e) => { e.currentTarget.src = item.backupImage; }}
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
-
-                {/* Subtitle Under Selector */}
-                <div className="mt-3 pt-3 border-t border-[#eceae5] flex items-center justify-between text-xs text-[#686a71]">
-                  <span className="flex items-center gap-1 font-medium">
-                    <Layers className="w-3.5 h-3.5 text-[#b8860b]" />
-                    Interactive Atelier Showcase
-                  </span>
-                  <button
-                    onClick={() => onOpenQuote(heroShowcases[heroTab].title)}
-                    className="font-semibold text-[#18191b] hover:text-[#b8860b] inline-flex items-center gap-1 transition-colors"
-                  >
-                    <span>Inquire Now</span>
-                    <ArrowUpRight className="w-3 h-3" />
-                  </button>
                 </div>
               </div>
             </div>
@@ -252,28 +417,47 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           ========================================================= */}
       <section className="py-20 bg-[#faf8f5] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+            className="text-center max-w-3xl mx-auto mb-16 space-y-3"
+          >
+            <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold block">
               The Ganesha Production Standard
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b]">
+            </motion.span>
+            <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b]">
               Why Leading Enterprises Entrust Their Brand to Us
-            </h2>
-            <p className="text-sm sm:text-base text-[#686a71]">
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#686a71]">
               Every project is treated as a strategic tactile artifact. We combine Swiss-grade color calibration with precision industrial finishing.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
             {company.valueProps.map((prop, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="p-8 rounded-3xl bg-white border border-[#e4e2dd] hover:border-[#b8860b] shadow-subtle hover:shadow-premium transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between"
+                custom={idx}
+                variants={fadeUp}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                className="p-8 rounded-3xl bg-white border border-[#e4e2dd] hover:border-[#b8860b] shadow-subtle hover:shadow-premium transition-all duration-300 group flex flex-col justify-between"
               >
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-[#f4f1ea] group-hover:bg-[#faf8f5] flex items-center justify-center transition-colors">
+                  <motion.div
+                    whileHover={{ rotate: 10, scale: 1.1 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                    className="w-12 h-12 rounded-2xl bg-[#f4f1ea] group-hover:bg-[#faf8f5] flex items-center justify-center transition-colors"
+                  >
                     {getIcon(prop.icon)}
-                  </div>
+                  </motion.div>
                   <h3 className="font-serif text-xl font-bold text-[#18191b] group-hover:text-[#b8860b] transition-colors">
                     {prop.title}
                   </h3>
@@ -286,9 +470,9 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                   <CheckCircle2 className="w-4 h-4 text-[#b8860b]" />
                   <span>Quality Guaranteed</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -297,8 +481,14 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           ========================================================= */}
       <section className="py-24 bg-[#f4f1ea]/60 border-y border-[#e4e2dd]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-            <div className="max-w-2xl space-y-2">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
+          >
+            <motion.div variants={fadeLeft} className="max-w-2xl space-y-2">
               <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold">
                 Signature Artifacts
               </span>
@@ -308,28 +498,37 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               <p className="text-sm text-[#686a71]">
                 From boardroom-ready visiting cards and employee welcome kits to heavy pique polos and roll-up standees.
               </p>
-            </div>
+            </motion.div>
 
-            <Link
-              to="/products"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#18191b] hover:text-[#b8860b] transition-colors border-b-2 border-[#18191b] hover:border-[#b8860b] pb-1 w-max"
-            >
-              <span>View All 90+ Products</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+            <motion.div variants={fadeRight}>
+              <Link
+                to="/products"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#18191b] hover:text-[#b8860b] transition-colors border-b-2 border-[#18191b] hover:border-[#b8860b] pb-1 w-max"
+              >
+                <span>View All 90+ Products</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          </motion.div>
 
           {/* Editorial Asymmetric Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
+          >
             {featuredProducts.slice(0, 8).map((product, idx) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onQuoteRequest={onOpenQuote}
-                priority={idx < 4}
-              />
+              <motion.div key={product.id} custom={idx} variants={scaleIn}>
+                <ProductCard
+                  product={product}
+                  onQuoteRequest={onOpenQuote}
+                  priority={idx < 4}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -341,12 +540,18 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
             {/* Left Imagery Composition */}
-            <div className="lg:col-span-6 relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-[#18191b] aspect-[4/3]">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={fadeLeft}
+              className="lg:col-span-6 relative"
+            >
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-[#18191b] aspect-[4/3] group">
                 <img
                   src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1200&auto=format&fit=crop"
                   alt="Ganesha Enterprises Workshop"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                 <div className="absolute bottom-6 left-6 right-6 text-white">
@@ -359,8 +564,15 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 </div>
               </div>
 
-              {/* Floating Stat Card */}
-              <div className="absolute -bottom-6 -right-4 sm:-right-8 bg-[#faf8f5] p-5 rounded-2xl border border-[#e4e2dd] shadow-xl max-w-xs hidden sm:block">
+              {/* Floating Stat Card with subtle bounce animation */}
+              <motion.div
+                initial={{ opacity: 0, x: 40, y: 20 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, duration: 0.6, type: 'spring' }}
+                whileHover={{ scale: 1.05 }}
+                className="absolute -bottom-6 -right-4 sm:-right-8 bg-[#faf8f5] p-5 rounded-2xl border border-[#e4e2dd] shadow-xl max-w-xs hidden sm:block"
+              >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-[#c59b27] text-white flex items-center justify-center font-bold">
                     <ShieldCheck className="w-5 h-5" />
@@ -370,51 +582,59 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                     <p className="text-[11px] text-[#686a71]">Zero Compromise QA Process</p>
                   </div>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Right Storytelling Column */}
-            <div className="lg:col-span-6 space-y-6">
-              <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={staggerContainer}
+              className="lg:col-span-6 space-y-6"
+            >
+              <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold block">
                 About Ganesha Enterprises
-              </span>
+              </motion.span>
 
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b] tracking-tight leading-tight">
+              <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b] tracking-tight leading-tight">
                 Architecting Tactile Brand Excellence Since 2011.
-              </h2>
+              </motion.h2>
 
-              <p className="text-sm sm:text-base text-[#686a71] leading-relaxed">
+              <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#686a71] leading-relaxed">
                 At Ganesha Enterprises, we specialize in professional digital printing solutions that combine quality, speed, and creativity — all without stretching your budget. Whether you’re a high-growth startup, an airline pioneer, or a multinational enterprise, we deliver customized print solutions that bring your brand identity to life.
-              </p>
+              </motion.p>
 
-              <p className="text-sm sm:text-base text-[#686a71] leading-relaxed">
+              <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#686a71] leading-relaxed">
                 With state-of-the-art machinery, skilled master printers, and an obsession with detail, we handle everything from heavy cotton pulp cardstock to vinyl manifestations, corporate uniforms, and large-format architectural branding.
-              </p>
+              </motion.p>
 
               {/* Capabilities Checkmarks */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-semibold text-[#18191b]">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#b8860b]" />
-                  <span>Pantone® Ink Calibration</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#b8860b]" />
-                  <span>High-DPI Japanese UV Flatbeds</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#b8860b]" />
-                  <span>Sculpted Brass Foil Embossing</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#b8860b]" />
-                  <span>Doorstep Pan-India Logistics</span>
-                </div>
-              </div>
+              <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-semibold text-[#18191b]">
+                {[
+                  'Pantone® Ink Calibration',
+                  'High-DPI Japanese UV Flatbeds',
+                  'Sculpted Brass Foil Embossing',
+                  'Doorstep Pan-India Logistics'
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -15 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + idx * 0.1 }}
+                    className="flex items-center gap-2"
+                  >
+                    <CheckCircle2 className="w-4 h-4 text-[#b8860b] shrink-0" />
+                    <span>{item}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
 
-              <div className="pt-4 flex items-center gap-4">
+              <motion.div variants={fadeUp} className="pt-4 flex items-center gap-4">
                 <Link
                   to="/about"
-                  className="px-6 py-3.5 rounded-full bg-[#18191b] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#c59b27] transition-all duration-300 shadow-md inline-flex items-center gap-2"
+                  className="px-6 py-3.5 rounded-full bg-[#18191b] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#c59b27] transition-all duration-300 shadow-md inline-flex items-center gap-2 hover:scale-105 active:scale-95"
                 >
                   <span>Read Full Heritage</span>
                   <ArrowRight className="w-4 h-4" />
@@ -426,8 +646,8 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 >
                   Schedule Plant Tour
                 </Link>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
           </div>
         </div>
@@ -438,37 +658,61 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           ========================================================= */}
       <section className="py-24 bg-[#faf8f5] border-t border-[#e4e2dd]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+            className="text-center max-w-3xl mx-auto mb-16 space-y-3"
+          >
+            <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold block">
               Comprehensive Production Capabilities
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b]">
+            </motion.span>
+            <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#18191b]">
               Turnkey Industrial Printing Services
-            </h2>
-            <p className="text-sm sm:text-base text-[#686a71]">
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#686a71]">
               Equipped for extreme volume, fine art precision, and rapid emergency turnarounds under one roof.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.slice(0, 6).map((service) => (
-              <ServiceCard
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {services.slice(0, 6).map((service, idx) => (
+              <motion.div
                 key={service.id}
-                service={service}
-                onQuoteRequest={onOpenQuote}
-              />
+                custom={idx}
+                variants={fadeUp}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+              >
+                <ServiceCard
+                  service={service}
+                  onQuoteRequest={onOpenQuote}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="mt-12 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="mt-12 text-center"
+          >
             <Link
               to="/services"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white border border-[#e4e2dd] text-[#18191b] hover:border-[#b8860b] hover:text-[#b8860b] text-xs font-bold uppercase tracking-widest shadow-xs transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white border border-[#e4e2dd] text-[#18191b] hover:border-[#b8860b] hover:text-[#b8860b] text-xs font-bold uppercase tracking-widest shadow-xs transition-all hover:scale-105 active:scale-95"
             >
               <span>Explore All 8 Specialized Service Divisions</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -477,8 +721,14 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           ========================================================= */}
       <section className="py-24 bg-[#f4f1ea] border-t border-[#e4e2dd]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-            <div className="max-w-2xl space-y-2">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
+          >
+            <motion.div variants={fadeLeft} className="max-w-2xl space-y-2">
               <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold">
                 Catalog Navigation
               </span>
@@ -488,54 +738,68 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               <p className="text-sm text-[#686a71]">
                 Engineered for rapid corporate procurement and tailored bespoke merchandise curation.
               </p>
-            </div>
+            </motion.div>
 
-            <Link
-              to="/products"
-              className="text-xs font-bold uppercase tracking-widest text-[#18191b] hover:text-[#b8860b] inline-flex items-center gap-1.5 transition-colors"
-            >
-              <span>Browse All Categories</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {productCategories.filter(c => c.id !== 'all').map((cat) => (
+            <motion.div variants={fadeRight}>
               <Link
-                key={cat.id}
-                to={`/products?category=${cat.id}`}
-                className="group p-8 rounded-3xl bg-white border border-[#e4e2dd] hover:border-[#b8860b] shadow-subtle hover:shadow-premium transition-all duration-300 flex flex-col justify-between"
+                to="/products"
+                className="text-xs font-bold uppercase tracking-widest text-[#18191b] hover:text-[#b8860b] inline-flex items-center gap-1.5 transition-colors"
               >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] uppercase tracking-widest font-semibold text-[#b8860b]">
-                      {cat.count} Products Available
-                    </span>
-                    <ArrowUpRight className="w-4 h-4 text-[#686a71] group-hover:text-[#b8860b] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                  </div>
-                  <h3 className="font-serif text-2xl font-bold text-[#18191b] group-hover:text-[#b8860b] transition-colors">
-                    {cat.name}
-                  </h3>
-                  <p className="text-xs text-[#686a71] leading-relaxed">
-                    {cat.description}
-                  </p>
-                </div>
-
-                <div className="pt-6 mt-6 border-t border-[#f4f1ea]">
-                  <div className="flex flex-wrap gap-1.5">
-                    {cat.subcategories?.slice(0, 4).map((sub, i) => (
-                      <span
-                        key={i}
-                        className="px-2.5 py-1 rounded-md bg-[#faf8f5] text-[10px] text-[#686a71] font-medium"
-                      >
-                        {sub}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                <span>Browse All Categories</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {productCategories.filter(c => c.id !== 'all').map((cat, idx) => (
+              <motion.div
+                key={cat.id}
+                custom={idx}
+                variants={fadeUp}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              >
+                <Link
+                  to={`/products?category=${cat.id}`}
+                  className="group p-8 rounded-3xl bg-white border border-[#e4e2dd] hover:border-[#b8860b] shadow-subtle hover:shadow-premium transition-all duration-300 flex flex-col justify-between h-full"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] uppercase tracking-widest font-semibold text-[#b8860b]">
+                        {cat.count} Products Available
+                      </span>
+                      <ArrowUpRight className="w-4 h-4 text-[#686a71] group-hover:text-[#b8860b] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    </div>
+                    <h3 className="font-serif text-2xl font-bold text-[#18191b] group-hover:text-[#b8860b] transition-colors">
+                      {cat.name}
+                    </h3>
+                    <p className="text-xs text-[#686a71] leading-relaxed">
+                      {cat.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-6 mt-6 border-t border-[#f4f1ea]">
+                    <div className="flex flex-wrap gap-1.5">
+                      {cat.subcategories?.slice(0, 4).map((sub, i) => (
+                        <span
+                          key={i}
+                          className="px-2.5 py-1 rounded-md bg-[#faf8f5] text-[10px] text-[#686a71] font-medium"
+                        >
+                          {sub}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -544,8 +808,14 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           ========================================================= */}
       <section className="py-24 bg-white border-t border-[#e4e2dd]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-            <div className="max-w-2xl space-y-2">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
+          >
+            <motion.div variants={fadeLeft} className="max-w-2xl space-y-2">
               <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold">
                 Proven Track Record
               </span>
@@ -555,22 +825,33 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               <p className="text-sm text-[#686a71]">
                 Authentic projects produced for Vistara, NTPC, Air India, Radisson, and prominent corporate networks.
               </p>
-            </div>
+            </motion.div>
 
-            <Link
-              to="/portfolio"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#18191b] hover:text-[#b8860b] transition-colors border-b-2 border-[#18191b] hover:border-[#b8860b] pb-1 w-max"
-            >
-              <span>Explore Complete Gallery</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+            <motion.div variants={fadeRight}>
+              <Link
+                to="/portfolio"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#18191b] hover:text-[#b8860b] transition-colors border-b-2 border-[#18191b] hover:border-[#b8860b] pb-1 w-max"
+              >
+                <span>Explore Complete Gallery</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          </motion.div>
 
           {/* Interactive Project Grid with Lightbox Action */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredPortfolio.map((item) => (
-              <div
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {featuredPortfolio.map((item, idx) => (
+              <motion.div
                 key={item.id}
+                custom={idx}
+                variants={fadeUp}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
                 className="group rounded-3xl bg-[#faf8f5] border border-[#e4e2dd] hover:border-[#b8860b] overflow-hidden transition-all duration-300 hover:shadow-premium flex flex-col justify-between"
               >
                 <div 
@@ -584,7 +865,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="px-4 py-2 rounded-full bg-white text-[#18191b] text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 shadow-lg">
+                    <span className="px-4 py-2 rounded-full bg-white text-[#18191b] text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                       <Eye className="w-3.5 h-3.5 text-[#b8860b]" />
                       <span>Inspect Artwork</span>
                     </span>
@@ -628,9 +909,9 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -645,56 +926,68 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Contact Details & Business Positioning */}
-            <div className="lg:col-span-5 space-y-6">
-              <span className="text-xs uppercase tracking-widest text-[#c59b27] font-semibold">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={staggerContainer}
+              className="lg:col-span-5 space-y-6"
+            >
+              <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#c59b27] font-semibold block">
                 Direct Studio Dialogue
-              </span>
+              </motion.span>
 
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
+              <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
                 Give Us a Printing Deal for Your Enterprise.
-              </h2>
+              </motion.h2>
 
-              <p className="text-sm text-white/70 leading-relaxed">
+              <motion.p variants={fadeUp} className="text-sm text-white/70 leading-relaxed">
                 Connect directly with Vineet and our production leads at the Naraina Industrial Area plant. We provide custom substrate swatch samples, rapid digital color proofs, and firm SLA guarantees for orders throughout India.
-              </p>
+              </motion.p>
 
-              <div className="space-y-4 pt-4 border-t border-white/10 text-xs text-white/80">
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1">
+              <motion.div variants={fadeUp} className="space-y-4 pt-4 border-t border-white/10 text-xs text-white/80">
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1 hover:border-[#c59b27]/40 transition-colors">
                   <div className="text-[10px] uppercase tracking-wider text-[#c59b27] font-semibold">Primary Facility & Address:</div>
                   <p className="font-medium text-white">{company.contact.address.full}</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1">
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1 hover:border-[#c59b27]/40 transition-colors">
                     <div className="text-[10px] uppercase tracking-wider text-[#c59b27] font-semibold">Direct Mobile / Call:</div>
                     <a href={`tel:${company.contact.phone.replace(/[^0-9]/g, '')}`} className="font-medium text-white hover:text-[#c59b27] block">
                       {company.contact.phoneDisplay}
                     </a>
                   </div>
-                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1">
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1 hover:border-[#c59b27]/40 transition-colors">
                     <div className="text-[10px] uppercase tracking-wider text-[#c59b27] font-semibold">Official Inquiries:</div>
                     <a href={`mailto:${company.contact.email}`} className="font-medium text-white hover:text-[#c59b27] block">
                       {company.contact.email}
                     </a>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="pt-2">
+              <motion.div variants={fadeUp} className="pt-2">
                 <a
                   href={company.contact.whatsappLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#25D366] text-white font-semibold text-xs uppercase tracking-wider hover:bg-[#20ba5a] transition-all shadow-md"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#25D366] text-white font-semibold text-xs uppercase tracking-wider hover:bg-[#20ba5a] transition-all shadow-md hover:scale-105 active:scale-95"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>Chat Immediately on WhatsApp</span>
                 </a>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Request a Quote Form Card */}
-            <div className="lg:col-span-7">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={fadeRight}
+              className="lg:col-span-7"
+            >
               <div className="bg-[#faf8f5] text-[#18191b] p-8 sm:p-10 rounded-3xl shadow-2xl border border-[#e4e2dd]">
                 <div className="space-y-2 mb-6">
                   <span className="text-xs uppercase tracking-widest font-semibold text-[#b8860b]">
@@ -709,7 +1002,11 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 </div>
 
                 {quickSubmitted ? (
-                  <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3"
+                  >
                     <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
                     <h4 className="font-serif text-xl font-bold text-[#18191b]">Request Submitted Successfully</h4>
                     <p className="text-xs text-[#686a71]">
@@ -721,7 +1018,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                     >
                       Submit Another Query
                     </button>
-                  </div>
+                  </motion.div>
                 ) : (
                   <form onSubmit={handleQuickSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -735,7 +1032,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                           value={quickContact.name}
                           onChange={(e) => setQuickContact({ ...quickContact, name: e.target.value })}
                           placeholder="e.g. Vikram Singhania"
-                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none transition-colors"
                         />
                       </div>
                       <div>
@@ -748,7 +1045,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                           value={quickContact.phone}
                           onChange={(e) => setQuickContact({ ...quickContact, phone: e.target.value })}
                           placeholder="+91 96500 44234"
-                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none transition-colors"
                         />
                       </div>
                     </div>
@@ -763,7 +1060,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                           value={quickContact.email}
                           onChange={(e) => setQuickContact({ ...quickContact, email: e.target.value })}
                           placeholder="contact@company.com"
-                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none transition-colors"
                         />
                       </div>
                       <div>
@@ -773,7 +1070,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                         <select
                           value={quickContact.service}
                           onChange={(e) => setQuickContact({ ...quickContact, service: e.target.value })}
-                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                          className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none transition-colors"
                         >
                           {services.map(s => (
                             <option key={s.id} value={s.title}>{s.title}</option>
@@ -791,7 +1088,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                         value={quickContact.message}
                         onChange={(e) => setQuickContact({ ...quickContact, message: e.target.value })}
                         placeholder="State your required quantity, target date, preferred paper stock, foil color, or custom apparel sizes..."
-                        className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none"
+                        className="w-full px-4 py-2.5 rounded-xl bg-white border border-[#e4e2dd] text-xs text-[#18191b] focus:border-[#b8860b] focus:outline-none transition-colors"
                       />
                     </div>
 
@@ -806,7 +1103,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
 
                       <button
                         type="submit"
-                        className="w-full sm:w-auto px-8 py-3 rounded-xl bg-[#18191b] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#c59b27] transition-all shadow-md"
+                        className="w-full sm:w-auto px-8 py-3 rounded-xl bg-[#18191b] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#c59b27] transition-all shadow-md hover:scale-105 active:scale-95"
                       >
                         Submit Inquiry
                       </button>
@@ -814,7 +1111,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                   </form>
                 )}
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -825,8 +1122,14 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           ========================================================= */}
       <section className="py-24 bg-[#faf8f5] border-t border-[#e4e2dd]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-            <div className="max-w-2xl space-y-2">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
+          >
+            <motion.div variants={fadeLeft} className="max-w-2xl space-y-2">
               <span className="text-xs uppercase tracking-widest text-[#b8860b] font-semibold">
                 Journal & Industry Insights
               </span>
@@ -836,22 +1139,33 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               <p className="text-sm text-[#686a71]">
                 Master printer articles on color theory, sustainable materials, retail merchandise, and corporate branding.
               </p>
-            </div>
+            </motion.div>
 
-            <Link
-              to="/blogs"
-              className="text-xs font-bold uppercase tracking-widest text-[#18191b] hover:text-[#b8860b] inline-flex items-center gap-1.5 transition-colors border-b-2 border-[#18191b] hover:border-[#b8860b] pb-1 w-max"
-            >
-              <span>Explore All 6 Articles</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+            <motion.div variants={fadeRight}>
+              <Link
+                to="/blogs"
+                className="text-xs font-bold uppercase tracking-widest text-[#18191b] hover:text-[#b8860b] inline-flex items-center gap-1.5 transition-colors border-b-2 border-[#18191b] hover:border-[#b8860b] pb-1 w-max"
+              >
+                <span>Explore All 6 Articles</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {blogs.slice(0, 3).map((blog) => (
-              <article
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {blogs.slice(0, 3).map((blog, idx) => (
+              <motion.article
                 key={blog.id}
-                className="group flex flex-col justify-between bg-white rounded-3xl border border-[#e4e2dd] hover:border-[#b8860b] overflow-hidden transition-all duration-300 hover:shadow-premium hover:-translate-y-1"
+                custom={idx}
+                variants={fadeUp}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                className="group flex flex-col justify-between bg-white rounded-3xl border border-[#e4e2dd] hover:border-[#b8860b] overflow-hidden transition-all duration-300 hover:shadow-premium"
               >
                 <div className="relative aspect-[16/10] bg-[#18191b] overflow-hidden">
                   <img
@@ -901,9 +1215,9 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                     </Link>
                   </div>
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

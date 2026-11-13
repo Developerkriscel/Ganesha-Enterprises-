@@ -161,6 +161,7 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                   isTransparent ? 'text-white hover:bg-white/10' : 'text-[#0f2a4a] hover:bg-black/5'
                 }`}
               >
+                
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>

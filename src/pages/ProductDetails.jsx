@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { 
-  Sparkles, 
   CheckCircle2, 
   Clock, 
   Package, 
@@ -163,11 +162,11 @@ export default function ProductDetails({ onOpenQuote }) {
                 </div>
               </div>
 
-              {/* Tactile Finishes Available */}
+              {/* Premium Finishes Available */}
               {product.finishes && (
                 <div className="space-y-3">
                   <h4 className="font-serif text-lg font-bold text-[#0f2a4a]">
-                    Available Tactile Finishes
+                    Available Premium Finishes
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {product.finishes.map((f, i) => (
@@ -188,7 +187,6 @@ export default function ProductDetails({ onOpenQuote }) {
                   onClick={() => onOpenQuote(product.name)}
                   className="flex-1 py-4 rounded-full bg-[#0f2a4a] hover:bg-[#15b498] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2"
                 >
-                  <Sparkles className="w-4 h-4" />
                   <span>Request Custom Quote</span>
                 </button>
 

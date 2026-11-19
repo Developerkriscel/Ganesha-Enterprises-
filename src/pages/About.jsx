@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Sparkles, 
   CheckCircle2, 
   Award, 
   ShieldCheck, 
@@ -17,15 +16,17 @@ import {
 import PageHero from '../components/PageHero';
 import BrandStrip from '../components/BrandStrip';
 import { company } from '../data/company';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function About({ onOpenQuote }) {
+  const { tr } = useLanguage();
   return (
     <div>
       <PageHero
-        badge="Heritage & Craftsmanship"
-        title="We Are Printers."
-        highlight="We Are Brand Architects."
-        subtitle="Bridging Swiss chromatic accuracy and Indian industrial manufacturing since 2011 from Naraina Industrial Area, New Delhi."
+        badge="About Ganesha Enterprises"
+        title="Quality Commercial Printing &"
+        highlight="Corporate Branding."
+        subtitle="Delivering reliable, high-precision digital printing and customized corporate merchandise since 2011 from Naraina Industrial Area, New Delhi."
         breadcrumbs={[{ name: 'About Us' }]}
       />
 
@@ -34,17 +35,18 @@ export default function About({ onOpenQuote }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-6">
-              <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
-                Our Genesis & Evolution
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a] leading-tight">
-                From a Specialized Digital Press to a Full-Spectrum Branding Studio.
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a] leading-tight tracking-tight">
+                From a Precision Digital Press to a <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Complete Printing & Branding Hub.</span>
               </h2>
+              <div className="flex items-center gap-2 pt-0.5">
+                <span className="h-[2px] w-12 bg-[#15b498] rounded-full"></span>
+                <span className="h-px w-6 bg-[#dbe4ee] rounded-full"></span>
+              </div>
               <p className="text-sm sm:text-base text-[#56667a] leading-relaxed">
-                Founded with a singular conviction: that physical printing should never be an afterthought. In an era dominated by pixel-perfect digital designs that lost their soul when transferred to cheap paper, Ganesha Enterprises set out to establish a world-class production studio in the heart of New Delhi’s industrial district.
+                Founded with a clear mission: high-quality printing should be dependable, beautifully finished, and cost-effective. While on-screen designs can look great, poor quality printing ruins a brand's reputation. Ganesha Enterprises established a modern printing plant in the heart of New Delhi’s industrial district to solve this challenge.
               </p>
               <p className="text-sm sm:text-base text-[#56667a] leading-relaxed">
-                Over the past 15 years, we have evolved from high-resolution digital proofing into end-to-end tactile brand engineering. Today, airlines such as Vistara and Air India, public sector behemoths like NTPC, and luxury hospitality leaders rely on our plant for precision uniforms, executive gift suites, and nationwide event signage.
+                Over the past 15 years, we have grown from high-resolution digital proofing into a complete commercial printing and corporate gifting facility. Today, airlines like Vistara and Air India, major public sector organizations like NTPC, and hospitality leaders rely on our plant for staff uniforms, executive gift kits, and event signage across India.
               </p>
 
               <div className="pt-2 flex flex-wrap gap-4 text-xs font-semibold text-[#0f2a4a]">
@@ -73,7 +75,7 @@ export default function About({ onOpenQuote }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                 <div className="absolute bottom-6 left-6 right-6 text-white">
                   <span className="text-[10px] uppercase tracking-widest text-[#15b498] font-semibold">
-                    The Naraina Atelier
+                    {tr('The Naraina Facility')}
                   </span>
                   <h3 className="font-serif text-xl sm:text-2xl font-bold mt-1">
                     Precision Dies, Embossing & Japanese UV Presses
@@ -91,7 +93,7 @@ export default function About({ onOpenQuote }) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {company.metrics.map((m, idx) => (
               <div key={idx} className="space-y-1">
-                <div className="font-serif text-4xl sm:text-5xl font-extrabold text-[#15b498]">
+                <div className="font-serif text-3xl sm:text-4xl font-extrabold text-[#15b498]">
                   {m.value}
                 </div>
                 <div className="text-xs uppercase tracking-wider font-semibold text-white/90">
@@ -110,12 +112,14 @@ export default function About({ onOpenQuote }) {
       <section className="py-24 bg-[#f7f9fc] border-b border-[#dbe4ee]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
-              Industrial Pedigree
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0f2a4a]">
-              Machinery & Production Infrastructure
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
+              Machinery & <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Production Infrastructure</span>
             </h2>
+            <div className="flex items-center justify-center gap-2.5 pt-1">
+              <span className="h-px w-12 bg-gradient-to-r from-transparent to-[#15b498]/60"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#15b498]"></span>
+              <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#15b498]/60"></span>
+            </div>
             <p className="text-sm text-[#56667a]">
               Inside our Naraina Industrial Area Phase 1 facility, advanced precision hardware meets master craftsman hand-finishing.
             </p>
@@ -128,7 +132,7 @@ export default function About({ onOpenQuote }) {
               </div>
               <h3 className="font-serif text-xl font-bold text-[#0f2a4a]">Japanese UV Flatbed & Direct Presses</h3>
               <p className="text-xs text-[#56667a] leading-relaxed">
-                Capable of curing photo-grade inks directly onto metal, glass, 304 steel, acrylic, and heavy cardstocks with zero chromatic aberration.
+                Prints sharp, vibrant colors directly onto metal, glass, stainless steel, acrylic, and heavy card paper with high color accuracy.
               </p>
               <ul className="text-xs space-y-2 text-[#0f2a4a] font-medium pt-2">
                 <li>• Instant UV curing technology</li>
@@ -156,9 +160,9 @@ export default function About({ onOpenQuote }) {
               <div className="w-12 h-12 rounded-2xl bg-[#edf3f9] flex items-center justify-center text-[#1f66a8]">
                 <Layers className="w-6 h-6" />
               </div>
-              <h3 className="font-serif text-xl font-bold text-[#0f2a4a]">Artisanal Finishing & Brass Dies</h3>
+              <h3 className="font-serif text-xl font-bold text-[#0f2a4a]">Premium Finishing & Custom Dies</h3>
               <p className="text-xs text-[#56667a] leading-relaxed">
-                Our bespoke finishing station houses German-engraved brass embossing dies, hydraulic hot-foil presses, thermal lamination, and laser-guided cutting tables.
+                Our finishing unit is equipped with high-precision brass embossing dies, hydraulic hot-foil stamping machines, thermal lamination, and laser cutting tables.
               </p>
               <ul className="text-xs space-y-2 text-[#0f2a4a] font-medium pt-2">
                 <li>• Multi-level 3D sculptured embossing</li>
@@ -178,10 +182,10 @@ export default function About({ onOpenQuote }) {
         <div className="max-w-4xl mx-auto px-4 text-center space-y-6">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#edf3f9] text-[#1f66a8] text-xs font-semibold uppercase tracking-wider">
             <MapPin className="w-3.5 h-3.5" />
-            Visit Our Delhi Studio
+            {tr('Visit Our Delhi Studio')}
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0f2a4a]">
-            Experience the Paper Swatches in Person
+            {tr('Experience the Paper Swatches in Person')}
           </h2>
           <p className="text-sm text-[#56667a] max-w-xl mx-auto">
             We welcome creative directors, brand managers, and procurement officers to inspect our live press sheets, debossing dies, and sample archives.

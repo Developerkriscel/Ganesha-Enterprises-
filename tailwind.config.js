@@ -23,9 +23,9 @@ export default {
         }
       },
       fontFamily: {
-        serif: ['Poppins', 'system-ui', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
         sans: ['Poppins', 'system-ui', 'sans-serif'],
-        display: ['Poppins', 'system-ui', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'Poppins', 'sans-serif'],
       },
       letterSpacing: {
         tighter: '-0.04em',

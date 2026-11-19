@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Sparkles, 
   ArrowRight, 
   CheckCircle2, 
   Clock, 
@@ -14,43 +13,45 @@ import {
 import PageHero from '../components/PageHero';
 import ServiceCard from '../components/ServiceCard';
 import { services } from '../data/services';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Services({ onOpenQuote }) {
+  const { tr } = useLanguage();
   const steps = [
     {
       num: "01",
-      title: "Consultation & Substrate Curation",
-      desc: "Our senior print architect assesses your brand guidelines, target audience, and selects optimal GSM weight, coatings, and structural die-lines."
+      title: "Consultation & Paper Selection",
+      desc: "Our printing experts review your brand guidelines and help you choose the best paper GSM, textures, and box structures for your budget."
     },
     {
       num: "02",
-      title: "Pre-Press & Color Calibration",
-      desc: "Files undergo rigorous 14-point pre-flight verification, bleed checks, and spectrophotometric Pantone® matching before physical press proofing."
+      title: "Design Check & Color Matching",
+      desc: "Your design files undergo thorough quality checks, bleed verification, and exact Pantone color matching before sample printing."
     },
     {
       num: "03",
-      title: "Precision Press Execution",
-      desc: "Printed using advanced Japanese UV flatbed, digital web, or Heidelberg multi-head offset lines for laser-sharp typographic clarity."
+      title: "High-Quality Printing Execution",
+      desc: "Printed using advanced Japanese UV flatbed, digital web, or Heidelberg multi-color offset machines for sharp and clear output."
     },
     {
       num: "04",
-      title: "Artisanal Finishing & Quality Audit",
-      desc: "Hydraulic foil stamping, 3D sculptured embossing, laser die-cutting, followed by individual hand-inspection of every single sheet."
+      title: "Special Finishing & Quality Check",
+      desc: "Gold/silver foil stamping, 3D embossing, and laser die-cutting, followed by individual quality inspection of every finished piece."
     },
     {
       num: "05",
-      title: "Insured Pan-India Dispatch",
-      desc: "Palletized industrial moisture-sealed packing and doorstep express logistics across all metro business corridors."
+      title: "Safe Pan-India Delivery",
+      desc: "Moisture-proof safe packaging and reliable express courier delivery to your doorstep across India."
     }
   ];
 
   return (
     <div>
       <PageHero
-        badge="Industrial Mastery"
+        badge="Printing & Production"
         title="Comprehensive Printing &"
         highlight="Brand Production Services"
-        subtitle="Turnkey corporate stationery, luxury packaging, airline uniforms, large-format event branding, and precision laser craft."
+        subtitle="Complete corporate stationery, custom packaging, airline uniforms, large-format event branding, and precision laser printing."
         breadcrumbs={[{ name: 'Services' }]}
       />
 
@@ -73,12 +74,14 @@ export default function Services({ onOpenQuote }) {
       <section className="py-24 bg-white border-y border-[#dbe4ee]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
-              The Protocol
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
-              From Vector Art to Flawless Physical Impression
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
+              From Digital Design to <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Finished Printed Product</span>
             </h2>
+            <div className="flex items-center justify-center gap-2.5 pt-1">
+              <span className="h-px w-12 bg-gradient-to-r from-transparent to-[#15b498]/60"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#15b498]"></span>
+              <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#15b498]/60"></span>
+            </div>
             <p className="text-sm text-[#56667a]">
               Every client commission follows a rigid 5-stage production roadmap to ensure zero defect rates and punctual SLA dispatch.
             </p>

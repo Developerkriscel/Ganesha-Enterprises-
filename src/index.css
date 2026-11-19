@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Keep the automatic translation engine invisible; our accessible language control drives it. */
+.goog-te-banner-frame,
+.skiptranslate,
+body > .skiptranslate {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+}
+
 @layer base {
   html {
     color-scheme: light;
@@ -48,6 +58,51 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Luxury Heading Accent & Pill Utilities */
+.heading-gradient-dark {
+  background: linear-gradient(135deg, #081a30 0%, #0f2a4a 45%, #1f66a8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heading-gradient-light {
+  background: linear-gradient(135deg, #ffffff 0%, #edf3f9 60%, #15b498 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heading-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  background: #ffffff;
+  border: 1px solid #dbe4ee;
+  color: #1f66a8;
+  box-shadow: 0 2px 8px rgba(15, 42, 74, 0.04);
+}
+
+.heading-pill-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #15b498;
+  backdrop-filter: blur(8px);
+}
+
 .hero-luxury-text {
   letter-spacing: -0.03em;
   line-height: 1.05;
@@ -57,6 +112,15 @@
 .bg-grain {
   background-image: radial-gradient(rgba(15, 42, 74, 0.04) 1px, transparent 0);
   background-size: 24px 24px;
+}
+
+/* Use the available page width while preserving each section's responsive padding. */
+.max-w-7xl {
+  max-width: 100%;
+}
+
+.footer-inner {
+  max-width: 80rem;
 }
 
 

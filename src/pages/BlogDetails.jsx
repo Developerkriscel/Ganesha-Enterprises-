@@ -4,29 +4,30 @@ import {
   Clock, 
   ArrowLeft, 
   Share2, 
-  Sparkles, 
   CheckCircle2, 
   BookOpen, 
   ArrowRight 
 } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import { blogs } from '../data/blogs';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function BlogDetails() {
+  const { tr } = useLanguage();
   const { slug } = useParams();
   const blog = blogs.find((b) => b.slug === slug);
 
   if (!blog) {
     return (
       <div className="py-32 text-center max-w-lg mx-auto px-4 space-y-4">
-        <h2 className="font-serif text-3xl font-bold text-[#0f2a4a]">Article Not Found</h2>
+        <h2 className="font-serif text-3xl font-bold text-[#0f2a4a]">{tr('Article Not Found')}</h2>
         <p className="text-sm text-[#56667a]">The editorial essay you are looking for does not exist in our archive.</p>
         <Link
           to="/blogs"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0f2a4a] text-white text-xs font-semibold uppercase tracking-wider"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Return to Journal</span>
+          <span>{tr('Return to Journal')}</span>
         </Link>
       </div>
     );
@@ -99,14 +100,14 @@ export default function BlogDetails() {
               if (block.type === 'paragraph') {
                 return (
                   <p key={idx} className="whitespace-pre-line leading-relaxed font-normal">
-                    {block.text}
+                    {tr(block.text)}
                   </p>
                 );
               }
               if (block.type === 'heading') {
                 return (
                   <h3 key={idx} className="font-serif text-2xl sm:text-3xl font-bold text-[#0f2a4a] pt-4">
-                    {block.text}
+                    {tr(block.text)}
                   </h3>
                 );
               }
@@ -124,8 +125,7 @@ export default function BlogDetails() {
                 return (
                   <div key={idx} className="my-8 p-6 sm:p-8 rounded-3xl bg-[#f7f9fc] border border-[#dbe4ee] space-y-3">
                     <h5 className="font-serif text-lg font-bold text-[#0f2a4a] flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-[#1f66a8]" />
-                      Executive Takeaways
+                      {tr('Executive Takeaways')}
                     </h5>
                     <ul className="space-y-2 text-xs sm:text-sm text-[#56667a]">
                       {block.points.map((pt, i) => (
@@ -153,7 +153,7 @@ export default function BlogDetails() {
               <h4 className="font-serif text-lg font-bold text-[#0f2a4a]">{blog.author.name}</h4>
               <p className="text-xs text-[#1f66a8] font-semibold uppercase tracking-wider">{blog.author.role}</p>
               <p className="text-xs text-[#56667a] leading-relaxed">
-                Guiding color accuracy, paper chemistry, and tactile finishing at Ganesha Enterprises Naraina plant for over a decade.
+                Guiding color accuracy, paper selection, and premium finishing at Ganesha Enterprises Naraina plant for over a decade.
               </p>
             </div>
           </div>

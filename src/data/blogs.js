@@ -3,7 +3,7 @@ export const blogs = [
     id: "secret-weapon-modern-branding",
     slug: "why-custom-printing-is-the-secret-weapon-of-modern-branding",
     title: "Why Custom Printing Is the Secret Weapon of Modern Branding",
-    subtitle: "In a digital-saturated world, the tactile weight of physical print creates an emotional anchor that pixels simply cannot replicate.",
+    subtitle: "In a digital world full of ads, high-quality physical print creates a lasting impression that screens simply cannot match.",
     date: "November 2024",
     formattedDate: "Nov 12, 2024",
     readTime: "6 min read",
@@ -15,7 +15,7 @@ export const blogs = [
     },
     image: "https://ganeshaenterprises.in/assets/imgs/blog/bank-phrom-Tzm3Oyu_6sk-unsplash.jpg",
     backupImage: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=1200&auto=format&fit=crop",
-    excerpt: "Every day, professionals scroll past thousands of fleeting digital ads. Discover why luxury brands and Fortune 500 enterprises are reinvesting heavily in heavyweight paper, tactile finishes, and bespoke physical touchpoints.",
+    excerpt: "Discover why leading brands and growing businesses are choosing premium heavyweight paper, foil finishes, and custom printed products to stand out.",
     content: [
       {
         type: "paragraph",
@@ -23,7 +23,7 @@ export const blogs = [
       },
       {
         type: "heading",
-        text: "The Neuroscience of the Tactile Impression"
+        text: "Why Premium Print Quality Leaves a Lasting Impression"
       },
       {
         type: "paragraph",
@@ -40,13 +40,13 @@ export const blogs = [
       },
       {
         type: "paragraph",
-        text: "Top-tier organizations don't use print as a generic megaphone; they deploy it as precision instrument at critical milestones: the executive introduction, the contract signing folder, the bespoke employee onboarding kit, and the celebratory year-end commemorative book. Each of these moments cements long-term loyalty."
+        text: "Top-tier organizations don't use print as a generic megaphone; they deploy it as precision instrument at critical milestones: the executive introduction, the contract signing folder, the custom employee welcome kit, and the year-end commemorative book. Each of these moments cements long-term loyalty."
       },
       {
         type: "keyTakeaways",
         points: [
           "Physical print bypasses digital ad fatigue and commands undivided sensory attention.",
-          "High GSM paper, tactile varnishes, and custom foiling trigger high-value brand perception.",
+          "High GSM paper, spot UV varnishes, and custom foiling trigger high-value brand perception.",
           "Consistency across all physical touchpoints—from badges to bill books—builds deep brand equity."
         ]
       }
@@ -120,7 +120,7 @@ export const blogs = [
     content: [
       {
         type: "paragraph",
-        text: "For decades, corporate sustainability came at the cost of aesthetic refinement. Eco-friendly papers were often fragile, uneven in tone, and prone to ink bleed. Today, advanced bio-engineering and closed-loop paper manufacturing have unlocked sustainable substrates that actually surpass virgin forest pulp in both tactile beauty and printing brilliance."
+        text: "For decades, corporate sustainability came at the cost of aesthetic refinement. Eco-friendly papers were often fragile, uneven in tone, and prone to ink bleed. Today, advanced bio-engineering and closed-loop paper manufacturing have unlocked sustainable papers that actually surpass virgin forest pulp in both texture and printing brilliance."
       },
       {
         type: "heading",
@@ -149,7 +149,7 @@ export const blogs = [
       {
         type: "keyTakeaways",
         points: [
-          "Modern eco-materials offer superior tactile texture and premium brand storytelling.",
+          "Modern eco-materials offer superior texture and premium brand storytelling.",
           "FSC-certified boards assure ethical sourcing and zero deforestation.",
           "Demonstrating environmental leadership in physical packaging directly boosts customer loyalty."
         ]
@@ -172,7 +172,7 @@ export const blogs = [
     },
     image: "https://ganeshaenterprises.in/assets/imgs/blog/in-tr-ng-d-ng-daZPDnz9lQY-unsplash.jpg",
     backupImage: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=1200&auto=format&fit=crop",
-    excerpt: "Why does the blue on your laptop screen look dull on uncoated paper? Understand the scientific reality of substrate absorption, pigment density, and precise Pantone ink formulation.",
+    excerpt: "Why does color on your screen look different when printed? Learn how paper absorption, ink density, and Pantone color matching work in real-world printing.",
     content: [
       {
         type: "paragraph",
@@ -180,7 +180,7 @@ export const blogs = [
       },
       {
         type: "heading",
-        text: "The Digital RGB vs. Physical Substrate Reality"
+        text: "Why Screen Colors Differ from Printed Paper"
       },
       {
         type: "paragraph",
@@ -211,7 +211,7 @@ export const blogs = [
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop"
     },
     image: "https://ganeshaenterprises.in/assets/imgs/blog/brands-people-0adHvNJu-Zo-unsplash.jpg",
-    backupImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1200&auto=format&fit=crop",
+    backupImage: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop",
     excerpt: "Demystifying the production journey. From 3mm bleed requirements and vector outlines to pre-flight verification, proof approvals, and multi-station finishing.",
     content: [
       {
@@ -270,7 +270,7 @@ export const blogs = [
         type: "keyTakeaways",
         points: [
           "Branded tape and tissue paper provide luxury unboxing at minimal unit cost.",
-          "Include a tactile printed card with a personalized message or VIP discount.",
+          "Include a printed thank-you card with a personalized message or VIP discount.",
           "Customers are 65% more likely to share an unboxing video on social media if the package has intentional design details."
         ]
       }

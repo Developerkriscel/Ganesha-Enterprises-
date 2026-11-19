@@ -3,7 +3,7 @@ export const company = {
   shortName: "Ganesha",
   tagline: "We Don't Just Print. We Create Impressions.",
   subTagline: "Premium printing, custom merchandise and branding solutions that bring corporate identities and creative visions to life.",
-  description: "At Ganesha Enterprises, we engineer bespoke digital printing, executive corporate merchandising, luxury packaging, and large-format architectural brand experiences. Based in Naraina Industrial Area, New Delhi, we combine Swiss-grade color precision, advanced UV & offset machinery, and fine tactile craftsmanship for enterprise leaders and forward-thinking brands across India.",
+  description: "At Ganesha Enterprises, we provide complete digital printing, custom corporate gifts & merchandise, premium packaging, and large-format signage. Based in Naraina Industrial Area, New Delhi, we combine high-precision color accuracy, advanced UV & offset printing machines, and premium finishing for corporate companies and growing brands across India.",
   establishedYear: 2011,
   
   contact: {
@@ -25,27 +25,27 @@ export const company = {
   },
 
   metrics: [
-    { value: "15+", label: "Years of Craftsmanship", sub: "Established printing pedigree" },
-    { value: "1,000+", label: "Corporate Partners", sub: "From Fortune 500s to high-growth ventures" },
-    { value: "5M+", label: "Impressions Delivered", sub: "Flawless color & substrate fidelity" },
-    { value: "99.8%", label: "On-Time Dispatch", sub: "Rapid SLA-backed turnaround" }
+    { value: "15+", label: "Years of Experience", sub: "Trusted commercial printing plant" },
+    { value: "1,000+", label: "Corporate Partners", sub: "From startups to multinational enterprises" },
+    { value: "5M+", label: "Impressions Delivered", sub: "Consistent color & premium paper quality" },
+    { value: "99.8%", label: "On-Time Dispatch", sub: "Reliable fast turnaround" }
   ],
 
   valueProps: [
     {
       title: "Customizable for Any Brand",
-      description: "Tailored die-cuts, custom pantone matches, tactile embossing, and curated substrate textures specifically aligned with your brand manual.",
+      description: "Custom shapes, exact Pantone color matching, 3D embossing, and premium paper textures designed to match your brand requirements.",
       icon: "Palette"
     },
     {
-      title: "Unmatched Print Quality",
-      description: "State-of-the-art Japanese UV flatbed, Heidelberg offset, and high-DPI digital presses ensuring razor-sharp edges and zero bleed.",
-      icon: "Award"
+      title: "Value for Money",
+      description: "Clear estimates, efficient production, and durable finishes that deliver dependable quality at a practical cost.",
+      icon: "Value"
     },
     {
-      title: "Fast Turnaround Times",
-      description: "Dedicated production shifts for emergency turnarounds, urgent exhibition assets, and rapid corporate onboarding rollouts.",
-      icon: "Zap"
+      title: "Unmatched Print Quality",
+      description: "State-of-the-art Japanese UV flatbed, Heidelberg offset, and high-DPI digital presses ensure sharp, consistent results.",
+      icon: "Award"
     },
     {
       title: "On-Time, Every Time",

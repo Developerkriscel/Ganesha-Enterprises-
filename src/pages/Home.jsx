@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { 
-  ArrowRight, 
-  ArrowUpRight, 
-  Sparkles, 
-  CheckCircle2, 
-  Palette, 
-  Award, 
-  Zap, 
-  Clock, 
-  ShieldCheck, 
-  MessageSquare, 
+import {
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+  Palette,
+  Award,
+  Zap,
+  Clock,
+  ShieldCheck,
+  MessageSquare,
   ChevronRight,
   Eye,
   Layers,
@@ -19,7 +18,9 @@ import {
   Package,
   Cpu,
   Play,
-  Pause
+  Pause,
+  Sparkles,
+  X
 } from 'lucide-react';
 import { company } from '../data/company';
 import { products, productCategories } from '../data/products';
@@ -30,14 +31,18 @@ import BrandStrip from '../components/BrandStrip';
 import ProductCard from '../components/ProductCard';
 import ServiceCard from '../components/ServiceCard';
 import Carousel from '../components/Carousel';
+import StandardsInfographic from '../components/StandardsInfographic';
+import CategoryInfographic from '../components/CategoryInfographic';
+import { useLanguage } from '../context/LanguageContext';
 
 // ── Animation Variants ──────────────────────────────────────
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1, y: 0,
-    transition: { duration: 0.7, delay: i * 0.12, ease: [0.25, 0.46, 0.45, 0.94] }
-  })
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }
+  }
 };
 
 const fadeLeft = {
@@ -117,6 +122,7 @@ function HeroAutoPlay({ heroTab, setHeroTab, total }) {
 }
 
 export default function Home({ onOpenQuote, onOpenLightbox }) {
+  const { tr } = useLanguage();
   // Hero active slide / showcase tab
   const [heroTab, setHeroTab] = useState(0);
 
@@ -132,7 +138,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       title: "Luxury Cotton Visiting Cards",
       tag: "Executive Stationery",
       image: "https://ganeshaenterprises.in/assets/imgs/prodact/IN_Standard-Visiting-Cards_Overview.jpeg",
-      backupImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1200&auto=format&fit=crop",
+      backupImage: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop",
       desc: "450 GSM French cotton boards with raised polymer spot gloss and metallic gold edge gilding."
     },
     {
@@ -166,6 +172,20 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
     message: ''
   });
   const [quickSubmitted, setQuickSubmitted] = useState(false);
+  const [selectedHomeBlog, setSelectedHomeBlog] = useState(null);
+
+  useEffect(() => {
+    if (!selectedHomeBlog) return undefined;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setSelectedHomeBlog(null);
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedHomeBlog]);
 
   const handleQuickSubmit = (e) => {
     e.preventDefault();
@@ -177,6 +197,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
     switch (name) {
       case 'Palette': return <Palette className="w-6 h-6 text-[#1f66a8]" />;
       case 'Award': return <Award className="w-6 h-6 text-[#1f66a8]" />;
+      case 'Value': return <ShieldCheck className="w-6 h-6 text-[#1f66a8]" />;
       case 'Zap': return <Zap className="w-6 h-6 text-[#1f66a8]" />;
       case 'Clock': return <Clock className="w-6 h-6 text-[#1f66a8]" />;
       default: return <Printer className="w-6 h-6 text-[#1f66a8]" />;
@@ -188,9 +209,9 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION B: CINEMATIC HERO SECTION
           ========================================================= */}
-      <section className="relative min-h-[92vh] lg:min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
+      <section className="relative min-h-[82vh] lg:min-h-[90vh] flex items-center justify-center pt-24 pb-10 overflow-hidden">
         {/* Fullscreen Background Video */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-x-0 top-[44px] bottom-0 lg:top-[48px] z-0">
           <video
             autoPlay
             loop
@@ -201,27 +222,27 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             <source src="/videos/hero-bg.mp4" type="video/mp4" />
           </video>
           {/* Dark overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0f2a4a]/75 via-[#0f2a4a]/60 to-[#0f2a4a]/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0f2a4a]/60 via-[#0f2a4a]/45 to-[#0f2a4a]/65"></div>
           {/* Warm golden tint overlay */}
-          <div className="absolute inset-0 bg-[#15b498]/5 mix-blend-overlay"></div>
+          <div className="absolute inset-0 bg-[#15b498]/3 mix-blend-overlay"></div>
           {/* Bottom fade to the next section */}
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#f7f9fc] to-transparent"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#f7f9fc] to-transparent"></div>
         </div>
 
         {/* Subtle Architectural Grain Background */}
-        <div className="absolute inset-0 bg-grain opacity-30 pointer-events-none z-[1]"></div>
+        <div className="absolute inset-0 bg-grain opacity-15 pointer-events-none z-[1]"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+
             {/* Left Column: Editorial Headline & Narrative */}
-            <div className="lg:col-span-7 space-y-6 sm:space-y-8 text-left">
+            <div className="lg:col-span-7 lg:justify-self-center lg:-translate-x-4 -translate-y-2 lg:-translate-y-4 space-y-4 sm:space-y-5 text-left">
               {/* Prestige Studio Badge */}
               <motion.div
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg"
+                className="hidden inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg"
               >
                 <span className="w-2 h-2 rounded-full bg-[#1f66a8] animate-pulse"></span>
                 <span className="text-[11px] font-semibold uppercase tracking-widest text-white/90">
@@ -236,9 +257,9 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="space-y-2"
               >
-                <h1 className="font-serif text-4xl sm:text-6xl xl:text-7xl font-extrabold text-white tracking-tight leading-[1.02] drop-shadow-lg">
-                  WE DON'T JUST PRINT. <br />
-                  <span className="brand-gradient-text italic font-normal">WE CREATE</span> IMPRESSIONS.
+                <h1 className="font-serif text-xl sm:text-2xl xl:text-[2.7rem] font-extrabold text-white tracking-tight leading-[1.12] drop-shadow-lg transition-transform duration-500 hover:scale-[1.02]">
+                  {tr("WE DON'T JUST PRINT.")} <br />
+                  <span className="brand-gradient-text italic font-normal drop-shadow-[0_0_16px_rgba(21,180,152,0.35)]">{tr('WE CREATE')}</span> {tr('IMPRESSIONS.')}
                 </h1>
               </motion.div>
 
@@ -261,18 +282,17 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               >
                 <Link
                   to="/products"
-                  className="px-8 py-4 rounded-full bg-[#1f66a8] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#19558f] transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center gap-2 group"
+                  className="px-5 py-2.5 rounded-full bg-[#1f66a8] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#19558f] transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center gap-2 group"
                 >
-                  <span>Explore Our Collection</span>
+                  <span>{tr('Explore Our Collection')}</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
 
                 <button
                   onClick={() => onOpenQuote()}
-                  className="px-8 py-4 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-bold uppercase tracking-widest border border-white/25 hover:border-[#15b498] hover:bg-white/15 transition-all duration-300 shadow-sm flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-bold uppercase tracking-widest border border-white/25 hover:border-[#15b498] hover:bg-white/15 transition-all duration-300 shadow-sm flex items-center gap-2"
                 >
-                  <Sparkles className="w-4 h-4 text-[#15b498]" />
-                  <span>Request a Quote</span>
+                  <span>{tr('Request a Quote')}</span>
                 </button>
               </motion.div>
 
@@ -281,7 +301,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.0 }}
-                className="pt-6 border-t border-white/15 grid grid-cols-3 gap-4 text-xs"
+                className="pt-5 border-t border-white/15 grid grid-cols-3 gap-4 text-xs"
               >
                 <div>
                   <div className="font-serif font-bold text-lg text-white"><AnimatedCounter target="15" suffix="+ Years" /></div>
@@ -299,7 +319,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             </div>
 
             {/* Right Column: Immersive 3D Rotating Showcase */}
-            <div className="lg:col-span-5 relative">
+            <div className="lg:col-span-5 relative lg:justify-self-center lg:-translate-x-10 lg:translate-y-8">
               {/* Ambient golden orb glow behind the card stack */}
               <div className="absolute -inset-8 pointer-events-none z-0">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-[#15b498]/10 blur-[80px] animate-pulse"></div>
@@ -309,7 +329,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
 
               <div className="relative z-10" style={{ perspective: '1200px' }}>
                 {/* Stacked card deck with 3D tilt */}
-                <div className="relative w-full aspect-[4/5] sm:aspect-[3/4]">
+                <div className="relative w-[460px] max-w-[calc(100vw-2rem)] h-[550px] max-h-[68vh] mx-auto">
                   {heroShowcases.map((item, idx) => {
                     const isActive = idx === heroTab;
                     const offset = idx - heroTab;
@@ -337,7 +357,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                             />
                             {/* Glass gradient overlay allowing video to show through */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
-                            
+
                             {/* Top tag */}
                             <div className={`absolute top-5 left-5 px-4 py-1.5 rounded-full backdrop-blur-xl text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 border ${isActive ? 'bg-[#15b498]/90 text-white border-[#15b498] shadow-lg' : 'bg-white/10 text-white/90 border-white/20'}`}>
                               {item.tag}
@@ -356,7 +376,6 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                                   onClick={(e) => { e.stopPropagation(); onOpenQuote(item.title); }}
                                   className="px-5 py-2.5 rounded-full bg-[#1f66a8] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#19558f] transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 flex items-center gap-2"
                                 >
-                                  <Sparkles className="w-3.5 h-3.5" />
                                   <span>Get Quote</span>
                                 </button>
                                 <Link
@@ -380,7 +399,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 <div className="mt-6 flex items-center justify-center gap-6">
                   {/* Auto-play toggle */}
                   <HeroAutoPlay heroTab={heroTab} setHeroTab={setHeroTab} total={heroShowcases.length} />
-                  
+
                   {/* Dot navigation */}
                   <div className="flex items-center gap-2">
                     {heroShowcases.map((_, idx) => (
@@ -389,11 +408,10 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                         onClick={() => setHeroTab(idx)}
                         className="group relative"
                       >
-                        <div className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${
-                          idx === heroTab 
-                            ? 'bg-[#1f66a8] scale-125 shadow-[0_0_12px_rgba(21,180,152,0.5)]' 
-                            : 'bg-white/40 hover:bg-white/60'
-                        }`} />
+                        <div className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${idx === heroTab
+                          ? 'bg-[#1f66a8] scale-125 shadow-[0_0_12px_rgba(21,180,152,0.5)]'
+                          : 'bg-white/40 hover:bg-white/60'
+                          }`} />
                         {idx === heroTab && (
                           <div className="absolute -inset-1.5 rounded-full border border-[#15b498]/40 animate-ping"></div>
                         )}
@@ -416,89 +434,49 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION C: BRAND VALUE PROPOSITIONS & METRICS
           ========================================================= */}
-      <section className="py-20 bg-[#f7f9fc] relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-6 sm:py-8 bg-[#f7f9fc] relative">
+        <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, margin: '-20px' }}
             variants={staggerContainer}
-            className="text-center max-w-3xl mx-auto mb-16 space-y-3"
+            className="text-center max-w-5xl mx-auto mb-4 sm:mb-6 space-y-2"
           >
-            <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold block">
-              The Ganesha Production Standard
-            </motion.span>
-            <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
-              Why Leading Enterprises Entrust Their Brand to Us
+            <motion.h2 variants={fadeUp} className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
+              Why Leading Enterprises <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Entrust Their Brand</span> to Us
             </motion.h2>
-            {/* <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#56667a]">
-              Every project is treated as a strategic tactile artifact. We combine Swiss-grade color calibration with precision industrial finishing.
-            </motion.p> */}
+            <div className="flex items-center justify-center gap-2.5 pt-0.5">
+              <span className="h-px w-12 bg-gradient-to-r from-transparent to-[#15b498]/60"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#15b498]"></span>
+              <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#15b498]/60"></span>
+            </div>
           </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-          >
-            {company.valueProps.map((prop, idx) => (
-              <motion.div
-                key={idx}
-                custom={idx}
-                variants={fadeUp}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="p-8 rounded-3xl bg-white border border-[#dbe4ee] hover:border-[#1f66a8] shadow-subtle hover:shadow-premium transition-all duration-300 group flex flex-col justify-between"
-              >
-                <div className="space-y-4">
-                  <motion.div
-                    whileHover={{ rotate: 10, scale: 1.1 }}
-                    transition={{ type: 'spring', stiffness: 300 }}
-                    className="w-12 h-12 rounded-2xl bg-[#edf3f9] group-hover:bg-[#f7f9fc] flex items-center justify-center transition-colors"
-                  >
-                    {getIcon(prop.icon)}
-                  </motion.div>
-                  <h3 className="font-serif text-xl font-bold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors">
-                    {prop.title}
-                  </h3>
-                  <p className="text-xs text-[#56667a] leading-relaxed">
-                    {prop.description}
-                  </p>
-                </div>
-
-                <div className="pt-6 mt-6 border-t border-[#edf3f9] flex items-center gap-1.5 text-xs font-semibold text-[#0f2a4a]">
-                  <CheckCircle2 className="w-4 h-4 text-[#1f66a8]" />
-                  <span>Quality Guaranteed</span>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+          <StandardsInfographic valueProps={company.valueProps} />
         </div>
       </section>
 
       {/* =========================================================
           SECTION D: FEATURED PRODUCTS SHOWCASE (Editorial Grid)
           ========================================================= */}
-      <section className="py-24 bg-[#edf3f9]/60 border-y border-[#dbe4ee]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 bg-[#edf3f9]/60 border-y border-[#dbe4ee]">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, margin: '-20px' }}
             variants={staggerContainer}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8"
           >
-            <motion.div variants={fadeLeft} className="max-w-2xl space-y-2">
-              <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
-                Signature Artifacts
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
-                Curated Corporate Collection
+            <motion.div variants={fadeLeft} className="max-w-2xl space-y-2.5">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
+                Featured <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Corporate Products</span>
               </h2>
-              {/* <p className="text-sm text-[#56667a]">
-                From boardroom-ready visiting cards and employee welcome kits to heavy pique polos and roll-up standees.
-              </p> */}
+              <div className="flex items-center gap-2 pt-0.5">
+                <span className="h-[2px] w-10 bg-[#15b498] rounded-full"></span>
+                <span className="h-px w-6 bg-[#dbe4ee] rounded-full"></span>
+              </div>
             </motion.div>
 
             <motion.div variants={fadeRight}>
@@ -506,7 +484,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 to="/products"
                 className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#0f2a4a] hover:text-[#1f66a8] transition-colors border-b-2 border-[#0f2a4a] hover:border-[#1f66a8] pb-1 w-max"
               >
-                <span>View All 90+ Products</span>
+                <span>{tr('View All 90+ Products')}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
@@ -529,118 +507,157 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION E: ABOUT GANESHA ENTERPRISES (Visual Storytelling)
           ========================================================= */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            
-            {/* Left Imagery Composition */}
+      <section className="py-6 sm:py-8 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+
+            {/* Left Imagery Composition - Matched Height to Right Column */}
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
+              viewport={{ once: true, margin: '-20px' }}
               variants={fadeLeft}
-              className="lg:col-span-6 relative"
+              className="lg:col-span-6 flex flex-col"
             >
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-[#0f2a4a] aspect-[4/3] group">
+              <div className="group relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-[#dbe4ee] hover:border-[#1f66a8] hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 transition-all duration-500 ease-out bg-[#0f2a4a] h-full min-h-[360px] flex flex-col justify-between cursor-pointer">
+                {/* Light sweep shimmer effect */}
+                <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
+                  <div className="w-[120%] h-full bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-[150%] skew-x-12 group-hover:translate-x-[200%] transition-transform duration-1000 ease-out"></div>
+                </div>
+
+                {/* Main Image with Zoom on Hover */}
                 <img
-                  src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1200&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop"
                   alt="Ganesha Enterprises Workshop"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <span className="text-[10px] uppercase tracking-widest text-[#15b498] font-semibold">
-                    Plant Overview • Naraina Phase 1
-                  </span>
-                  <h3 className="font-serif text-2xl font-bold mt-1">
-                    Where Industrial Scale Meets Artisanal Precision
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0f2a4a]/90 via-[#0f2a4a]/20 to-transparent"></div>
+
+                {/* Top Floating Badge */}
+                <div className="relative z-20 p-4 sm:p-5">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#dbe4ee] shadow-md text-[11px] font-bold text-[#0f2a4a]">
+                    <span className="w-2 h-2 rounded-full bg-[#15b498]"></span>
+                    <span>Since 2011 · Naraina, New Delhi</span>
+                  </div>
+                </div>
+
+                {/* Bottom Overlay Title */}
+                <div className="relative z-20 p-5 sm:p-6 text-white">
+                  <h3 className="font-serif text-lg sm:text-xl font-bold leading-snug drop-shadow-sm group-hover:text-white transition-colors">
+                    Advanced Printing Technology with Precision Quality
                   </h3>
                 </div>
               </div>
-
-              {/* Floating Stat Card with subtle bounce animation */}
-              <motion.div
-                initial={{ opacity: 0, x: 40, y: 20 }}
-                whileInView={{ opacity: 1, x: 0, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.6, type: 'spring' }}
-                whileHover={{ scale: 1.05 }}
-                className="absolute -bottom-6 -right-4 sm:-right-8 bg-[#f7f9fc] p-5 rounded-2xl border border-[#dbe4ee] shadow-xl max-w-xs hidden sm:block"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#1f66a8] text-white flex items-center justify-center font-bold">
-                    <ShieldCheck className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h5 className="font-serif font-bold text-sm text-[#0f2a4a]">MSME & ISO Certified</h5>
-                    <p className="text-[11px] text-[#56667a]">Zero Compromise QA Process</p>
-                  </div>
-                </div>
-              </motion.div>
             </motion.div>
 
-            {/* Right Storytelling Column */}
+            {/* Right Storytelling Column - Matched Height to Left Image */}
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-              variants={staggerContainer}
-              className="lg:col-span-6 space-y-6"
+              viewport={{ once: true, margin: '-20px' }}
+              variants={fadeUp}
+              className="lg:col-span-6 flex flex-col justify-between space-y-3 sm:space-y-3.5"
             >
-              <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold block">
-                About Ganesha Enterprises
-              </motion.span>
+              <div className="space-y-1.5">
+                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
+                  Delivering Premium <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Print & Branding</span> Since 2011.
+                </h2>
 
-              <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
-                Architecting Tactile Brand Excellence Since 2011.
-              </motion.h2>
+                <div className="flex items-center gap-2 pt-0.5">
+                  <span className="h-[2px] w-12 bg-gradient-to-r from-[#15b498] to-[#1f66a8] rounded-full"></span>
+                  <span className="h-px w-6 bg-[#dbe4ee] rounded-full"></span>
+                </div>
 
-              <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#56667a] leading-relaxed">
-                At Ganesha Enterprises, we specialize in professional digital printing solutions that combine quality, speed, and creativity — all without stretching your budget. Whether you’re a high-growth startup, an airline pioneer, or a multinational enterprise, we deliver customized print solutions that bring your brand identity to life.
-              </motion.p>
+                <p className="text-xs sm:text-[12.5px] text-[#56667a] leading-relaxed pt-0.5">
+                  At Ganesha Enterprises, we specialize in professional digital printing solutions that combine quality, speed, and creativity — all without stretching your budget. Whether you’re a high-growth startup, an airline pioneer, or a multinational enterprise, we deliver customized print solutions that bring your brand identity to life.
+                </p>
+              </div>
 
-              {/* <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#56667a] leading-relaxed">
-                With state-of-the-art machinery, skilled master printers, and an obsession with detail, we handle everything from heavy cotton pulp cardstock to vinyl manifestations, corporate uniforms, and large-format architectural branding.
-              </motion.p> */}
-
-              {/* Capabilities Checkmarks */}
-              <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-semibold text-[#0f2a4a]">
+              {/* 4 Interactive Feature Cards (2x2 Grid) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {[
-                  'Pantone® Ink Calibration',
-                  'High-DPI Japanese UV Flatbeds',
-                  'Sculpted Brass Foil Embossing',
-                  'Doorstep Pan-India Logistics'
-                ].map((item, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -15 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + idx * 0.1 }}
-                    className="flex items-center gap-2"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-[#1f66a8] shrink-0" />
-                    <span>{item}</span>
-                  </motion.div>
-                ))}
-              </motion.div>
+                  {
+                    title: 'Pantone® Ink Calibration',
+                    desc: 'Exact Pantone & brand color matching',
+                    icon: Palette,
+                  },
+                  {
+                    title: 'High-DPI UV Flatbeds',
+                    desc: 'High-resolution Japanese UV flatbed printers',
+                    icon: Printer,
+                  },
+                  {
+                    title: 'Sculpted Foil Embossing',
+                    desc: 'Premium gold & metallic foil embossing',
+                    icon: Layers,
+                  },
+                  {
+                    title: 'Doorstep Pan-India Logistics',
+                    desc: 'Safe doorstep delivery across India',
+                    icon: ShieldCheck,
+                  },
+                ].map((item, idx) => {
+                  const Icon = item.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className="group/item flex items-start gap-2.5 p-2 rounded-xl bg-white border border-[#dbe4ee] hover:border-[#15b498] hover:shadow-xs transition-all duration-300"
+                    >
+                      <div className="w-7 h-7 rounded-lg bg-[#edf3f9] text-[#1f66a8] group-hover/item:bg-[#15b498] group-hover/item:text-white flex items-center justify-center shrink-0 transition-colors">
+                        <Icon className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[11.5px] font-bold text-[#0f2a4a] group-hover/item:text-[#1f66a8] transition-colors line-clamp-1">
+                          {tr(item.title)}
+                        </div>
+                        <div className="text-[9.5px] text-[#7a8ba0] line-clamp-1">
+                          {tr(item.desc)}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
 
-              <motion.div variants={fadeUp} className="pt-4 flex items-center gap-4">
+              {/* Key Metrics Strip (3 pillars) */}
+              <div className="grid grid-cols-3 gap-3 py-2 border-y border-[#edf3f9]">
+                <div className="text-center sm:text-left">
+                  <div className="font-serif text-base sm:text-lg font-bold text-[#0f2a4a]">
+                    14+ <span className="text-[#15b498] text-xs">Yrs</span>
+                  </div>
+                  <div className="text-[9.5px] uppercase font-bold tracking-wider text-[#7a8ba0]">Heritage</div>
+                </div>
+                <div className="text-center sm:text-left border-x border-[#edf3f9] px-2 sm:px-0">
+                  <div className="font-serif text-base sm:text-lg font-bold text-[#0f2a4a]">
+                    1,000+
+                  </div>
+                  <div className="text-[9.5px] uppercase font-bold tracking-wider text-[#7a8ba0]">Enterprises</div>
+                </div>
+                <div className="text-center sm:text-left">
+                  <div className="font-serif text-base sm:text-lg font-bold text-[#0f2a4a]">
+                    99.8%
+                  </div>
+                  <div className="text-[9.5px] uppercase font-bold tracking-wider text-[#7a8ba0]">On-Time SLA</div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-0.5 flex items-center gap-3">
                 <Link
                   to="/about"
-                  className="px-6 py-3.5 rounded-full bg-[#0f2a4a] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#15b498] transition-all duration-300 shadow-md inline-flex items-center gap-2 hover:scale-105 active:scale-95"
+                  className="px-5 py-2 rounded-full bg-gradient-to-r from-[#0f2a4a] to-[#1f66a8] hover:from-[#15b498] hover:to-[#0f2a4a] text-white text-[11px] font-semibold uppercase tracking-wider transition-all duration-300 shadow-sm inline-flex items-center gap-1.5 hover:scale-105 active:scale-95 cursor-pointer"
                 >
-                  <span>Read Full Heritage</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>{tr('View Details')}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
 
                 <Link
                   to="/contact"
-                  className="text-xs font-semibold text-[#0f2a4a] hover:text-[#1f66a8] transition-colors"
+                  className="px-4 py-2 rounded-full border border-[#dbe4ee] hover:border-[#15b498] text-[11px] font-semibold text-[#0f2a4a] hover:text-[#1f66a8] hover:bg-[#edf3f9]/50 transition-all cursor-pointer"
                 >
-                  Schedule Plant Tour
+                  {tr('Schedule Plant Tour')}
                 </Link>
-              </motion.div>
+              </div>
             </motion.div>
 
           </div>
@@ -650,24 +667,23 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION F: OUR SERVICES (Comprehensive Printing Services)
           ========================================================= */}
-      <section className="py-24 bg-[#f7f9fc] border-t border-[#dbe4ee]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 bg-[#f7f9fc] border-t border-[#dbe4ee]">
+        <div className="w-full px-3 sm:px-5 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, margin: '-20px' }}
             variants={staggerContainer}
-            className="text-center max-w-3xl mx-auto mb-16 space-y-3"
+            className="text-center max-w-4xl mx-auto mb-10 space-y-3"
           >
-            <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold block">
-              Comprehensive Production Capabilities
-            </motion.span>
-            <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
-              Turnkey Industrial Printing Services
+            <motion.h2 variants={fadeUp} className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
+              Complete Commercial & <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Corporate Printing Services</span>
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-sm sm:text-base text-[#56667a]">
-              Equipped for extreme volume, fine art precision, and rapid emergency turnarounds under one roof.
-            </motion.p>
+            <div className="flex items-center justify-center gap-2.5 pt-1">
+              <span className="h-px w-12 bg-gradient-to-r from-transparent to-[#15b498]/60"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#15b498]"></span>
+              <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#15b498]/60"></span>
+            </div>
           </motion.div>
 
           <motion.div
@@ -675,14 +691,14 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-7 w-full py-4"
           >
             {services.slice(0, 6).map((service, idx) => (
               <motion.div
                 key={service.id}
                 custom={idx}
                 variants={fadeUp}
-                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className="relative z-10 hover:z-30 transition-all"
               >
                 <ServiceCard
                   service={service}
@@ -703,7 +719,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               to="/services"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white border border-[#dbe4ee] text-[#0f2a4a] hover:border-[#1f66a8] hover:text-[#1f66a8] text-xs font-bold uppercase tracking-widest shadow-xs transition-all hover:scale-105 active:scale-95"
             >
-              <span>Explore All 8 Specialized Service Divisions</span>
+              <span>Explore All Printing Services</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
@@ -711,27 +727,25 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       </section>
 
       {/* =========================================================
-          SECTION G: PRODUCT CATEGORIES (Discovery Showcase)
+          SECTION G: PRODUCT CATEGORIES (5 Steps Arrow Infographic)
           ========================================================= */}
-      <section className="py-24 bg-[#edf3f9] border-t border-[#dbe4ee]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-10 sm:py-14 bg-[#f7f9fc] border-t border-[#dbe4ee]">
+        <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, margin: '-20px' }}
             variants={staggerContainer}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
+            className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12"
           >
-            <motion.div variants={fadeLeft} className="max-w-2xl space-y-2">
-              <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
-                Catalog Navigation
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
-                Explore by Product Category
+            <motion.div variants={fadeLeft} className="max-w-2xl space-y-2.5">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
+                Explore by <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Product Category</span>
               </h2>
-              <p className="text-sm text-[#56667a]">
-                Engineered for rapid corporate procurement and tailored bespoke merchandise curation.
-              </p>
+              <div className="flex items-center gap-2 pt-0.5">
+                <span className="h-[2px] w-10 bg-[#15b498] rounded-full"></span>
+                <span className="h-px w-6 bg-[#dbe4ee] rounded-full"></span>
+              </div>
             </motion.div>
 
             <motion.div variants={fadeRight}>
@@ -745,55 +759,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             </motion.div>
           </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {productCategories.filter(c => c.id !== 'all').map((cat, idx) => (
-              <motion.div
-                key={cat.id}
-                custom={idx}
-                variants={fadeUp}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              >
-                <Link
-                  to={`/products?category=${cat.id}`}
-                  className="group p-8 rounded-3xl bg-white border border-[#dbe4ee] hover:border-[#1f66a8] shadow-subtle hover:shadow-premium transition-all duration-300 flex flex-col justify-between h-full"
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] uppercase tracking-widest font-semibold text-[#1f66a8]">
-                        {cat.count} Products Available
-                      </span>
-                      <ArrowUpRight className="w-4 h-4 text-[#56667a] group-hover:text-[#1f66a8] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                    </div>
-                    <h3 className="font-serif text-2xl font-bold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors">
-                      {cat.name}
-                    </h3>
-                    <p className="text-xs text-[#56667a] leading-relaxed">
-                      {cat.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-6 mt-6 border-t border-[#edf3f9]">
-                    <div className="flex flex-wrap gap-1.5">
-                      {cat.subcategories?.slice(0, 4).map((sub, i) => (
-                        <span
-                          key={i}
-                          className="px-2.5 py-1 rounded-md bg-[#f7f9fc] text-[10px] text-[#56667a] font-medium"
-                        >
-                          {sub}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
+          <CategoryInfographic categories={productCategories} />
         </div>
       </section>
 
@@ -805,20 +771,18 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, margin: '-20px' }}
             variants={staggerContainer}
             className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
           >
-            <motion.div variants={fadeLeft} className="max-w-2xl space-y-2">
-              <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
-                Proven Track Record
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
-                Recent Client Commissions
+            <motion.div variants={fadeLeft} className="max-w-2xl space-y-2.5">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
+                Recent Client <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Projects</span>
               </h2>
-              <p className="text-sm text-[#56667a]">
-                Authentic projects produced for Vistara, NTPC, Air India, Radisson, and prominent corporate networks.
-              </p>
+              <div className="flex items-center gap-2 pt-0.5">
+                <span className="h-[2px] w-10 bg-[#15b498] rounded-full"></span>
+                <span className="h-px w-6 bg-[#dbe4ee] rounded-full"></span>
+              </div>
             </motion.div>
 
             <motion.div variants={fadeRight}>
@@ -838,69 +802,71 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             whileInView="visible"
             viewport={{ once: true, margin: '-40px' }}
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 py-3"
           >
             {featuredPortfolio.map((item, idx) => (
               <motion.div
                 key={item.id}
                 custom={idx}
                 variants={fadeUp}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="group rounded-3xl bg-[#f7f9fc] border border-[#dbe4ee] hover:border-[#1f66a8] overflow-hidden transition-all duration-300 hover:shadow-premium flex flex-col justify-between"
+                className="relative z-10 hover:z-30"
               >
-                <div 
-                  className="relative aspect-[4/3] bg-[#0f2a4a] overflow-hidden cursor-pointer"
-                  onClick={() => onOpenLightbox(item)}
-                >
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    onError={(e) => { e.currentTarget.src = item.backupImage; }}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="px-4 py-2 rounded-full bg-white text-[#0f2a4a] text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                      <Eye className="w-3.5 h-3.5 text-[#1f66a8]" />
-                      <span>Inspect Artwork</span>
-                    </span>
+                <div className="group rounded-2xl sm:rounded-3xl bg-white border border-[#dbe4ee] hover:border-[#15b498] overflow-hidden transition-all duration-350 ease-out hover:scale-[1.035] sm:hover:scale-[1.045] hover:-translate-y-2 hover:shadow-[0_24px_50px_-10px_rgba(15,42,74,0.22),0_10px_20px_-5px_rgba(21,180,152,0.2)] flex flex-col justify-between relative will-change-transform">
+                  {/* Top subtle ambient glowing line on hover */}
+                  <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#15b498]/0 to-transparent group-hover:via-[#15b498] transition-all duration-500 z-30"></div>
+
+                  {/* Light sweep shimmer effect */}
+                  <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
+                    <div className="w-[120%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] skew-x-12 group-hover:translate-x-[200%] transition-transform duration-1000 ease-out"></div>
                   </div>
 
-                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-semibold uppercase tracking-widest text-white border border-white/10">
-                    {item.category}
-                  </div>
-                </div>
-
-                <div className="p-6 space-y-2">
-                  <div className="flex items-center justify-between text-xs text-[#1f66a8] font-medium">
-                    <span>Client: {item.client}</span>
-                    <span>{item.year}</span>
-                  </div>
-
-                  <h3 
+                  {/* Compact Visual Header */}
+                  <div
+                    className="relative aspect-[16/9.5] bg-[#0f2a4a] overflow-hidden cursor-pointer"
                     onClick={() => onOpenLightbox(item)}
-                    className="font-serif text-lg font-bold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors cursor-pointer"
                   >
-                    {item.title}
-                  </h3>
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      onError={(e) => { e.currentTarget.src = item.backupImage; }}
+                      className="w-full h-full object-cover group-hover:scale-115 transition-transform duration-700 ease-out"
+                    />
 
-                  <p className="text-xs text-[#56667a] line-clamp-2 leading-relaxed">
-                    {item.scope}
-                  </p>
+                    <div className="absolute top-3 left-3 z-10 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[9.5px] font-bold uppercase tracking-widest text-white border border-white/10 group-hover:bg-[#15b498] transition-colors duration-300">
+                      {item.category}
+                    </div>
+                  </div>
 
-                  <div className="pt-3 border-t border-[#e6edf5] flex items-center justify-between">
-                    <button
+                  {/* Compact Content Body */}
+                  <div className="p-4 sm:p-4.5 space-y-1.5 bg-gradient-to-b from-white to-[#fafcff]">
+                    <div className="flex items-center justify-between text-[11px] text-[#1f66a8] font-semibold">
+                      <span>Client: {item.client}</span>
+                      <span className="px-2 py-0.5 rounded-full bg-[#edf3f9] text-[9.5px] font-bold border border-[#dbe4ee]/60">{item.year}</span>
+                    </div>
+
+                    <h3
                       onClick={() => onOpenLightbox(item)}
-                      className="text-xs font-semibold text-[#0f2a4a] hover:text-[#1f66a8] inline-flex items-center gap-1"
+                      className="font-serif text-[15px] sm:text-base font-bold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors cursor-pointer line-clamp-1 leading-snug"
                     >
-                      <span>View Case File</span>
-                      <ArrowUpRight className="w-3 h-3" />
-                    </button>
-                    <button
-                      onClick={() => onOpenQuote(item.title)}
-                      className="text-xs font-semibold text-[#1f66a8] hover:text-[#0f2a4a]"
-                    >
-                      Quote Similar
-                    </button>
+                      {item.title}
+                    </h3>
+
+                    <div className="pt-2 border-t border-[#edf3f9] flex items-center justify-between">
+                      <button
+                        type="button"
+                        onClick={() => onOpenLightbox(item)}
+                        className="text-[11px] font-bold text-[#0f2a4a] hover:text-[#1f66a8] inline-flex items-center gap-1 cursor-pointer py-1 group/link transition-colors"
+                      >
+                        <span>{tr('View Details')}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform text-[#15b498]" />
+                      </button>
+                      <button
+                        onClick={() => onOpenQuote(item.title)}
+                        className="px-3 py-1 rounded-full bg-gradient-to-r from-[#1f66a8] to-[#15b498] hover:from-[#15b498] hover:to-[#1f66a8] text-white text-[10.5px] font-bold uppercase tracking-wider transition-all duration-300 shadow-xs hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer"
+                      >
+                        Quote Similar
+                      </button>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -918,25 +884,25 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Contact Details & Business Positioning */}
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
+              viewport={{ once: true, margin: '-20px' }}
               variants={staggerContainer}
               className="lg:col-span-5 space-y-6"
             >
-              <motion.span variants={fadeUp} className="text-xs uppercase tracking-widest text-[#15b498] font-semibold block">
-                Direct Studio Dialogue
-              </motion.span>
-
-              <motion.h2 variants={fadeUp} className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-                Give Us a Printing Deal for Your Enterprise.
+              <motion.h2 variants={fadeUp} className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
+                Give Us a Printing Deal for <span className="bg-gradient-to-r from-[#15b498] via-[#5eead4] to-[#15b498] bg-clip-text text-transparent">Your Enterprise.</span>
               </motion.h2>
+              <div className="flex items-center gap-2 pt-0.5">
+                <span className="h-[2px] w-12 bg-[#15b498] rounded-full"></span>
+                <span className="h-px w-6 bg-white/20 rounded-full"></span>
+              </div>
 
               <motion.p variants={fadeUp} className="text-sm text-white/70 leading-relaxed">
-                Connect directly with Vineet and our production leads at the Naraina Industrial Area plant. We provide custom substrate swatch samples, rapid digital color proofs, and firm SLA guarantees for orders throughout India.
+                Connect directly with our production team at the Naraina Industrial Area plant. We provide paper sample kits, quick color proofs, and reliable on-time delivery across India.
               </motion.p>
 
               <motion.div variants={fadeUp} className="space-y-4 pt-4 border-t border-white/10 text-xs text-white/80">
@@ -978,7 +944,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
+              viewport={{ once: true, margin: '-20px' }}
               variants={fadeRight}
               className="lg:col-span-7"
             >
@@ -1119,20 +1085,18 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
+            viewport={{ once: true, margin: '-20px' }}
             variants={staggerContainer}
             className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
           >
-            <motion.div variants={fadeLeft} className="max-w-2xl space-y-2">
-              <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
-                Journal & Industry Insights
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a]">
-                The Craft of Tactile Impressions
+            <motion.div variants={fadeLeft} className="max-w-2xl space-y-2.5">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
+                Printing Guides & <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Industry Insights</span>
               </h2>
-              <p className="text-sm text-[#56667a]">
-                Master printer articles on color theory, sustainable materials, retail merchandise, and corporate branding.
-              </p>
+              <div className="flex items-center gap-2 pt-0.5">
+                <span className="h-[2px] w-10 bg-[#15b498] rounded-full"></span>
+                <span className="h-px w-6 bg-[#dbe4ee] rounded-full"></span>
+              </div>
             </motion.div>
 
             <motion.div variants={fadeRight}>
@@ -1140,7 +1104,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 to="/blogs"
                 className="text-xs font-bold uppercase tracking-widest text-[#0f2a4a] hover:text-[#1f66a8] inline-flex items-center gap-1.5 transition-colors border-b-2 border-[#0f2a4a] hover:border-[#1f66a8] pb-1 w-max"
               >
-                <span>Explore All 6 Articles</span>
+                <span>Explore All Articles</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
@@ -1183,7 +1147,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                         {blog.title}
                       </h3>
                     </Link>
-                    <p className="text-xs text-[#56667a] line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-[#56667a] line-clamp-1 leading-relaxed">
                       {blog.excerpt}
                     </p>
                   </div>
@@ -1200,13 +1164,14 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                       </span>
                     </div>
 
-                    <Link
-                      to={`/blogs/${blog.slug}`}
+                    <button
+                      type="button"
+                      onClick={() => setSelectedHomeBlog(blog)}
                       className="text-xs font-semibold text-[#1f66a8] hover:text-[#0f2a4a] inline-flex items-center gap-1 transition-colors"
                     >
-                      <span>Read Story</span>
+                      <span>View</span>
                       <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </motion.article>
@@ -1214,6 +1179,33 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           </motion.div>
         </div>
       </section>
+
+      {selectedHomeBlog && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selectedHomeBlog.title} preview`}
+          onClick={() => setSelectedHomeBlog(null)}
+        >
+          <div className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white shadow-2xl border border-[#dbe4ee] p-6 sm:p-8" onClick={(event) => event.stopPropagation()}>
+            <div className="flex items-start justify-between gap-4 border-b border-[#edf3f9] pb-5">
+              <div>
+                <span className="text-[10px] uppercase tracking-widest font-semibold text-[#1f66a8]">{selectedHomeBlog.category}</span>
+                <h3 className="mt-1 font-serif text-2xl font-bold text-[#0f2a4a]">{selectedHomeBlog.title}</h3>
+                <p className="mt-1 text-xs text-[#56667a]">{selectedHomeBlog.formattedDate} · {selectedHomeBlog.readTime}</p>
+              </div>
+              <button type="button" onClick={() => setSelectedHomeBlog(null)} aria-label="Close preview" className="p-2 rounded-full text-[#56667a] hover:bg-[#edf3f9]"><X className="w-5 h-5" /></button>
+            </div>
+            <p className="mt-6 text-sm leading-relaxed text-[#56667a]">{selectedHomeBlog.excerpt}</p>
+            <div className="mt-7 border-t border-[#edf3f9] pt-5">
+              <Link to={`/blogs/${selectedHomeBlog.slug}`} onClick={() => setSelectedHomeBlog(null)} className="inline-flex items-center gap-2 rounded-full bg-[#0f2a4a] px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-[#1f66a8]">
+                Read Full Article <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

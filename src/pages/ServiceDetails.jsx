@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
-  Sparkles, 
   CheckCircle2, 
   Clock, 
   Package, 
@@ -146,7 +145,6 @@ export default function ServiceDetails({ onOpenQuote }) {
                   onClick={() => onOpenQuote(service.title)}
                   className="w-full py-4 rounded-full bg-[#0f2a4a] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#15b498] transition-all shadow-md flex items-center justify-center gap-2"
                 >
-                  <Sparkles className="w-4 h-4" />
                   <span>Request Custom Quote</span>
                 </button>
 

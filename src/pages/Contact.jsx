@@ -8,15 +8,16 @@ import {
   CheckCircle2, 
   AlertCircle, 
   MessageSquare, 
-  Sparkles,
   Building2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import PageHero from '../components/PageHero';
 import { company } from '../data/company';
+import { useLanguage } from '../context/LanguageContext';
 import { services } from '../data/services';
 
 export default function Contact() {
+  const { tr } = useLanguage();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -98,10 +99,10 @@ export default function Contact() {
   return (
     <div>
       <PageHero
-        badge="Contact Studio"
-        title="Direct Dialogue with"
-        highlight="Our Master Printers"
-        subtitle="Schedule a plant visit, request customized substrate sample boxes, or discuss high-volume enterprise SLAs."
+        badge="Contact Us"
+        title="Get in Touch with"
+        highlight="Our Printing Team"
+        subtitle="Schedule a factory visit, request paper & product sample kits, or discuss bulk corporate orders with our team."
         breadcrumbs={[{ name: 'Contact' }]}
       />
 
@@ -112,12 +113,13 @@ export default function Contact() {
             {/* Left Contact Card & Address */}
             <div className="lg:col-span-5 space-y-8">
               <div className="space-y-3">
-                <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
-                  Facility Head Office
-                </span>
-                <h2 className="font-serif text-3xl font-bold text-[#0f2a4a]">
-                  Ganesha Enterprises
+                <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
+                  Ganesha <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Enterprises Head Office & Plant</span>
                 </h2>
+                <div className="flex items-center gap-2 pt-0.5">
+                  <span className="h-[2px] w-12 bg-[#15b498] rounded-full"></span>
+                  <span className="h-px w-6 bg-[#dbe4ee] rounded-full"></span>
+                </div>
                 <p className="text-sm text-[#56667a] leading-relaxed">
                   Situated in the premier industrial manufacturing zone of West Delhi with direct metro connectivity and high-capacity dispatch docks.
                 </p>
@@ -128,7 +130,7 @@ export default function Contact() {
                 <div className="p-5 rounded-2xl bg-[#f7f9fc] border border-[#dbe4ee] space-y-2">
                   <div className="flex items-center gap-2 text-[#1f66a8] font-bold uppercase tracking-wider">
                     <MapPin className="w-4 h-4" />
-                    <span>Physical Workshop & Studio</span>
+                  <span>{tr('Physical Workshop & Studio')}</span>
                   </div>
                   <p className="text-[#0f2a4a] font-medium text-sm leading-relaxed">
                     {company.contact.address.full}
@@ -138,7 +140,7 @@ export default function Contact() {
                 <div className="p-5 rounded-2xl bg-[#f7f9fc] border border-[#dbe4ee] space-y-2">
                   <div className="flex items-center gap-2 text-[#1f66a8] font-bold uppercase tracking-wider">
                     <Phone className="w-4 h-4" />
-                    <span>Direct Hotline & WhatsApp</span>
+                    <span>{tr('Direct Hotline & WhatsApp')}</span>
                   </div>
                   <p className="text-[#0f2a4a] font-bold text-base">
                     <a href={`tel:${company.contact.phone.replace(/[^0-9]/g, '')}`} className="hover:text-[#1f66a8] transition-colors">
@@ -151,7 +153,7 @@ export default function Contact() {
                 <div className="p-5 rounded-2xl bg-[#f7f9fc] border border-[#dbe4ee] space-y-2">
                   <div className="flex items-center gap-2 text-[#1f66a8] font-bold uppercase tracking-wider">
                     <Mail className="w-4 h-4" />
-                    <span>Official Quotations & Pre-Press Files</span>
+                    <span>{tr('Official Quotations & Pre-Press Files')}</span>
                   </div>
                   <p className="text-[#0f2a4a] font-bold text-sm">
                     <a href={`mailto:${company.contact.email}`} className="hover:text-[#1f66a8] transition-colors">
@@ -163,7 +165,7 @@ export default function Contact() {
                 <div className="p-5 rounded-2xl bg-[#f7f9fc] border border-[#dbe4ee] space-y-2">
                   <div className="flex items-center gap-2 text-[#1f66a8] font-bold uppercase tracking-wider">
                     <Clock className="w-4 h-4" />
-                    <span>Operating Shifts</span>
+                    <span>{tr('Operating Shifts')}</span>
                   </div>
                   <p className="text-[#0f2a4a] font-medium text-xs">
                     {company.contact.hours}
@@ -179,7 +181,7 @@ export default function Contact() {
                   className="w-full py-4 rounded-full bg-[#25D366] text-white font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:bg-[#20ba5a] transition-all"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span>Start WhatsApp Chat with Plant Manager</span>
+                  <span>{tr('Start WhatsApp Chat with Plant Manager')}</span>
                 </button>
               </div>
             </div>
@@ -187,13 +189,14 @@ export default function Contact() {
             {/* Right Contact / Quote Request Form */}
             <div className="lg:col-span-7">
               <div className="bg-[#f7f9fc] rounded-3xl p-8 sm:p-10 border border-[#dbe4ee] shadow-xl">
-                <div className="space-y-2 mb-8">
-                  <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold">
-                    Interactive RFQ
-                  </span>
-                  <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#0f2a4a]">
-                    Request a Customized Print Estimate
+                <div className="space-y-2.5 mb-8">
+                  <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
+                    Request a Customized <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Print Estimate</span>
                   </h3>
+                  <div className="flex items-center gap-2 pt-0.5">
+                    <span className="h-[2px] w-10 bg-[#15b498] rounded-full"></span>
+                    <span className="h-px w-6 bg-[#dbe4ee] rounded-full"></span>
+                  </div>
                   <p className="text-xs text-[#56667a]">
                     Fill in your details below. Validated on submit and stored locally in browser storage.
                   </p>
@@ -206,7 +209,7 @@ export default function Contact() {
                       <span className="text-xs uppercase tracking-widest font-bold text-[#1f66a8]">Reference Code: #{submittedId}</span>
                       <h4 className="font-serif text-2xl font-bold text-[#0f2a4a]">Proposal Request Recorded</h4>
                       <p className="text-xs text-[#56667a] max-w-md mx-auto">
-                        Thank you, <strong>{formData.fullName}</strong>. Your project specifications have been logged securely. Our senior print architect at the Naraina plant will review your substrate and color specifications.
+                        Thank you, <strong>{formData.fullName}</strong>. Your project inquiry has been received. Our printing team at the Naraina plant will review your requirements and share an official quote shortly.
                       </p>
                     </div>
 
@@ -391,7 +394,7 @@ export default function Contact() {
                       >
                         {isSubmitting ? <span>Logging Inquiry...</span> : <>
                           <Send className="w-3.5 h-3.5" />
-                          <span>Submit Request</span>
+                        <span>{tr('Submit Request')}</span>
                         </>}
                       </button>
                     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { productCategories, products } from '../data/products';
 
 export default function MegaMenu({ isOpen, onClose }) {
@@ -45,7 +45,6 @@ export default function MegaMenu({ isOpen, onClose }) {
           <div className="hidden lg:flex flex-col justify-between bg-white p-5 rounded-2xl border border-[#dbe4ee]">
             <div>
               <div className="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-widest text-[#1f66a8] mb-2">
-                <Sparkles className="w-3 h-3" />
                 Featured Artifact
               </div>
               <h4 className="font-serif text-sm font-bold text-[#0f2a4a]">
@@ -84,7 +83,7 @@ export default function MegaMenu({ isOpen, onClose }) {
             </span>
             <span className="flex items-center gap-1.5 font-medium text-[#0f2a4a]">
               <CheckCircle2 className="w-4 h-4 text-[#1f66a8]" />
-              FSC Certified Substrates
+              Certified Quality Paper
             </span>
             <span className="flex items-center gap-1.5 font-medium text-[#0f2a4a]">
               <CheckCircle2 className="w-4 h-4 text-[#1f66a8]" />

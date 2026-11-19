@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Clock, Sparkles } from 'lucide-react';
+import { ArrowRight, BookOpen, Clock, X } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import { blogs } from '../data/blogs';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Blogs() {
+  const { tr } = useLanguage();
+  const [selectedBlog, setSelectedBlog] = useState(null);
+
+  useEffect(() => {
+    if (!selectedBlog) return undefined;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setSelectedBlog(null);
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedBlog]);
+
   return (
     <div>
       <PageHero
-        badge="Editorial & Insights"
-        title="The Ganesha Print"
-        highlight="Architecture Journal"
-        subtitle="Dispatches on chromatic precision, paper substrates, tactile finishes, and modern corporate merchandising."
-        breadcrumbs={[{ name: 'Journals' }]}
+        badge="Printing Guides & Insights"
+        title="Printing Knowledge &"
+        highlight="Industry Insights"
+        subtitle="Helpful guides and insights on paper types, print quality, finishing techniques, and corporate gifting in India."
+        breadcrumbs={[{ name: 'Blogs & Insights' }]}
       />
 
       <section className="py-20 bg-[#f7f9fc]">
@@ -31,7 +48,7 @@ export default function Blogs() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-semibold uppercase tracking-widest text-[#0f2a4a]">
-                    {blog.category}
+                    {tr(blog.category)}
                   </div>
                 </div>
 
@@ -43,11 +60,11 @@ export default function Blogs() {
                     </span>
                     <Link to={`/blogs/${blog.slug}`}>
                       <h3 className="font-serif text-lg font-bold text-[#0f2a4a] group-hover:text-[#1f66a8] transition-colors line-clamp-2">
-                        {blog.title}
+                        {tr(blog.title)}
                       </h3>
                     </Link>
-                    <p className="text-xs text-[#56667a] line-clamp-3 leading-relaxed">
-                      {blog.excerpt}
+                    <p className="text-xs text-[#56667a] line-clamp-1 leading-relaxed">
+                      {tr(blog.excerpt)}
                     </p>
                   </div>
 
@@ -63,13 +80,14 @@ export default function Blogs() {
                       </span>
                     </div>
 
-                    <Link
-                      to={`/blogs/${blog.slug}`}
+                    <button
+                      type="button"
+                      onClick={() => setSelectedBlog(blog)}
                       className="text-xs font-semibold text-[#1f66a8] hover:text-[#0f2a4a] inline-flex items-center gap-1 transition-colors"
                     >
-                      <span>Read Essay</span>
+                      <span>{tr('View')}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </article>
@@ -77,6 +95,50 @@ export default function Blogs() {
           </div>
         </div>
       </section>
+
+      {selectedBlog && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selectedBlog.title} preview`}
+          onClick={() => setSelectedBlog(null)}
+        >
+          <div
+            className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white shadow-2xl border border-[#dbe4ee] p-6 sm:p-8"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-4 border-b border-[#edf3f9] pb-5">
+              <div>
+                <span className="text-[10px] uppercase tracking-widest font-semibold text-[#1f66a8]">{selectedBlog.category}</span>
+                <h3 className="mt-1 font-serif text-2xl font-bold text-[#0f2a4a]">{selectedBlog.title}</h3>
+                <p className="mt-1 text-xs text-[#56667a]">{selectedBlog.formattedDate} · {selectedBlog.readTime}</p>
+              </div>
+              <button type="button" onClick={() => setSelectedBlog(null)} aria-label="Close preview" className="p-2 rounded-full text-[#56667a] hover:bg-[#edf3f9]">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <p className="mt-6 text-sm leading-relaxed text-[#56667a]">{selectedBlog.excerpt}</p>
+            <div className="mt-5 space-y-3 text-sm leading-relaxed text-[#17375e]">
+              {selectedBlog.content.slice(0, 2).map((block, index) => (
+                <p key={index}>{block.text}</p>
+              ))}
+            </div>
+
+            <div className="mt-7 flex flex-wrap gap-3 border-t border-[#edf3f9] pt-5">
+              <Link
+                to={`/blogs/${selectedBlog.slug}`}
+                onClick={() => setSelectedBlog(null)}
+                className="inline-flex items-center gap-2 rounded-full bg-[#0f2a4a] px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white hover:bg-[#1f66a8]"
+              >
+                Read Full Article
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

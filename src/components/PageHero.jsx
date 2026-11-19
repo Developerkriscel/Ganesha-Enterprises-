@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   ChevronRight, 
-  Sparkles, 
   ShieldCheck, 
   Clock, 
   Award, 
@@ -13,6 +12,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { company } from '../data/company';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function PageHero({ 
   badge = "Ganesha Enterprises", 
@@ -23,12 +23,13 @@ export default function PageHero({
   image = "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=1200&auto=format&fit=crop",
   children
 }) {
+  const { tr } = useLanguage();
   return (
     <section className="relative pt-32 pb-16 sm:pb-20 bg-gradient-to-b from-[#edf3f9] via-[#f7f9fc] to-[#f7f9fc] border-b border-[#dbe4ee] overflow-hidden">
       {/* Editorial Atmospheric Background Photo with Cream Gradient Overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img 
-          src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1600&auto=format&fit=crop" 
+          src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1600&auto=format&fit=crop" 
           alt="Atelier Background" 
           className="w-full h-full object-cover object-center opacity-20 filter saturate-50 contrast-125"
         />
@@ -49,16 +50,16 @@ export default function PageHero({
             aria-label="Breadcrumb" 
             className="flex items-center gap-2 text-xs text-[#56667a] mb-6"
           >
-            <Link to="/" className="hover:text-[#0f2a4a] transition-colors">Home</Link>
+            <Link to="/" className="hover:text-[#0f2a4a] transition-colors">{tr('Home')}</Link>
             {breadcrumbs.map((crumb, idx) => (
               <React.Fragment key={idx}>
                 <ChevronRight className="w-3 h-3 text-[#1f66a8]" />
                 {crumb.path ? (
                   <Link to={crumb.path} className="hover:text-[#0f2a4a] transition-colors">
-                    {crumb.name}
+                    {tr(crumb.name)}
                   </Link>
                 ) : (
-                  <span className="text-[#0f2a4a] font-medium">{crumb.name}</span>
+                  <span className="text-[#0f2a4a] font-medium">{tr(crumb.name)}</span>
                 )}
               </React.Fragment>
             ))}
@@ -75,20 +76,18 @@ export default function PageHero({
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="lg:col-span-7 space-y-5"
           >
-            {badge && (
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-[#1f66a8] border border-[#dbe4ee] text-[11px] font-semibold uppercase tracking-widest shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-[#15b498] animate-pulse" />
-                <span>{badge}</span>
-              </div>
-            )}
-
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0f2a4a] tracking-tight leading-[1.08]">
-              {title} {highlight && <span className="brand-gradient-text block sm:inline">{highlight}</span>}
+            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2a4a] tracking-tight leading-[1.12]">
+              {tr(title)} {highlight && <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent block sm:inline">{tr(highlight)}</span>}
             </h1>
+
+            <div className="flex items-center gap-2.5 pt-1">
+              <span className="h-[2px] w-12 bg-[#15b498] rounded-full"></span>
+              <span className="h-px w-6 bg-[#dbe4ee] rounded-full"></span>
+            </div>
 
             {subtitle && (
               <p className="text-base sm:text-lg text-[#56667a] leading-relaxed max-w-2xl">
-                {subtitle}
+                {tr(subtitle)}
               </p>
             )}
 
@@ -112,7 +111,7 @@ export default function PageHero({
             <div className="absolute -top-3 -right-3 -bottom-3 -left-3 sm:-top-4 sm:-right-4 sm:-bottom-4 sm:-left-4 rounded-[2rem] overflow-hidden -rotate-2 sm:-rotate-3 shadow-2xl border-2 border-[#15b498]/30 bg-[#0f2a4a] transition-all duration-700 ease-out group-hover:rotate-0 group-hover:scale-[1.02]">
               <img 
                 src={image} 
-                alt="Bespoke Production Workshop" 
+                alt="Production Printing Facility" 
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20"></div>

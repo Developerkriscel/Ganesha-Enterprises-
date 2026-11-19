@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { 
-  Sparkles, 
   Send, 
   CheckCircle2, 
   AlertCircle, 
@@ -15,8 +14,10 @@ import PageHero from '../components/PageHero';
 import { services } from '../data/services';
 import { productCategories } from '../data/products';
 import { company } from '../data/company';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Quote() {
+  const { tr } = useLanguage();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -109,10 +110,10 @@ export default function Quote() {
   return (
     <div>
       <PageHero
-        badge="Executive RFQ"
+        badge="Get a Quote"
         title="Request a Detailed"
         highlight="Project Estimation"
-        subtitle="Specify paper substrates, tactile foil finishes, apparel embroidery, or large-format installations with our senior print estimators."
+        subtitle="Specify your paper choices, gold/silver foil finishes, t-shirt embroidery, or signage requirements to get a quick quote from our team."
         breadcrumbs={[{ name: 'Request a Quote' }]}
       />
 
@@ -145,7 +146,7 @@ export default function Quote() {
                     <span className="font-semibold">{formData.service}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#56667a]">Substrate & Finish:</span>
+                    <span className="text-[#56667a]">Paper & Finish:</span>
                     <span className="font-semibold">{formData.paperGSM} • {formData.finish}</span>
                   </div>
                   <div className="flex justify-between">
@@ -166,7 +167,7 @@ export default function Quote() {
                     className="px-8 py-3.5 rounded-full bg-[#25D366] text-white font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-[#20ba5a] transition-all"
                   >
                     <MessageSquare className="w-4 h-4" />
-                    <span>Inquire via WhatsApp</span>
+                    <span>{tr('Inquire via WhatsApp')}</span>
                   </button>
                   <button
                     onClick={() => setSubmittedId(null)}
@@ -274,7 +275,7 @@ export default function Quote() {
 
                     <div>
                       <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
-                        Preferred Paper / Substrate
+                        Preferred Paper / Material
                       </label>
                       <select
                         value={formData.paperGSM}
@@ -293,7 +294,7 @@ export default function Quote() {
 
                     <div>
                       <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
-                        Artisanal Finish
+                        Special Finish
                       </label>
                       <select
                         value={formData.finish}
@@ -400,7 +401,7 @@ export default function Quote() {
                     >
                       {isSubmitting ? <span>Calculating...</span> : <>
                         <Send className="w-3.5 h-3.5" />
-                        <span>Submit Project RFQ</span>
+                        <span>{tr('Submit Project RFQ')}</span>
                       </>}
                     </button>
                   </div>

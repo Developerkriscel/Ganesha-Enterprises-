@@ -6,10 +6,10 @@ export const services = [
     shortTitle: "Office & Corporate Stationery",
     tagline: "Distinguished stationery that commands authority in every boardroom.",
     category: "Corporate Essentials",
-    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1200&auto=format&fit=crop",
-    referenceImg: "https://ganeshaenterprises.in/assets/imgs/About/book-printing-banner-0.jpg",
+    image: "https://ganeshaenterprises.in/assets/imgs/prodact/IN_Standard-Visiting-Cards_Overview.jpeg",
+    referenceImg: "https://ganeshaenterprises.in/assets/imgs/prodact/IN_Standard-Visiting-Cards_Overview.jpeg",
     description: "From debossed visiting cards on 450 GSM imported cotton board to gold-foiled letterheads and executive bill books, our corporate stationery sets the gold standard for executive communication.",
-    longDescription: "First impressions are etched in the tactile touch of your corporate identity. Ganesha Enterprises engineers bespoke business stationery for international conglomerates, consulting firms, legal practices, and luxury lifestyle brands. We offer laser-guided cutting, raised spot UV, blind debossing, hot stamping foil in metallic shades, and edge-coloring techniques that transform standard paper into brand artifacts.",
+    longDescription: "A great first impression begins with quality corporate stationery. Ganesha Enterprises creates custom business stationery for leading companies, consulting firms, legal practices, and corporate brands. We offer laser-guided cutting, raised spot UV, embossing, metallic foil stamping, and colored edges to give your stationery an executive finish.",
     deliverables: [
       "Luxury Visiting Cards (Velvet Matte, Cotton Pulp, Metallic Foiled)",
       "Executive Watermarked Letterheads & Envelopes",
@@ -36,8 +36,8 @@ export const services = [
     category: "Marketing",
     image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=1200&auto=format&fit=crop",
     referenceImg: "https://ganeshaenterprises.in/assets/imgs/About/marketing-strategy-planning-strategy-concept_53876-42950.jpg",
-    description: "Architecting high-converting promotional flyers, luxury brochures, lookbooks, and high-DPI posters that amplify product launches and marketing campaigns across pan-India channels.",
-    longDescription: "Great marketing collateral demands a harmony of chromatic vibrancy and tactile refinement. Whether launching an automobile marquee, an ultra-luxury real estate enclave, or a high-traffic retail showcase, our multi-head digital and high-speed offset lines produce photorealistic color depth, zero banding, and crisp micro-typography.",
+    description: "High-quality promotional flyers, brochures, product catalogs, and posters designed to support product launches and marketing campaigns across India.",
+    longDescription: "Effective marketing materials require sharp colors and premium finishes. Whether you are launching a new automotive brand, real estate project, or retail store, our modern digital and high-speed offset machines deliver vibrant colors and crystal-clear printing.",
     deliverables: [
       "Stitched & Perfect-Bound Product Catalogs & Lookbooks",
       "Premium Gloss / Matte Laminated Promotional Flyers",
@@ -92,8 +92,8 @@ export const services = [
     category: "Packaging",
     image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1200&auto=format&fit=crop",
     referenceImg: "https://ganeshaenterprises.in/assets/imgs/prodact/Corrugated-Boxes_Labels-_-Stickers_Category-image_1x1.jpeg",
-    description: "Rigid magnetic gift boxes, corrugated branded shipper cartons, metallized labels, hologram security seals, and bespoke cosmetic folding cartons.",
-    longDescription: "The packaging is the prologue of every customer experience. At Ganesha Enterprises, our packaging engineers create custom structural die-lines tailored to millimeter precision. Using rigid European greyboards, soft-touch velvet laminates, selective anti-scratch matte films, and bespoke pull-ribbons, we craft tactile unboxing journeys that enhance product value.",
+    description: "Rigid magnetic gift boxes, branded shipping cartons, metallic labels, security hologram seals, and custom packaging boxes.",
+    longDescription: "Premium packaging creates an unforgettable unboxing experience for your clients. At Ganesha Enterprises, we design and produce custom rigid gift boxes, soft-touch matte boxes, and branded cartons with precision cutting to enhance your brand value.",
     deliverables: [
       "Rigid Magnetic-Closure Gift Boxes with Custom Foam Inserts",
       "E-Commerce Heavy-Duty Corrugated Mailer Boxes",
@@ -148,7 +148,7 @@ export const services = [
     category: "Editorial & Keepsakes",
     image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=1200&auto=format&fit=crop",
     referenceImg: "https://ganeshaenterprises.in/assets/imgs/prodact/IN_Acrylic-photo-Calendar_Overview_01.jpeg",
-    description: "Hardbound coffee table books, executive desktop acrylic calendars, bespoke annual reports, and personalized photo albums crafted with archival fidelity.",
+    description: "Hardbound coffee table books, executive desktop acrylic calendars, custom corporate annual reports, and personalized photo albums with long-lasting print quality.",
     longDescription: "From corporate annual retrospectives to luxury hotel room compendiums, our bookbinding atelier treats print as timeless literature. We offer Swiss-bound layflat bindings, section-sewn hardcover binding, gold-gilded edges, and archival lustre paper stocks that render skin tones and architectural photography with photographic brilliance.",
     deliverables: [
       "Hardcover Layflat Coffee Table Books & Retrospectives",
@@ -176,7 +176,7 @@ export const services = [
     category: "Specialized Craft",
     image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop",
     referenceImg: "https://ganeshaenterprises.in/assets/imgs/prodact/IN_Standard-Visiting-Cards_Overview.jpeg",
-    description: "Tactile foil stamping, registered spot UV, multi-level 3D embossing, die-cutting, duplex and triplex paper bonding, and iridescent laser varnishing.",
+    description: "Gold and silver foil stamping, spot UV, 3D embossing, custom die-cutting, thick multi-layer paper bonding, and premium gloss coatings.",
     longDescription: "When an ordinary print won't suffice, our specialized finishing laboratory introduces multi-sensory dimension. By combining heat, pressure, and precision-etched brass dies, we create sculptural depths and gleaming metallic highlights that demand to be touched.",
     deliverables: [
       "Hot Foil Stamping in Gold, Rose Gold, Silver, Holographic & Copper",
@@ -190,7 +190,7 @@ export const services = [
       "German-made brass embossing dies for micro-fine hairline details",
       "Registration precision accurate to within 0.1 millimeters",
       "Compatible across paper, leatherette, wood veneer, and acrylic",
-      "Instant tactile differentiation against mass-produced competitors"
+      "Instant visual impact and premium feel that stands out from competitors"
     ],
     turnaround: "2 – 3 Days Additional to Base Print",
     minQuantity: "100 Units"
@@ -200,11 +200,11 @@ export const services = [
     slug: "3d-design-and-printing",
     title: "3D Design, Prototyping & Trophies",
     shortTitle: "3D Design & Awards",
-    tagline: "Three-dimensional brand sculptures, prestige awards, and bespoke mementos.",
+    tagline: "Custom corporate trophies, prestige awards, and mementos.",
     category: "Architectural & 3D",
     image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=1200&auto=format&fit=crop",
     referenceImg: "https://ganeshaenterprises.in/assets/imgs/prodact/Awards_Photo-gifts_Category-image_1x1.jpeg",
-    description: "Crystal, acrylic, metal, and wooden corporate awards, 3D packaging prototypes, customized brand insignias, and bespoke executive mementos.",
+    description: "Crystal, acrylic, metal, and wooden corporate awards, 3D packaging samples, customized logos, and premium executive mementos.",
     longDescription: "Recognizing achievement and creating physical brand prototypes requires industrial artistry. Our 3D design studio handles end-to-end CAD rendering, precision laser cutting, CNC acrylic milling, and dimensional UV direct printing to build show-stopping trophies and spatial brand icons.",
     deliverables: [
       "Custom Cut Optical Crystal & High-Transparency Acrylic Awards",

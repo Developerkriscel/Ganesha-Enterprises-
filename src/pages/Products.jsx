@@ -1,11 +1,13 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Search, Filter, Sparkles, X, ArrowUpDown } from 'lucide-react';
+import { Search, Filter, X, ArrowUpDown } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import ProductCard from '../components/ProductCard';
 import { products, productCategories } from '../data/products';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Products({ onOpenQuote }) {
+  const { tr } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const initialCategory = searchParams.get('category') || 'all';
   const initialSub = searchParams.get('sub') || '';
@@ -45,10 +47,11 @@ export default function Products({ onOpenQuote }) {
       // Search query
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
-        const matchesName = p.name.toLowerCase().includes(q);
-        const matchesCategory = p.categoryName.toLowerCase().includes(q);
-        const matchesSub = p.subcategory.toLowerCase().includes(q);
-        const matchesDesc = p.shortDesc.toLowerCase().includes(q);
+        const matches = (value) => [value, tr(value)].some((text) => text?.toLowerCase().includes(q));
+        const matchesName = matches(p.name);
+        const matchesCategory = matches(p.categoryName);
+        const matchesSub = matches(p.subcategory);
+        const matchesDesc = matches(p.shortDesc);
         if (!matchesName && !matchesCategory && !matchesSub && !matchesDesc) {
           return false;
         }
@@ -59,7 +62,7 @@ export default function Products({ onOpenQuote }) {
       if (sortBy === 'turnaround') return a.turnaround.localeCompare(b.turnaround);
       return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
     });
-  }, [activeCategory, activeSub, searchQuery, sortBy]);
+  }, [activeCategory, activeSub, searchQuery, sortBy, tr]);
 
   // Current category object
   const currentCatObj = productCategories.find(c => c.id === activeCategory);
@@ -67,10 +70,10 @@ export default function Products({ onOpenQuote }) {
   return (
     <div>
       <PageHero
-        badge="Master Catalog"
-        title="Bespoke Corporate &"
+        badge="Product Catalog"
+        title="Custom Corporate &"
         highlight="Commercial Products"
-        subtitle="Explore our curated collection of luxury stationery, customized apparel, onboarding hampers, and event displays."
+        subtitle="Explore our complete collection of corporate stationery, customized apparel, employee welcome kits, and promotional displays."
         breadcrumbs={[{ name: 'Products' }]}
       />
 
@@ -91,7 +94,7 @@ export default function Products({ onOpenQuote }) {
                       : 'bg-white border border-[#dbe4ee] text-[#56667a] hover:text-[#0f2a4a] hover:border-[#1f66a8]'
                   }`}
                 >
-                  {cat.name}
+                  {tr(cat.name)}
                 </button>
               ))}
             </div>
@@ -104,7 +107,7 @@ export default function Products({ onOpenQuote }) {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Filter products..."
+                  placeholder={tr('Filter products...')}
                   className="w-full pl-10 pr-8 py-2 rounded-xl bg-white border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none"
                 />
                 {searchQuery && (
@@ -123,9 +126,9 @@ export default function Products({ onOpenQuote }) {
                   onChange={(e) => setSortBy(e.target.value)}
                   className="px-3.5 py-2 rounded-xl bg-white border border-[#dbe4ee] text-xs text-[#0f2a4a] focus:border-[#1f66a8] focus:outline-none"
                 >
-                  <option value="featured">Featured First</option>
-                  <option value="name">Alphabetical (A-Z)</option>
-                  <option value="turnaround">Turnaround Speed</option>
+                  <option value="featured">{tr('Featured First')}</option>
+                  <option value="name">{tr('Alphabetical (A-Z)')}</option>
+                  <option value="turnaround">{tr('Turnaround Speed')}</option>
                 </select>
               </div>
             </div>
@@ -135,7 +138,7 @@ export default function Products({ onOpenQuote }) {
           {currentCatObj?.subcategories && (
             <div className="flex items-center gap-2 overflow-x-auto pb-1">
               <span className="text-xs font-semibold text-[#0f2a4a] uppercase tracking-wider shrink-0 mr-1">
-                Sub-Division:
+                {tr('Sub-Division:')}
               </span>
               {currentCatObj.subcategories.map((sub, idx) => (
                 <button
@@ -147,7 +150,7 @@ export default function Products({ onOpenQuote }) {
                       : 'bg-white border border-[#e6edf5] text-[#56667a] hover:text-[#0f2a4a]'
                   }`}
                 >
-                  {sub}
+                  {tr(sub)}
                 </button>
               ))}
             </div>
@@ -155,7 +158,7 @@ export default function Products({ onOpenQuote }) {
 
           {/* Result Count and Active Filters Bar */}
           <div className="flex items-center justify-between text-xs text-[#56667a]">
-            <span>Showing <strong>{filteredProducts.length}</strong> verified corporate artifacts</span>
+            <span>{tr('Showing')} <strong>{filteredProducts.length}</strong> {tr('verified corporate artifacts')}</span>
             {(activeCategory !== 'all' || activeSub || searchQuery) && (
               <button
                 onClick={() => {
@@ -166,7 +169,7 @@ export default function Products({ onOpenQuote }) {
                 }}
                 className="text-[#1f66a8] font-semibold hover:underline"
               >
-                Clear all filters
+                {tr('Clear all filters')}
               </button>
             )}
           </div>
@@ -187,9 +190,9 @@ export default function Products({ onOpenQuote }) {
               <div className="w-12 h-12 mx-auto rounded-full bg-[#edf3f9] flex items-center justify-center text-[#1f66a8]">
                 <Search className="w-6 h-6" />
               </div>
-              <h3 className="font-serif text-xl font-bold text-[#0f2a4a]">No Products Matched Your Criteria</h3>
+              <h3 className="font-serif text-xl font-bold text-[#0f2a4a]">{tr('No Products Matched Your Criteria')}</h3>
               <p className="text-xs text-[#56667a] max-w-md mx-auto">
-                Try clearing search terms or selecting a different category. Our studio produces bespoke custom jobs beyond catalog listings.
+                {tr('Try clearing search terms or selecting a different category. We also produce custom orders based on your specific requirements.')}
               </p>
               <button
                 onClick={() => {
@@ -199,7 +202,7 @@ export default function Products({ onOpenQuote }) {
                 }}
                 className="px-6 py-2.5 rounded-full bg-[#0f2a4a] text-white text-xs font-semibold uppercase tracking-wider"
               >
-                Reset Filters
+                {tr('Reset Filters')}
               </button>
             </div>
           )}

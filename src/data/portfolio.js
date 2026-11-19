@@ -81,7 +81,7 @@ export const portfolioItems = [
     year: "2024",
     location: "Indira Gandhi International Airport, Delhi",
     image: "https://ganeshaenterprises.in/assets/imgs/portfolio/p-6.jpg",
-    backupImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000&auto=format&fit=crop",
+    backupImage: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop",
     scope: "High-security metallic gold and silver badge pins with magnetic dual-plate backing that protects delicate uniform blazers from pin puncture.",
     deliverables: ["Gold-electroplated die-cast zinc crest", "Neodymium magnetic fastener", "Jewelry box presentation"],
     results: "Equipped over 8,000 crew members across domestic and international sectors."

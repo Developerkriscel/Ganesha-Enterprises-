@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, AlertCircle, MessageSquare, Send, Sparkles } from 'lucide-react';
+import { X, CheckCircle2, AlertCircle, MessageSquare, Send } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { company } from '../data/company';
 
@@ -120,7 +120,6 @@ export default function QuoteModal({ isOpen, onClose, initialProduct = '', initi
         <div className="flex items-center justify-between px-8 py-6 bg-white border-b border-[#dbe4ee]">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#edf3f9] text-[#1f66a8] text-xs font-semibold uppercase tracking-wider mb-1">
-              <Sparkles className="w-3.5 h-3.5" />
               Direct Studio Inquiries
             </div>
             <h3 className="font-serif text-2xl font-bold text-[#0f2a4a]">Request an Executive Proposal</h3>
@@ -143,7 +142,7 @@ export default function QuoteModal({ isOpen, onClose, initialProduct = '', initi
               <span className="text-xs uppercase tracking-widest font-semibold text-[#1f66a8]">Reference #{submittedRef}</span>
               <h4 className="font-serif text-2xl font-bold text-[#0f2a4a]">Proposal Request Recorded</h4>
               <p className="text-sm text-[#56667a] max-w-md mx-auto">
-                Thank you, <strong>{formData.fullName}</strong>. Your project specifications have been logged securely. Our senior print architect at the Naraina plant will review your substrate and color specifications.
+                Thank you, <strong>{formData.fullName}</strong>. Your project inquiry has been received. Our printing team at the Naraina plant will review your material and color specifications.
               </p>
             </div>
 
@@ -269,7 +268,7 @@ export default function QuoteModal({ isOpen, onClose, initialProduct = '', initi
                   <option value="Made by You & Stationery">Made by You & Stationery</option>
                   <option value="Home, Drinkware & Gifts">Home, Drinkware & Gifts</option>
                   <option value="Signage, Awards & Large Format">Signage, Awards & Large Format</option>
-                  <option value="Other Bespoke Work">Other Bespoke Work</option>
+                  <option value="Other Custom Work">Other Custom Work</option>
                 </select>
               </div>
 
@@ -308,7 +307,7 @@ export default function QuoteModal({ isOpen, onClose, initialProduct = '', initi
 
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
-                Project Details & Substrate Notes <span className="text-red-500">*</span>
+                Project Details & Material Notes <span className="text-red-500">*</span>
               </label>
               <textarea
                 rows={3}

@@ -9,7 +9,7 @@ export const productCategories = [
     id: "business-essentials",
     name: "Business Essentials",
     count: 6,
-    description: "Tactile corporate stationery, visiting cards, presentation folders, and administrative essentials.",
+    description: "Premium corporate stationery, visiting cards, presentation folders, and office essentials.",
     subcategories: ["Visiting Cards", "Posters & Marketing", "Letterheads & Notebooks", "Labels & Packaging", "Stamps & Ink", "Office Supplies"]
   },
   {
@@ -52,7 +52,7 @@ export const products = [
     subcategory: "Gift Hampers",
     featured: true,
     badge: "Bestseller",
-    shortDesc: "The premier corporate onboarding ensemble featuring an insulated flask, diary, engraved pen, and steel mug in a bespoke magnetic box.",
+    shortDesc: "Complete corporate welcome kit with an insulated flask, diary, engraved pen, and steel mug in a premium magnetic box.",
     description: "Turn day-one onboarding into an unforgettable brand moment. Our flagship Welcome Kit combines an insulated matte-black vacuum flask, a gold-foiled debossed vegan leather planner, a matte-metal laser engraved rollerball pen, and a premium thermal ceramic mug, nestled snugly in laser-cut high-density EVA foam inside a rigid presentation box.",
     image: "https://ganeshaenterprises.in/assets/imgs/feature-5/Welcome_Kit.jpg",
     backupImage: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000&auto=format&fit=crop",
@@ -101,11 +101,11 @@ export const products = [
     shortDesc: "Heavyweight 450 GSM imported cotton pulp business cards with optional raised metallic foil and velvet touch.",
     description: "A business card is your handshake when you are no longer in the room. Printed on pure natural-white or deep charcoal French cotton boards, our visiting cards feature crisp micro-typography, raised polymer spot gloss, and radiant metallic edge-gilding.",
     image: "https://ganeshaenterprises.in/assets/imgs/prodact/IN_Standard-Visiting-Cards_Overview.jpeg",
-    backupImage: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000&auto=format&fit=crop",
+    backupImage: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop",
     moq: "100 Cards",
     turnaround: "24 – 48 Hours",
     specs: {
-      "Substrate": "400 - 600 GSM Imported Cotton Pulp / Linen Texture",
+      "Material": "400 - 600 GSM Premium Cotton Pulp / Linen Texture",
       "Finishing": "Raised Spot UV, Soft-Touch Velvet, Foil Stamping",
       "Edges": "Clean Die-Cut, Optional Gold/Rose-Gold Gilded Edges",
       "Dimensions": "Standard 89mm x 54mm or European 85mm x 55mm"
@@ -145,7 +145,7 @@ export const products = [
     featured: true,
     badge: "Year-Round",
     shortDesc: "Diamond-polished 5mm virgin cast acrylic desktop stand with 12 interchangeable high-DPI textured calendar cards.",
-    description: "Command prime desktop real estate on your client's executive workspace 365 days a year. Our desktop calendar pairs an ultra-clear, bevel-edged acrylic or solid teakwood base with 12 bespoke monthly cards printed on 350 GSM textured felt paper.",
+    description: "Keep your brand visible on your client's desk 365 days a year. Our desktop calendar pairs an ultra-clear bevel-edged acrylic or solid teakwood base with 12 custom monthly cards printed on 350 GSM textured paper.",
     image: "https://ganeshaenterprises.in/assets/imgs/prodact/IN_Acrylic-photo-Calendar_Overview_01.jpeg",
     backupImage: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=1000&auto=format&fit=crop",
     moq: "50 Units",
@@ -154,7 +154,7 @@ export const products = [
       "Base": "5mm Diamond-Polished Optical Cast Acrylic",
       "Cards": "12 Months + Cover on 350 GSM Felt Matte Cardstock",
       "Printing": "6-Color High-Resolution Digital Press",
-      "Packaging": "Flat-packed in bespoke gift envelope"
+      "Packaging": "Packed in a premium gift envelope"
     },
     finishes: ["Diamond Bevel Edge", "Textured Cardstock", "Laser Logo on Base"]
   },
@@ -350,7 +350,7 @@ export const products = [
     subcategory: "Mugs, Albums & Gifts",
     featured: false,
     badge: "Giftware",
-    shortDesc: "330ml stoneware ceramic mugs with tactile matte exterior finish, gloss interior, and permanent heat-cured branding.",
+    shortDesc: "330ml stoneware ceramic mugs with smooth matte exterior finish, gloss interior, and permanent branding.",
     description: "An office desk staple elevated to luxury design. Features a silky touch exterior, comfortable ergonomic C-handle, and vibrant color contrasts that do not wash away in dishwashers.",
     image: "https://ganeshaenterprises.in/assets/imgs/prodact/Cello-SS-Hot-Sip-Mug---170ml_Overview.jpeg",
     backupImage: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000&auto=format&fit=crop",

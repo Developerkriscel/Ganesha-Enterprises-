@@ -7,15 +7,16 @@ import {
   ArrowRight, 
   CheckCircle2, 
   MessageSquare, 
-  Sparkles,
-  ShieldCheck,
   Clock
 } from 'lucide-react';
 import { company } from '../data/company';
 import { services } from '../data/services';
 import { productCategories } from '../data/products';
+import { useLanguage } from '../context/LanguageContext';
+import BrandLogo from './BrandLogo';
 
 export default function Footer({ onOpenQuote }) {
+  const { tr } = useLanguage();
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
 
@@ -29,60 +30,53 @@ export default function Footer({ onOpenQuote }) {
   };
 
   return (
-    <footer className="bg-[#0f2a4a] text-[#f7f9fc] border-t border-white/10 pt-20 pb-12 overflow-hidden relative">
+    <footer className="bg-[#0f2a4a] text-[#f7f9fc] border-t border-white/10 pt-8 pb-4 overflow-hidden relative">
       {/* Decorative Subtle Ambient Glow */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#15b498]/5 rounded-full blur-3xl pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="footer-inner mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Top Call to Action Row */}
-        <div className="pb-16 mb-16 border-b border-white/10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-          <div className="max-w-2xl space-y-2">
-            <span className="text-xs uppercase tracking-widest text-[#15b498] font-semibold">
-              Ready to elevated your brand tactile experience?
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight">
-              Let’s Engineer Your Next High-Impact Print Run.
+        <div className="pb-6 mb-6 border-b border-white/10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+          <div className="space-y-2">
+            <h2 className="font-serif text-lg sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white tracking-tight whitespace-normal md:whitespace-nowrap">
+              Let’s Engineer Your Next <span className="bg-gradient-to-r from-[#15b498] via-[#5eead4] to-[#15b498] bg-clip-text text-transparent">High-Impact Print Run.</span>
             </h2>
-            <p className="text-sm text-white/60">
-              Direct access to senior master printers, sample swatch books, and guaranteed corporate SLA turnarounds.
-            </p>
+            <div className="flex items-center gap-2 pt-0.5">
+              <span className="h-[2px] w-12 bg-[#15b498] rounded-full"></span>
+              <span className="h-px w-6 bg-white/20 rounded-full"></span>
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex items-center flex-nowrap gap-2.5 sm:gap-3 shrink-0">
             <button
               onClick={() => onOpenQuote()}
-              className="px-8 py-4 rounded-full bg-[#1f66a8] hover:bg-[#1f66a8] text-[#0f2a4a] font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center gap-2"
+              className="px-4.5 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#15b498] hover:bg-[#129a82] text-[#0f2a4a] font-bold text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 active:scale-95 flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
             >
-              <Sparkles className="w-4 h-4" />
-              <span>Request a Quote</span>
+              <span>{tr('Request a Quote')}</span>
             </button>
 
             <a
               href={company.contact.whatsappLink}
               target="_blank"
               rel="noreferrer"
-              className="px-6 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-xs uppercase tracking-widest border border-white/10 transition-colors flex items-center gap-2"
+              className="px-4 py-2 sm:px-4.5 sm:py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-[11px] sm:text-xs uppercase tracking-wider border border-white/15 transition-all flex items-center gap-1.5 whitespace-nowrap hover:scale-105 active:scale-95 cursor-pointer"
             >
-              <MessageSquare className="w-4 h-4 text-[#25D366]" />
-              <span>WhatsApp Direct</span>
+              <MessageSquare className="w-3.5 h-3.5 text-[#25D366]" />
+              <span>{tr('WhatsApp Direct')}</span>
             </a>
           </div>
         </div>
 
         {/* 4-Column Editorial Links Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 pb-6 border-b border-white/10">
           {/* Column 1: Company Profile */}
-          <div className="lg:col-span-2 space-y-6">
-            <Link to="/" className="inline-block" aria-label="Ganesha Enterprises home">
-              <img
-                src="/logo.png"
-                alt="Ganesha Enterprises"
-                className="h-16 w-auto rounded-lg bg-[#f8f8f8] px-3 py-2"
-              />
+          <div className="lg:col-span-2 space-y-4">
+            <Link to="/" className="inline-block hover:scale-105 active:scale-95 transition-transform duration-300" aria-label="Ganesha Enterprises home">
+              <BrandLogo />
             </Link>
 
             <p className="text-xs text-white/70 leading-relaxed max-w-sm">
-              New Delhi's premier corporate printing and bespoke merchandise studio. We engineer high-DPI digital printing, Japanese UV finishing, custom employee welcome kits, and luxury packaging for India's foremost enterprise institutions.
+              Corporate printing, merchandise, packaging, and signage from New Delhi.
             </p>
 
             <div className="space-y-3 pt-2 text-xs text-white/80">
@@ -110,9 +104,9 @@ export default function Footer({ onOpenQuote }) {
           </div>
 
           {/* Column 2: Core Services */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h4 className="font-serif text-sm font-bold uppercase tracking-wider text-white border-b border-white/10 pb-2">
-              Our Services
+              {tr('Our Services')}
             </h4>
             <ul className="space-y-2.5 text-xs text-white/60">
               {services.map((s) => (
@@ -129,9 +123,9 @@ export default function Footer({ onOpenQuote }) {
           </div>
 
           {/* Column 3: Product Collections */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h4 className="font-serif text-sm font-bold uppercase tracking-wider text-white border-b border-white/10 pb-2">
-              Collections
+              {tr('Collections')}
             </h4>
             <ul className="space-y-2.5 text-xs text-white/60">
               {productCategories.filter(c => c.id !== 'all').map((cat) => (
@@ -158,12 +152,12 @@ export default function Footer({ onOpenQuote }) {
           </div>
 
           {/* Column 4: Newsletter & Verification */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h4 className="font-serif text-sm font-bold uppercase tracking-wider text-white border-b border-white/10 pb-2">
-              Print Journal
+              {tr('Print Journal')}
             </h4>
             <p className="text-xs text-white/60">
-              Receive quarterly substrate guides, seasonal corporate gifting previews, and packaging trends.
+              Get occasional print and merchandise updates.
             </p>
 
             <form onSubmit={handleSubscribe} className="space-y-2">
@@ -192,27 +186,20 @@ export default function Footer({ onOpenQuote }) {
               )}
             </form>
 
-            <div className="pt-2">
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#15b498]">
-                  <ShieldCheck className="w-4 h-4" />
-                  Industrial Plant Guarantee
-                </div>
-                <p className="text-[11px] text-white/50">
-                  Full production, finishing, and QA conducted on-site in Naraina Industrial Area Phase 1.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
 
         {/* Bottom Copyright & Legal Links */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
+        <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
           <div>
-            © {new Date().getFullYear()} Ganesha Enterprises. All rights reserved. Registered under MSME & ISO standards.
+            © {new Date().getFullYear()} Ganesha Enterprises. All rights reserved.
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+            <Link to="/about" className="text-white/80 hover:text-[#15b498] font-medium transition-colors">
+              About Us
+            </Link>
+            <span className="text-white/20">•</span>
             <Link to="/privacy-policy" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>

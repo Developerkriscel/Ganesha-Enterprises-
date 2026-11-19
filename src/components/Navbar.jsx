@@ -7,17 +7,21 @@ import {
   ChevronDown, 
   Phone, 
   MessageSquare, 
-  Sparkles,
   ArrowUpRight 
 } from 'lucide-react';
 import MegaMenu from './MegaMenu';
+import BrandLogo from './BrandLogo';
 import { company } from '../data/company';
+import { useLanguage, supportedLanguages } from '../context/LanguageContext';
 
 export default function Navbar({ onOpenSearch, onOpenQuote }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
   const location = useLocation();
+  const { language, setLanguage, t } = useLanguage();
+  const currentLanguageLabel = supportedLanguages.find(([code]) => code === language)?.[1] || 'English';
 
   const isHome = location.pathname === '/';
 
@@ -36,13 +40,12 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
   }, [location.pathname]);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
-    { name: 'Services', path: '/services' },
-    { name: 'Products', path: '/products', hasMega: true },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Journals', path: '/blogs' },
-    { name: 'Contact', path: '/contact' },
+    { name: t('nav', 'home'), path: '/' },
+    { name: t('nav', 'corporate'), path: '/services' },
+    { name: t('nav', 'wedding'), path: '/wedding-printing' },
+    { name: t('nav', 'products'), path: '/products', hasMega: true },
+    { name: t('nav', 'portfolio'), path: '/portfolio' },
+    { name: t('nav', 'contact'), path: '/contact' },
   ];
 
   const isTransparent = isHome && !scrolled;
@@ -52,19 +55,15 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isTransparent
-            ? 'bg-transparent text-white py-5 border-b border-white/10'
-            : 'bg-[#f7f9fc]/95 backdrop-blur-md text-[#0f2a4a] py-3.5 shadow-sm border-b border-[#dbe4ee]'
+            ? 'bg-[#f7f9fc]/95 backdrop-blur-md text-[#0f2a4a] py-3 border-b border-[#dbe4ee]'
+            : 'bg-[#f7f9fc]/95 backdrop-blur-md text-[#0f2a4a] py-2.5 shadow-sm border-b border-[#dbe4ee]'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             {/* Logo */}
-            <Link to="/" className="flex items-center shrink-0" aria-label="Ganesha Enterprises home">
-              <img
-                src="/logo.png"
-                alt="Ganesha Enterprises"
-                className="h-12 sm:h-14 w-auto rounded-lg bg-[#f8f8f8] px-2 py-1 shadow-md"
-              />
+            <Link to="/" className="flex items-center shrink-0 hover:scale-105 active:scale-95 transition-transform duration-300" aria-label="Ganesha Enterprises home">
+              <BrandLogo compact />
             </Link>
 
             {/* Desktop Navigation Links */}
@@ -80,9 +79,9 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                     className={({ isActive }) =>
                       `px-3.5 py-2 text-xs font-semibold whitespace-nowrap uppercase tracking-wider transition-all duration-200 inline-flex items-center gap-1 rounded-full ${
                         isActive
-                          ? 'text-[#15b498] bg-white/10 backdrop-blur-sm'
+                          ? 'text-[#15b498] bg-[#e8f4f2]'
                           : isTransparent
-                            ? 'text-white/90 hover:text-[#15b498] hover:bg-white/10'
+                            ? 'text-[#0f2a4a] hover:text-[#15b498] hover:bg-black/5'
                             : 'text-[#0f2a4a] hover:text-[#1f66a8] hover:bg-black/5'
                       }`
                     }
@@ -98,6 +97,26 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
 
             {/* Desktop Action Buttons */}
             <div className="hidden lg:flex items-center gap-3">
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setLanguageMenuOpen((open) => !open)}
+                  aria-haspopup="listbox"
+                  aria-expanded={languageMenuOpen}
+                  className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1.5 text-[11px] font-semibold ${isTransparent ? 'border-[#dbe4ee] text-[#0f2a4a]' : 'border-[#dbe4ee] text-[#0f2a4a]'}`}
+                >
+                  {currentLanguageLabel} <ChevronDown className="w-3 h-3" />
+                </button>
+                {languageMenuOpen && (
+                  <div role="listbox" className="absolute right-0 top-full mt-2 min-w-28 overflow-hidden rounded-xl border border-[#dbe4ee] bg-white p-1 shadow-xl">
+                    {supportedLanguages.map(([code, label]) => (
+                      <button key={code} type="button" role="option" aria-selected={language === code} onClick={() => { setLanguage(code); setLanguageMenuOpen(false); }} className={`block w-full rounded-lg px-3 py-2 text-left text-xs font-semibold ${language === code ? 'bg-[#edf3f9] text-[#1f66a8]' : 'text-[#0f2a4a] hover:bg-[#f7f9fc]'}`}>
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
               {/* Search Trigger */}
               {/* <button
                 onClick={onOpenSearch}
@@ -117,7 +136,7 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                 href="tel:9650044234"
                 className={`hidden xl:inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   isTransparent
-                    ? 'text-white bg-white/10 border border-white/20 hover:border-[#15b498]'
+                    ? 'text-[#0f2a4a] bg-white border border-[#dbe4ee] hover:border-[#15b498]'
                     : 'text-[#0f2a4a] bg-white border border-[#dbe4ee] hover:border-[#1f66a8]'
                 }`}
               >
@@ -128,10 +147,9 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
               {/* Request a Quote CTA */}
               <button
                 onClick={() => onOpenQuote()}
-                className="px-5 py-2.5 whitespace-nowrap shrink-0 rounded-full bg-[#1f66a8] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#19558f] transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 flex items-center gap-1.5"
+                className="px-4 py-2 whitespace-nowrap shrink-0 rounded-full bg-[#1f66a8] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#19558f] transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 flex items-center gap-1.5"
               >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Request a Quote</span>
+                <span>{t('actions', 'quote')}</span>
               </button>
             </div>
 
@@ -151,7 +169,7 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                 onClick={() => onOpenQuote()}
                 className="px-3 py-1.5 rounded-full bg-[#1f66a8] text-white text-[11px] font-semibold uppercase tracking-wider shadow-sm"
               >
-                Quote
+                {t('actions', 'shortQuote')}
               </button>
 
               <button
@@ -180,7 +198,7 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
         <div className="fixed inset-0 z-30 bg-[#f7f9fc] pt-24 pb-8 px-6 overflow-y-auto lg:hidden animate-fadeIn">
           <div className="flex flex-col space-y-4">
             <span className="text-xs uppercase tracking-widest text-[#1f66a8] font-semibold border-b border-[#dbe4ee] pb-2">
-              Navigation Menu
+              {t('actions', 'navigation')}
             </span>
 
             {navLinks.map((link) => (
@@ -207,8 +225,7 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                 }}
                 className="w-full py-3.5 rounded-2xl bg-[#0f2a4a] text-white font-semibold text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg"
               >
-                <Sparkles className="w-4 h-4 text-[#15b498]" />
-                Request a Custom Quote
+                {t('actions', 'customQuote')}
               </button>
 
               <a
@@ -218,7 +235,7 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                 className="w-full py-3 rounded-2xl bg-[#25D366] text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-md"
               >
                 <MessageSquare className="w-4 h-4" />
-                WhatsApp Studio (+91 96500 44234)
+                {t('actions', 'whatsapp')} (+91 96500 44234)
               </a>
 
               <a
@@ -226,8 +243,15 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                 className="w-full py-3 rounded-2xl bg-white border border-[#dbe4ee] text-[#0f2a4a] font-semibold text-sm flex items-center justify-center gap-2"
               >
                 <Phone className="w-4 h-4 text-[#1f66a8]" />
-                Call +91 96500 44234
+                {t('actions', 'call')} +91 96500 44234
               </a>
+
+              <label className="flex items-center justify-between py-3 text-sm font-semibold text-[#0f2a4a] border-b border-[#e6edf5]">
+                <span>{t('language', 'label')}</span>
+                <select value={language} onChange={(e) => setLanguage(e.target.value)} aria-label={t('language', 'label')} className="rounded-lg border border-[#dbe4ee] bg-white px-3 py-1.5 outline-none">
+                  {supportedLanguages.map(([code, label]) => <option key={code} value={code}>{label}</option>)}
+                </select>
+              </label>
             </div>
 
             <div className="pt-6 text-xs text-[#56667a] space-y-1">

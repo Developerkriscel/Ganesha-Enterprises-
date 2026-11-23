@@ -120,7 +120,7 @@ export default function Quote() {
       <section className="py-20 bg-[#f7f9fc]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#dbe4ee] shadow-xl">
+          <div className="quote-page-card bg-white rounded-3xl p-4 sm:p-12 border border-[#dbe4ee] shadow-xl">
             {submittedId ? (
               <div className="text-center py-10 space-y-6">
                 <CheckCircle2 className="w-16 h-16 text-emerald-600 mx-auto" />
@@ -178,7 +178,7 @@ export default function Quote() {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="quote-page-form space-y-8">
                 
                 {/* Step 1: Client Information */}
                 <div>

@@ -23,7 +23,7 @@ export default function ServiceCard({ service, onQuoteRequest }) {
   }, [detailsOpen]);
 
   return (
-    <div className="group relative bg-white rounded-2xl sm:rounded-3xl border border-[#dbe4ee] hover:border-[#15b498] flex flex-col justify-between transition-all duration-350 ease-out shadow-[0_4px_20px_rgba(15,42,74,0.05)] hover:shadow-[0_24px_50px_-10px_rgba(15,42,74,0.22),0_10px_20px_-5px_rgba(21,180,152,0.2)] hover:scale-[1.035] sm:hover:scale-[1.045] hover:-translate-y-2 z-10 hover:z-30 overflow-hidden will-change-transform">
+    <div className="group relative bg-white rounded-2xl sm:rounded-3xl border border-[#dbe4ee] hover:border-[#15b498] flex flex-col justify-between transition-all duration-350 ease-out shadow-[0_4px_20px_rgba(15,42,74,0.05)] hover:shadow-[0_24px_50px_-10px_rgba(15,42,74,0.22),0_10px_20px_-5px_rgba(21,180,152,0.2)] sm:hover:scale-[1.045] sm:hover:-translate-y-2 z-10 hover:z-30 overflow-hidden will-change-transform">
       {/* Top subtle ambient glowing line on hover */}
       <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#15b498]/0 to-transparent group-hover:via-[#15b498] transition-all duration-500 z-30"></div>
 

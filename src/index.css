@@ -10,6 +10,7 @@ body > .skiptranslate {
 }
 body {
   top: 0 !important;
+  overflow-x: hidden;
 }
 
 @layer base {
@@ -24,6 +25,16 @@ body {
     font-family: 'Poppins', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
   }
 
   ::selection {
@@ -121,6 +132,240 @@ body {
 
 .footer-inner {
   max-width: 80rem;
+}
+
+@media (max-width: 639px) {
+  .py-20 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .py-24 {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  .footer-inner {
+    width: 100%;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Compact quote modal on phones while keeping touch targets usable. */
+  .quote-form {
+    gap: 0.75rem !important;
+  }
+
+  .quote-form label {
+    font-size: 0.625rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .quote-form input,
+  .quote-form select,
+  .quote-form textarea {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  .quote-form textarea {
+    min-height: 4.5rem;
+  }
+
+  .quote-page-card {
+    border-radius: 1.25rem !important;
+    padding: 1rem !important;
+  }
+
+  .quote-page-form {
+    gap: 1.25rem !important;
+  }
+
+  .quote-page-form h4 {
+    font-size: 0.95rem;
+    line-height: 1.25;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .quote-page-form label {
+    font-size: 0.625rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .quote-page-form input,
+  .quote-page-form select,
+  .quote-page-form textarea {
+    padding: 0.55rem 0.75rem !important;
+  }
+
+  .quote-page-form textarea {
+    min-height: 5rem;
+  }
+
+  .quote-page-form .border-dashed {
+    padding: 0.75rem;
+  }
+
+  .quote-page-form .border-dashed svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .home-about-section {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+
+  .home-about-story {
+    gap: 0.65rem !important;
+  }
+
+  .home-about-story h2 {
+    font-size: 1.35rem;
+  }
+
+  .home-about-story > div:first-child p {
+    font-size: 0.68rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .home-about-story .grid {
+    gap: 0.35rem;
+  }
+
+  .home-about-story .group\/item {
+    padding: 0.4rem;
+    gap: 0.5rem;
+  }
+
+  .home-about-story .group\/item > div:first-child {
+    width: 1.65rem;
+    height: 1.65rem;
+  }
+
+  .home-about-story .about-feature-desc {
+    font-size: 0.55rem;
+  }
+
+  .home-about-story .grid-cols-3 {
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
+    gap: 0.35rem;
+  }
+
+  .home-about-story .grid-cols-3 > div > div:first-child {
+    font-size: 0.85rem;
+  }
+
+  .home-about-story .grid-cols-3 > div > div:last-child {
+    font-size: 0.5rem;
+  }
+
+  .home-contact-section {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.25rem !important;
+  }
+
+  .home-contact-copy {
+    gap: 0.75rem !important;
+  }
+
+  .home-contact-copy h2 {
+    font-size: 1.45rem;
+  }
+
+  .home-contact-copy > p {
+    font-size: 0.7rem;
+    line-height: 1.45;
+  }
+
+  .home-contact-copy .space-y-4 {
+    gap: 0.5rem;
+    padding-top: 0.6rem;
+  }
+
+  .home-contact-copy .space-y-4 > div,
+  .home-contact-copy .grid > div {
+    padding: 0.65rem;
+    border-radius: 0.9rem;
+  }
+
+  .home-contact-copy .text-\[10px\] {
+    font-size: 0.5rem;
+  }
+
+  .home-contact-copy .pt-2 a {
+    padding: 0.6rem 1rem;
+    font-size: 0.58rem;
+  }
+
+  .home-quick-quote-card {
+    padding: 0.9rem !important;
+    border-radius: 1.15rem !important;
+  }
+
+  .home-quick-quote-card h3 {
+    font-size: 1.3rem;
+    line-height: 1.2;
+  }
+
+  .home-quick-quote-card {
+    padding: 0.7rem !important;
+  }
+
+  .home-quick-form-heading {
+    gap: 0.35rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+
+  .home-quick-form-heading h3 {
+    font-size: 1.15rem;
+  }
+
+  .home-quick-form-heading p {
+    font-size: 0.62rem;
+    line-height: 1.35;
+  }
+
+  .home-quick-form {
+    gap: 0.65rem !important;
+  }
+
+  .home-quick-form label {
+    font-size: 0.58rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .home-quick-form input,
+  .home-quick-form select,
+  .home-quick-form textarea {
+    padding: 0.45rem 0.65rem !important;
+  }
+
+  .home-quick-form textarea {
+    min-height: 4rem;
+    max-height: 4rem;
+  }
+
+  .home-quick-form > div:last-child {
+    padding-top: 0.15rem;
+    gap: 0.5rem;
+  }
+
+  .home-quick-form > div:last-child button {
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+    font-size: 0.58rem;
+  }
 }
 
 

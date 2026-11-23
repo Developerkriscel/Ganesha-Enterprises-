@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { productCategories } from '../data/products';
+import { Pause, Play } from 'lucide-react';
 
 export default function CategoryInfographic() {
   const { tr } = useLanguage();
   const navigate = useNavigate();
   const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [selectedMobileIdx, setSelectedMobileIdx] = useState(0);
+  const [isMobileAutoPlaying, setIsMobileAutoPlaying] = useState(true);
+
+  useEffect(() => {
+    if (!isMobileAutoPlaying) return undefined;
+    const timer = window.setInterval(() => {
+      setSelectedMobileIdx((current) => (current + 1) % 5);
+    }, 3600);
+    return () => window.clearInterval(timer);
+  }, [isMobileAutoPlaying]);
 
   // 5 Authentic Website Categories mapped to the 5 infographic steps
   const categoriesList = productCategories.filter(c => c.id !== 'all');
@@ -132,10 +143,10 @@ export default function CategoryInfographic() {
       {/* =========================================================
           DESKTOP 1:1 VECTOR REPLICA WITH EYE-CATCHY EFFECTS
           ========================================================= */}
-      <div className="hidden md:block w-full overflow-visible">
+      <div className="hidden md:block w-full overflow-hidden">
         <svg
           viewBox="0 0 1140 450"
-          className="w-full h-auto drop-shadow-xl overflow-visible select-none"
+          className="w-full h-auto drop-shadow-xl overflow-hidden select-none"
           style={{ maxHeight: '520px' }}
         >
           <defs>
@@ -257,7 +268,7 @@ export default function CategoryInfographic() {
                 key={item.id}
                 className="cursor-pointer transition-transform duration-300 ease-out"
                 style={{
-                  transform: isHovered ? 'translateX(10px)' : 'translateX(0px)',
+                  transform: isHovered ? 'translateX(4px)' : 'translateX(0px)',
                   filter: isHovered ? 'url(#rowHoverShadow)' : 'none'
                 }}
                 onMouseEnter={() => setHoveredIdx(idx)}
@@ -491,47 +502,63 @@ export default function CategoryInfographic() {
       {/* =========================================================
           MOBILE VIEW (Touch-Friendly Responsive Stacked Cards)
           ========================================================= */}
-      <div className="md:hidden flex flex-col space-y-3">
-        {steps.map((item) => (
-          <div
-            key={item.id}
-            onClick={() => navigate(`/products?category=${item.id}`)}
-            className="group relative bg-[#f8fafc] rounded-xl border border-[#dbe4ee] shadow-sm hover:shadow-md transition-all p-3.5 flex items-center justify-between gap-3 overflow-hidden cursor-pointer active:scale-98"
-            style={{
-              borderLeftColor: item.color,
-              borderLeftWidth: '5px'
-            }}
+      <div className="md:hidden flex w-full flex-col items-center gap-4 py-2">
+        <div className="relative h-[min(90vw,360px)] w-[min(90vw,360px)] rounded-full border-[12px] border-[#e2e8f0] bg-gradient-to-br from-white via-[#f8fafc] to-[#edf3f9] shadow-[0_22px_55px_rgba(15,42,74,0.22)]">
+          <div className="absolute -inset-5 rounded-full bg-[#15b498]/10 blur-2xl animate-pulse" />
+          <div className="absolute -inset-2 rounded-full border border-[#15b498]/30 animate-[spin_18s_linear_infinite]" />
+          <div className="absolute inset-2 rounded-full border-2 border-[#dbe4ee] shadow-inner" />
+          <button
+            type="button"
+            onClick={() => navigate(`/products?category=${steps[selectedMobileIdx].id}`)}
+            aria-label={`Open ${steps[selectedMobileIdx].name} products`}
+            className="absolute inset-0 z-[1] flex cursor-pointer flex-col items-center justify-center border-0 bg-transparent px-10 text-center outline-none transition-transform duration-300 hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-[#15b498] focus-visible:ring-inset"
           >
-            <div className="flex items-start gap-3 min-w-0">
-              <span
-                className="font-serif text-2xl font-light tracking-tight shrink-0 mt-0.5"
-                style={{ color: item.color }}
+            <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#15b498]">Product Matrix</span>
+            <span className="mt-1 font-serif text-3xl font-bold drop-shadow-sm animate-[pulse_2.4s_ease-in-out_infinite]" style={{ color: steps[selectedMobileIdx].color }}>{steps[selectedMobileIdx].step}</span>
+            <h3 className="mt-1 text-[13px] font-bold leading-tight text-[#0f2a4a]">{tr(steps[selectedMobileIdx].name)}</h3>
+            <span className="mt-1 text-[9px] font-bold uppercase tracking-wider" style={{ color: steps[selectedMobileIdx].color }}>{steps[selectedMobileIdx].count}</span>
+            <p className="mt-2 line-clamp-3 text-[10px] leading-snug text-[#64748b]">{tr(steps[selectedMobileIdx].description)}</p>
+          </button>
+
+          {steps.map((item, idx) => {
+            const positions = [
+              'left-1/2 top-0 -translate-x-1/2 -translate-y-1/2',
+              'right-0 top-[22%] translate-x-1/2 -translate-y-1/2',
+              'right-0 bottom-[22%] translate-x-1/2 translate-y-1/2',
+              'left-0 bottom-[22%] -translate-x-1/2 translate-y-1/2',
+              'left-0 top-[22%] -translate-x-1/2 -translate-y-1/2'
+            ];
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setSelectedMobileIdx(idx)}
+                aria-label={`Show ${item.name}`}
+                className={`absolute z-10 flex h-12 w-12 items-center justify-center rounded-full border-4 border-white text-sm font-bold text-white shadow-[0_8px_18px_rgba(15,42,74,0.28)] transition-all duration-300 hover:scale-125 hover:shadow-[0_12px_26px_rgba(15,42,74,0.4)] active:scale-95 ${positions[idx]} ${selectedMobileIdx === idx ? 'scale-125 ring-4 ring-white/80 shadow-[0_12px_28px_rgba(15,42,74,0.42)] animate-[pulse_2s_ease-in-out_infinite]' : ''}`}
+                style={{ background: `linear-gradient(135deg, ${item.fromColor}, ${item.toColor})` }}
               >
                 {item.step}
-              </span>
-              <div className="min-w-0">
-                <span className="text-[11px] font-bold uppercase tracking-wider block text-[#0f2a4a]">
-                  {tr(item.name)}
-                </span>
-                <span className="text-[9.5px] font-bold uppercase tracking-wider block mt-0.5" style={{ color: item.color }}>
-                  {item.count}
-                </span>
-                <p className="text-[11px] text-[#64748b] line-clamp-1 mt-1">
-                  {tr(item.description)}
-                </p>
-              </div>
-            </div>
+              </button>
+            );
+          })}
+        </div>
 
-            <div
-              className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 shadow-xs transition-transform group-hover:scale-110"
-              style={{
-                background: `linear-gradient(135deg, ${item.fromColor}, ${item.toColor})`
-              }}
-            >
-              <div className="scale-90">{renderIcon(item.iconType)}</div>
-            </div>
-          </div>
-        ))}
+        <button
+          type="button"
+          onClick={() => navigate(`/products?category=${steps[selectedMobileIdx].id}`)}
+          className="inline-flex items-center justify-center rounded-full bg-[#0f2a4a] px-5 py-2.5 text-[10px] font-bold uppercase tracking-widest text-white shadow-md"
+        >
+          Explore {tr(steps[selectedMobileIdx].name)}
+        </button>
+        <button
+          type="button"
+          onClick={() => setIsMobileAutoPlaying((playing) => !playing)}
+          aria-label={isMobileAutoPlaying ? 'Pause automatic category rotation' : 'Play automatic category rotation'}
+          className="inline-flex items-center gap-1.5 rounded-full border border-[#15b498]/30 bg-white/85 px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-[#0f2a4a] shadow-sm backdrop-blur transition-all hover:scale-105"
+        >
+          {isMobileAutoPlaying ? <Pause className="h-3 w-3 text-[#15b498]" /> : <Play className="h-3 w-3 text-[#15b498]" />}
+          {isMobileAutoPlaying ? 'Auto switch' : 'Play categories'}
+        </button>
       </div>
     </div>
   );

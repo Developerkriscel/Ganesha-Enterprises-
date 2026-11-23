@@ -3,18 +3,19 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { productCategories, products } from '../data/products';
 
-export default function MegaMenu({ isOpen, onClose }) {
+export default function MegaMenu({ isOpen, onClose, onMouseEnter, onMouseLeave }) {
   if (!isOpen) return null;
 
   const featured = products.filter(p => p.featured).slice(0, 2);
 
   return (
     <div 
-      className="absolute top-full left-0 w-full bg-[#f7f9fc] border-b border-[#dbe4ee] shadow-2xl py-8 px-6 lg:px-12 z-40 transition-all duration-300 animate-fadeIn"
-      onMouseLeave={onClose}
+      className="absolute top-full left-0 w-full bg-[#f7f9fc] border-b border-[#dbe4ee] shadow-2xl py-8 px-6 lg:px-12 z-50 transition-all duration-300 animate-fadeIn"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 xl:gap-8">
           {/* Category Columns */}
           {productCategories.filter(c => c.id !== 'all').map((cat) => (
             <div key={cat.id} className="space-y-3">
@@ -26,28 +27,35 @@ export default function MegaMenu({ isOpen, onClose }) {
                 {cat.name}
               </Link>
               <ul className="space-y-2 text-xs text-[#56667a]">
-                {cat.subcategories?.map((sub, idx) => (
-                  <li key={idx}>
-                    <Link
-                      to={`/products?category=${cat.id}&sub=${encodeURIComponent(sub)}`}
-                      onClick={onClose}
-                      className="hover:text-[#0f2a4a] hover:translate-x-1 inline-block transition-all"
-                    >
-                      {sub}
-                    </Link>
-                  </li>
-                ))}
+                {cat.subcategories?.map((sub, idx) => {
+                  const isWedding = sub === 'Wedding Printing';
+                  const targetUrl = isWedding
+                    ? '/wedding-printing'
+                    : `/products?category=${cat.id}&sub=${encodeURIComponent(sub)}`;
+
+                  return (
+                    <li key={idx}>
+                      <Link
+                        to={targetUrl}
+                        onClick={onClose}
+                        className="hover:text-[#0f2a4a] hover:translate-x-1 inline-block transition-all"
+                      >
+                        {sub}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
 
           {/* Featured Showcase Column */}
-          <div className="hidden lg:flex flex-col justify-between bg-white p-5 rounded-2xl border border-[#dbe4ee]">
+          <div className="hidden lg:flex flex-col justify-between bg-white p-4 xl:p-5 rounded-2xl border border-[#dbe4ee] shadow-sm">
             <div>
               <div className="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-widest text-[#1f66a8] mb-2">
-                Featured Artifact
+                Featured Product
               </div>
-              <h4 className="font-serif text-sm font-bold text-[#0f2a4a]">
+              <h4 className="font-serif text-sm font-bold text-[#0f2a4a] line-clamp-1">
                 {featured[0]?.name}
               </h4>
               <p className="text-xs text-[#56667a] mt-1 line-clamp-2">
@@ -66,7 +74,7 @@ export default function MegaMenu({ isOpen, onClose }) {
             <Link
               to={`/products/${featured[0]?.slug}`}
               onClick={onClose}
-              className="mt-4 text-xs font-semibold text-[#0f2a4a] hover:text-[#1f66a8] inline-flex items-center gap-1 transition-colors"
+              className="mt-3 text-xs font-semibold text-[#0f2a4a] hover:text-[#1f66a8] inline-flex items-center gap-1 transition-colors"
             >
               <span>Explore Specs</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -96,7 +104,7 @@ export default function MegaMenu({ isOpen, onClose }) {
             onClick={onClose}
             className="font-semibold text-[#0f2a4a] hover:text-[#1f66a8] inline-flex items-center gap-1.5"
           >
-            <span>View Complete Product Catalog (90+ Items)</span>
+            <span>View Complete Product Catalog</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -104,4 +112,3 @@ export default function MegaMenu({ isOpen, onClose }) {
     </div>
   );
 }
-

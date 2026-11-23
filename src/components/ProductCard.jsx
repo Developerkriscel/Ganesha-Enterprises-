@@ -23,7 +23,7 @@ export default function ProductCard({ product, onQuoteRequest, priority = false 
   }, [detailsOpen]);
 
   return (
-    <div className="group relative flex flex-col justify-between bg-white rounded-3xl border border-[#dbe4ee]/80 hover:border-[#15b498] transition-all duration-350 ease-out shadow-[0_4px_20px_rgba(15,42,74,0.04)] hover:shadow-[0_25px_50px_-10px_rgba(15,42,74,0.25),0_0_25px_rgba(21,180,152,0.22)] hover:-translate-y-2.5 hover:scale-[1.05] sm:hover:scale-[1.07] z-10 hover:z-40 overflow-hidden will-change-transform">
+    <div className="group relative flex flex-col justify-between bg-white rounded-3xl border border-[#dbe4ee]/80 hover:border-[#15b498] transition-all duration-350 ease-out shadow-[0_4px_20px_rgba(15,42,74,0.04)] hover:shadow-[0_25px_50px_-10px_rgba(15,42,74,0.25),0_0_25px_rgba(21,180,152,0.22)] sm:hover:-translate-y-2.5 sm:hover:scale-[1.07] z-10 hover:z-40 overflow-hidden will-change-transform">
       {/* Light sweep shimmer effect */}
       <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
         <div className="w-[120%] h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-[150%] skew-x-12 group-hover:translate-x-[200%] transition-transform duration-1000 ease-out"></div>

@@ -111,30 +111,30 @@ export default function QuoteModal({ isOpen, onClose, initialProduct = '', initi
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md overflow-y-auto animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-2 sm:p-4 bg-black/60 backdrop-blur-md overflow-y-auto animate-fadeIn">
       <div 
-        className="w-full max-w-2xl bg-[#f7f9fc] rounded-3xl shadow-2xl border border-[#dbe4ee] overflow-hidden my-8"
+        className="w-[calc(100vw-2rem)] max-w-2xl max-h-[calc(100dvh-2rem)] sm:w-full sm:max-h-[90vh] bg-[#f7f9fc] rounded-2xl sm:rounded-3xl shadow-2xl border border-[#dbe4ee] overflow-y-auto my-4 sm:my-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-8 py-6 bg-white border-b border-[#dbe4ee]">
+        <div className="flex items-start justify-between gap-2 px-3 py-3 sm:gap-3 sm:px-8 sm:py-6 bg-white border-b border-[#dbe4ee]">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#edf3f9] text-[#1f66a8] text-xs font-semibold uppercase tracking-wider mb-1">
+            <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#edf3f9] text-[#1f66a8] text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-1">
               Direct Studio Inquiries
             </div>
-            <h3 className="font-serif text-2xl font-bold text-[#0f2a4a]">Request an Executive Proposal</h3>
+            <h3 className="font-serif text-lg sm:text-2xl font-bold text-[#0f2a4a] leading-tight">Request an Executive Proposal</h3>
             <p className="text-xs text-[#56667a] mt-0.5">Custom specifications • Rapid proofing • Pan-India logistics</p>
           </div>
           <button
             onClick={onClose}
             className="p-2 text-[#56667a] hover:text-[#0f2a4a] hover:bg-[#edf3f9] rounded-full transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
 
         {submittedRef ? (
-          <div className="p-8 text-center space-y-6 bg-white">
+          <div className="p-4 sm:p-8 text-center space-y-6 bg-white">
             <div className="w-16 h-16 mx-auto rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
               <CheckCircle2 className="w-9 h-9" />
             </div>
@@ -184,7 +184,7 @@ export default function QuoteModal({ isOpen, onClose, initialProduct = '', initi
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="p-8 space-y-5">
+          <form onSubmit={handleSubmit} className="quote-form p-3 sm:p-8 space-y-3 sm:space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">
@@ -328,7 +328,7 @@ export default function QuoteModal({ isOpen, onClose, initialProduct = '', initi
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-[#25D366]/40 text-[#128C7E] bg-white hover:bg-[#25D366]/10 text-xs font-semibold transition-all"
               >
                 <MessageSquare className="w-4 h-4 text-[#25D366]" />
-                WhatsApp Inquiry (+91 96500 44234)
+                <span>WhatsApp Inquiry</span><span className="hidden sm:inline"> (+91 96500 44234)</span>
               </button>
 
               <button

@@ -31,7 +31,12 @@ export default function Products({ onOpenQuote }) {
   };
 
   const handleSubChange = (sub) => {
-    setActiveSub(sub === activeSub ? '' : sub);
+    const nextSub = sub === activeSub ? '' : sub;
+    setActiveSub(nextSub);
+    const params = {};
+    if (activeCategory !== 'all') params.category = activeCategory;
+    if (nextSub) params.sub = nextSub;
+    setSearchParams(params);
   };
 
   const filteredProducts = useMemo(() => {

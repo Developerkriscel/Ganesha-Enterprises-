@@ -30,7 +30,7 @@ export default function Footer({ onOpenQuote }) {
   };
 
   return (
-    <footer className="bg-[#0f2a4a] text-[#f7f9fc] border-t border-white/10 pt-8 pb-4 overflow-hidden relative">
+    <footer className="bg-[#0f2a4a] text-[#f7f9fc] border-t border-white/10 pt-4 sm:pt-8 pb-3 overflow-hidden relative">
       {/* Decorative Subtle Ambient Glow */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#15b498]/5 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -47,7 +47,7 @@ export default function Footer({ onOpenQuote }) {
             </div>
           </div>
 
-          <div className="flex items-center flex-nowrap gap-2.5 sm:gap-3 shrink-0">
+          <div className="flex items-center flex-wrap gap-2.5 sm:gap-3 shrink-0">
             <button
               onClick={() => onOpenQuote()}
               className="px-4.5 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#15b498] hover:bg-[#129a82] text-[#0f2a4a] font-bold text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 active:scale-95 flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
@@ -68,18 +68,18 @@ export default function Footer({ onOpenQuote }) {
         </div>
 
         {/* 4-Column Editorial Links Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 pb-6 border-b border-white/10">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-x-3 gap-y-4 sm:gap-6 pb-4 sm:pb-6 border-b border-white/10">
           {/* Column 1: Company Profile */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="col-span-2 lg:col-span-2 space-y-2 sm:space-y-4">
             <Link to="/" className="inline-block hover:scale-105 active:scale-95 transition-transform duration-300" aria-label="Ganesha Enterprises home">
-              <BrandLogo />
+              <BrandLogo compact />
             </Link>
 
             <p className="text-xs text-white/70 leading-relaxed max-w-sm">
               Corporate printing, merchandise, packaging, and signage from New Delhi.
             </p>
 
-            <div className="space-y-3 pt-2 text-xs text-white/80">
+            <div className="space-y-2 pt-1 sm:pt-2 text-[11px] sm:text-xs text-white/80">
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[#15b498] shrink-0 mt-0.5" />
                 <span>{company.contact.address.full}</span>
@@ -104,11 +104,11 @@ export default function Footer({ onOpenQuote }) {
           </div>
 
           {/* Column 2: Core Services */}
-          <div className="space-y-3">
+          <div className="col-span-1 space-y-2 sm:space-y-3">
             <h4 className="font-serif text-sm font-bold uppercase tracking-wider text-white border-b border-white/10 pb-2">
               {tr('Our Services')}
             </h4>
-            <ul className="space-y-2.5 text-xs text-white/60">
+            <ul className="space-y-1.5 sm:space-y-2 text-[11px] sm:text-xs text-white/60">
               {services.map((s) => (
                 <li key={s.id}>
                   <Link
@@ -123,11 +123,11 @@ export default function Footer({ onOpenQuote }) {
           </div>
 
           {/* Column 3: Product Collections */}
-          <div className="space-y-3">
+          <div className="col-span-1 space-y-2 sm:space-y-3">
             <h4 className="font-serif text-sm font-bold uppercase tracking-wider text-white border-b border-white/10 pb-2">
               {tr('Collections')}
             </h4>
-            <ul className="space-y-2.5 text-xs text-white/60">
+            <ul className="space-y-1.5 sm:space-y-2 text-[11px] sm:text-xs text-white/60">
               {productCategories.filter(c => c.id !== 'all').map((cat) => (
                 <li key={cat.id}>
                   <Link
@@ -152,7 +152,7 @@ export default function Footer({ onOpenQuote }) {
           </div>
 
           {/* Column 4: Newsletter & Verification */}
-          <div className="space-y-3">
+          <div className="col-span-2 lg:col-span-1 space-y-2 sm:space-y-3">
             <h4 className="font-serif text-sm font-bold uppercase tracking-wider text-white border-b border-white/10 pb-2">
               {tr('Print Journal')}
             </h4>
@@ -190,12 +190,12 @@ export default function Footer({ onOpenQuote }) {
         </div>
 
         {/* Bottom Copyright & Legal Links */}
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
+        <div className="pt-3 sm:pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3 text-[10px] sm:text-xs text-white/50">
           <div>
             © {new Date().getFullYear()} Ganesha Enterprises. All rights reserved.
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-6">
             <Link to="/about" className="text-white/80 hover:text-[#15b498] font-medium transition-colors">
               About Us
             </Link>

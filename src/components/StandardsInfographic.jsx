@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Palette, ShieldCheck, Award, Clock, CheckCircle2 } from 'lucide-react';
+import { Palette, ShieldCheck, Award, Clock, CheckCircle2, X, Pause, Play } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function StandardsInfographic({ valueProps = [] }) {
   const { tr } = useLanguage();
+  const [selectedStandard, setSelectedStandard] = useState(null);
+  const [selectedMobileStandard, setSelectedMobileStandard] = useState(0);
+  const [isMobileAutoPlaying, setIsMobileAutoPlaying] = useState(true);
+
+  useEffect(() => {
+    if (!isMobileAutoPlaying) return undefined;
+    const timer = window.setInterval(() => {
+      setSelectedMobileStandard((current) => (current + 1) % 4);
+    }, 3600);
+    return () => window.clearInterval(timer);
+  }, [isMobileAutoPlaying]);
 
   // Helper to generate SVG annular quadrant arc paths (viewBox 0 0 240 240, center 120, 120)
   const makeArc = (startAngle, endAngle, innerR = 64, outerR = 108, cx = 120, cy = 120) => {
@@ -149,9 +160,59 @@ export default function StandardsInfographic({ valueProps = [] }) {
   ];
 
   return (
-    <div className="relative w-full max-w-6xl lg:max-w-7xl mx-auto py-3 sm:py-4">
+    <div className="relative mx-auto w-full max-w-[360px] aspect-square py-2 sm:py-4 md:max-w-6xl md:aspect-auto lg:max-w-7xl">
       {/* 2x2 Grid with Enhanced Zoom-In Interactive Hover Effect */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 relative z-10">
+      <div className="md:hidden flex w-full flex-col items-center gap-4 py-2">
+        <div
+          className="relative h-[min(88vw,330px)] w-[min(88vw,330px)] rounded-3xl border-[11px] transition-all duration-700 ease-out"
+          style={{
+            borderColor: `${standardsData[selectedMobileStandard].themeColor}35`,
+            background: `linear-gradient(135deg, #ffffff 0%, ${standardsData[selectedMobileStandard].themeColor}0d 55%, #f8fafc 100%)`,
+            boxShadow: `0 22px 55px ${standardsData[selectedMobileStandard].themeColor}2b, 0 0 0 1px ${standardsData[selectedMobileStandard].themeColor}22`
+          }}
+        >
+          <div className="absolute -inset-4 rounded-3xl blur-2xl animate-pulse transition-colors duration-700" style={{ backgroundColor: `${standardsData[selectedMobileStandard].themeColor}1f` }} />
+          <div className="absolute -inset-2 rounded-3xl border animate-[spin_20s_linear_infinite] transition-colors duration-700" style={{ borderColor: `${standardsData[selectedMobileStandard].themeColor}55` }} />
+          <div className="absolute inset-2 rounded-2xl border-2 transition-colors duration-700" style={{ borderColor: `${standardsData[selectedMobileStandard].themeColor}30` }} />
+          <div className="absolute inset-0 z-[1] flex flex-col items-center justify-center px-8 text-center">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#15b498]">Production Standards</span>
+            <span className="mt-1 font-serif text-3xl font-bold drop-shadow-sm animate-[pulse_2.4s_ease-in-out_infinite]" style={{ color: standardsData[selectedMobileStandard].themeColor }}>{standardsData[selectedMobileStandard].step}</span>
+            <h3 className="mt-1 text-[13px] font-bold leading-tight text-[#0f2a4a]">{tr(standardsData[selectedMobileStandard].title)}</h3>
+            <p className="mt-2 line-clamp-4 text-[10px] leading-snug text-[#64748b]">{tr(standardsData[selectedMobileStandard].desc)}</p>
+          </div>
+          {standardsData.map((item, idx) => {
+            const positions = [
+              'left-1/2 top-0 -translate-x-1/2 -translate-y-1/2',
+              'right-0 top-1/2 translate-x-1/2 -translate-y-1/2',
+              'left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2',
+              'left-0 top-1/2 -translate-x-1/2 -translate-y-1/2'
+            ];
+            return (
+              <button
+                key={item.step}
+                type="button"
+                onClick={() => setSelectedMobileStandard(idx)}
+                aria-label={`Show standard ${item.step}`}
+                className={`absolute z-10 flex h-12 w-12 items-center justify-center rounded-full border-4 border-white text-sm font-bold text-white shadow-[0_8px_18px_rgba(15,42,74,0.28)] transition-all duration-300 hover:scale-125 hover:shadow-[0_12px_26px_rgba(15,42,74,0.4)] active:scale-95 ${positions[idx]} ${selectedMobileStandard === idx ? 'scale-125 ring-4 ring-white/80 shadow-[0_12px_28px_rgba(15,42,74,0.42)] animate-[pulse_2s_ease-in-out_infinite]' : ''}`}
+                style={{ background: `linear-gradient(135deg, ${item.themeColor}, ${item.themeColor}cc)` }}
+              >
+                {item.step}
+              </button>
+            );
+          })}
+        </div>
+        <button
+          type="button"
+          onClick={() => setIsMobileAutoPlaying((playing) => !playing)}
+          aria-label={isMobileAutoPlaying ? 'Pause automatic standards rotation' : 'Play automatic standards rotation'}
+          className="inline-flex items-center gap-1.5 rounded-full border border-[#15b498]/30 bg-white/85 px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-[#0f2a4a] shadow-sm backdrop-blur transition-all hover:scale-105"
+        >
+          {isMobileAutoPlaying ? <Pause className="h-3 w-3 text-[#15b498]" /> : <Play className="h-3 w-3 text-[#15b498]" />}
+          {isMobileAutoPlaying ? 'Auto switch' : 'Play standards'}
+        </button>
+      </div>
+
+      <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 relative z-10">
         {standardsData.map((item) => (
           <motion.div
             key={item.step}
@@ -161,6 +222,7 @@ export default function StandardsInfographic({ valueProps = [] }) {
             whileHover={{ scale: 1.06, y: -6 }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: 'spring', stiffness: 380, damping: 24 }}
+            onClick={() => setSelectedStandard(item)}
             className={`relative rounded-2xl p-4 sm:p-5 border border-[#dbe4ee] ${item.bgGradient} ${item.hoverBorder} ${item.hoverShadow} transition-[border-color,box-shadow,background-color] duration-300 overflow-hidden group ${item.cornerClass} ${item.orderClass} min-h-[195px] flex flex-col justify-between shadow-subtle z-10 hover:z-40 cursor-pointer will-change-transform`}
           >
             {/* Top Color Accent Line */}
@@ -194,9 +256,16 @@ export default function StandardsInfographic({ valueProps = [] }) {
                     {tr('Production Standard')}
                   </span>
                 </div>
-                <div className={`w-8 h-8 rounded-lg ${item.iconBg} flex items-center justify-center shrink-0 shadow-xs group-hover:scale-120 group-hover:rotate-6 transition-transform duration-300`}>
+                <button
+                  type="button"
+                  aria-label={`View ${item.title} details`}
+                  title="View details"
+                  onClick={(event) => { event.stopPropagation(); setSelectedStandard(item); }}
+                  className={`relative w-10 h-10 rounded-full ${item.iconBg} flex items-center justify-center shrink-0 shadow-sm group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300`}
+                >
                   {item.icon}
-                </div>
+                  <span className="absolute -inset-1 rounded-full border border-current opacity-0 group-hover:opacity-20 transition-opacity" />
+                </button>
               </div>
 
               {/* Title */}
@@ -261,7 +330,15 @@ export default function StandardsInfographic({ valueProps = [] }) {
 
             {/* 4 Quadrant Colored Donut Arcs */}
             {quadrantArcs.map((q) => (
-              <g key={q.num} className="transition-transform duration-200 hover:scale-105 transform origin-center cursor-pointer">
+              <g
+                key={q.num}
+                role="button"
+                tabIndex="0"
+                aria-label={`View standard ${q.num}`}
+                onClick={() => setSelectedStandard(standardsData[Number(q.num) - 1])}
+                onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') setSelectedStandard(standardsData[Number(q.num) - 1]); }}
+                className="transition-transform duration-200 hover:scale-105 transform origin-center cursor-pointer"
+              >
                 <path
                   d={q.path}
                   fill={`url(#${q.gradId})`}
@@ -341,6 +418,40 @@ export default function StandardsInfographic({ valueProps = [] }) {
           </svg>
         </div>
       </div>
+
+      {selectedStandard && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setSelectedStandard(null)}
+        >
+          <div
+            className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-5 sm:p-7 shadow-2xl border border-[#dbe4ee]"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#1f66a8]">Standard {selectedStandard.step}</span>
+                <h3 className="mt-1 font-serif text-2xl font-bold text-[#0f2a4a]">{tr(selectedStandard.title)}</h3>
+              </div>
+              <button type="button" onClick={() => setSelectedStandard(null)} aria-label="Close standard details" className="rounded-full p-2 text-[#56667a] hover:bg-[#edf3f9]">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-[#56667a]">{tr(selectedStandard.desc)}</p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {selectedStandard.chips.map((chip) => (
+                <span key={chip} className="rounded-full border border-[#dbe4ee] bg-[#f7f9fc] px-3 py-1 text-xs text-[#0f2a4a]">{tr(chip)}</span>
+              ))}
+            </div>
+            <div className="mt-6 flex items-center gap-2 border-t border-[#edf3f9] pt-4 text-sm font-semibold text-[#0f2a4a]">
+              <CheckCircle2 className="h-4 w-4" style={{ color: selectedStandard.themeColor }} />
+              Quality checked
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

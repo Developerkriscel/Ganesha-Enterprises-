@@ -257,7 +257,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="space-y-2"
               >
-                <h1 className="font-serif text-xl sm:text-2xl xl:text-[2.7rem] font-extrabold text-white tracking-tight leading-[1.12] drop-shadow-lg transition-transform duration-500 hover:scale-[1.02]">
+                <h1 className="font-serif text-2xl sm:text-2xl xl:text-[2.7rem] font-extrabold text-white tracking-tight leading-[1.12] drop-shadow-lg transition-transform duration-500 hover:scale-[1.02]">
                   {tr("WE DON'T JUST PRINT.")} <br />
                   <span className="brand-gradient-text italic font-normal drop-shadow-[0_0_16px_rgba(21,180,152,0.35)]">{tr('WE CREATE')}</span> {tr('IMPRESSIONS.')}
                 </h1>
@@ -278,11 +278,11 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
-                className="flex flex-wrap items-center gap-4 pt-2"
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-4 pt-2 w-full"
               >
                 <Link
                   to="/products"
-                  className="px-5 py-2.5 rounded-full bg-[#1f66a8] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#19558f] transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center gap-2 group"
+                  className="w-full sm:w-auto flex-none justify-center px-3 sm:px-5 py-2.5 rounded-full bg-[#1f66a8] text-white text-[10px] sm:text-xs font-bold uppercase tracking-[0.12em] sm:tracking-widest hover:bg-[#19558f] transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 flex items-center gap-1.5 sm:gap-2 group whitespace-nowrap"
                 >
                   <span>{tr('Explore Our Collection')}</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -290,7 +290,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
 
                 <button
                   onClick={() => onOpenQuote()}
-                  className="px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-bold uppercase tracking-widest border border-white/25 hover:border-[#15b498] hover:bg-white/15 transition-all duration-300 shadow-sm flex items-center gap-2"
+                  className="w-full sm:w-auto flex-none justify-center px-3 sm:px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md text-white text-[10px] sm:text-xs font-bold uppercase tracking-[0.12em] sm:tracking-widest border border-white/25 hover:border-[#15b498] hover:bg-white/15 transition-all duration-300 shadow-sm flex items-center gap-1.5 sm:gap-2 whitespace-nowrap"
                 >
                   <span>{tr('Request a Quote')}</span>
                 </button>
@@ -329,7 +329,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
 
               <div className="relative z-10" style={{ perspective: '1200px' }}>
                 {/* Stacked card deck with 3D tilt */}
-                <div className="relative w-[460px] max-w-[calc(100vw-2rem)] h-[550px] max-h-[68vh] mx-auto">
+                <div className="relative w-[460px] max-w-[calc(100vw-2rem)] h-[420px] sm:h-[480px] lg:h-[550px] max-h-none lg:max-h-[68vh] mx-auto">
                   {heroShowcases.map((item, idx) => {
                     const isActive = idx === heroTab;
                     const offset = idx - heroTab;
@@ -364,8 +364,8 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                             </div>
 
                             {/* Bottom info — only on active card */}
-                            <div className={`absolute bottom-0 left-0 right-0 p-6 sm:p-8 transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+                            <div className={`absolute bottom-0 left-0 right-0 p-4 sm:p-6 transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                              <h3 className="font-serif text-xl sm:text-3xl font-bold text-white leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
                                 {item.title}
                               </h3>
                               <p className="text-xs sm:text-sm text-white/80 mt-2 line-clamp-2 max-w-md drop-shadow-[0_1px_6px_rgba(0,0,0,0.8)]">
@@ -434,7 +434,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION C: BRAND VALUE PROPOSITIONS & METRICS
           ========================================================= */}
-      <section className="py-6 sm:py-8 bg-[#f7f9fc] relative">
+      <section className="scroll-mt-24 py-8 sm:py-8 bg-[#f7f9fc] relative">
         <div className="w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
           <motion.div
             initial="hidden"
@@ -443,7 +443,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
             variants={staggerContainer}
             className="text-center max-w-5xl mx-auto mb-4 sm:mb-6 space-y-2"
           >
-            <motion.h2 variants={fadeUp} className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
+            <motion.h2 variants={fadeUp} className="mx-auto max-w-[22rem] sm:max-w-5xl px-2 font-serif text-xl sm:text-3xl lg:text-4xl font-bold text-[#0f2a4a] tracking-tight leading-tight break-words">
               Why Leading Enterprises <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Entrust Their Brand</span> to Us
             </motion.h2>
             <div className="flex items-center justify-center gap-2.5 pt-0.5">
@@ -507,7 +507,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION E: ABOUT GANESHA ENTERPRISES (Visual Storytelling)
           ========================================================= */}
-      <section className="py-6 sm:py-8 bg-white relative overflow-hidden">
+      <section className="home-about-section py-6 sm:py-8 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
 
@@ -556,7 +556,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               whileInView="visible"
               viewport={{ once: true, margin: '-20px' }}
               variants={fadeUp}
-              className="lg:col-span-6 flex flex-col justify-between space-y-3 sm:space-y-3.5"
+              className="home-about-story lg:col-span-6 flex flex-col justify-between space-y-3 sm:space-y-3.5"
             >
               <div className="space-y-1.5">
                 <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
@@ -610,7 +610,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                         <div className="text-[11.5px] font-bold text-[#0f2a4a] group-hover/item:text-[#1f66a8] transition-colors line-clamp-1">
                           {tr(item.title)}
                         </div>
-                        <div className="text-[9.5px] text-[#7a8ba0] line-clamp-1">
+                        <div className="about-feature-desc text-[9.5px] text-[#7a8ba0] line-clamp-1">
                           {tr(item.desc)}
                         </div>
                       </div>
@@ -878,12 +878,12 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
       {/* =========================================================
           SECTION J: CONTACT & DIRECT QUOTE SECTION
           ========================================================= */}
-      <section className="py-24 bg-[#0f2a4a] text-white relative overflow-hidden">
+      <section className="home-contact-section py-10 sm:py-16 lg:py-24 bg-[#0f2a4a] text-white relative overflow-hidden">
         {/* Subtle Ambient Radial Light */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#15b498]/10 rounded-full blur-[100px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 sm:gap-10 lg:gap-12 items-center">
 
             {/* Contact Details & Business Positioning */}
             <motion.div
@@ -891,7 +891,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               whileInView="visible"
               viewport={{ once: true, margin: '-20px' }}
               variants={staggerContainer}
-              className="lg:col-span-5 space-y-6"
+              className="home-contact-copy lg:col-span-5 space-y-4 sm:space-y-6"
             >
               <motion.h2 variants={fadeUp} className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
                 Give Us a Printing Deal for <span className="bg-gradient-to-r from-[#15b498] via-[#5eead4] to-[#15b498] bg-clip-text text-transparent">Your Enterprise.</span>
@@ -946,10 +946,10 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
               whileInView="visible"
               viewport={{ once: true, margin: '-20px' }}
               variants={fadeRight}
-              className="lg:col-span-7"
+              className="home-quick-quote lg:col-span-7"
             >
-              <div className="bg-[#f7f9fc] text-[#0f2a4a] p-8 sm:p-10 rounded-3xl shadow-2xl border border-[#dbe4ee]">
-                <div className="space-y-2 mb-6">
+              <div className="home-quick-quote-card bg-[#f7f9fc] text-[#0f2a4a] p-4 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl shadow-2xl border border-[#dbe4ee]">
+                <div className="home-quick-form-heading space-y-2 mb-6">
                   <span className="text-xs uppercase tracking-widest font-semibold text-[#1f66a8]">
                     Fast Turnaround Quote
                   </span>
@@ -980,7 +980,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
                     </button>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleQuickSubmit} className="space-y-4">
+                  <form onSubmit={handleQuickSubmit} className="home-quick-form space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1">
@@ -1091,7 +1091,7 @@ export default function Home({ onOpenQuote, onOpenLightbox }) {
           >
             <motion.div variants={fadeLeft} className="max-w-2xl space-y-2.5">
               <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
-                Printing Guides & <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Industry Insights</span>
+                <span className="whitespace-nowrap text-[1.1rem] sm:text-3xl lg:text-4xl">Printing Guides & <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Industry Insights</span></span>
               </h2>
               <div className="flex items-center gap-2 pt-0.5">
                 <span className="h-[2px] w-10 bg-[#15b498] rounded-full"></span>

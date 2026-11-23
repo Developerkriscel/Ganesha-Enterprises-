@@ -8,7 +8,7 @@ export const productCategories = [
   {
     id: "business-essentials",
     name: "Business Essentials",
-    count: 6,
+    count: 7,
     description: "Premium corporate stationery, visiting cards, presentation folders, and office essentials.",
     subcategories: ["Visiting Cards", "Posters & Marketing", "Letterheads & Notebooks", "Labels & Packaging", "Stamps & Ink", "Office Supplies"]
   },
@@ -29,14 +29,14 @@ export const productCategories = [
   {
     id: "home-and-gifts",
     name: "Home, Drinkware & Gifts",
-    count: 5,
+    count: 3,
     description: "Luxury employee welcome hampers, insulated thermal drinkware, ceramic mugs, and curated festive boxes.",
     subcategories: ["Drinkware", "Gift Hampers", "Mugs, Albums & Gifts"]
   },
   {
     id: "signage-and-more",
     name: "Signage, Awards & More",
-    count: 3,
+    count: 4,
     description: "Roll-up standees, acrylic prestige awards, wedding suites, and large-format architectural displays.",
     subcategories: ["Roll-up Standees", "Prestige Awards", "Event Banners", "Wedding Printing"]
   }
@@ -408,6 +408,190 @@ export const products = [
       "Reflective": "2-inch 3M Scotchlite High-Intensity Prismatic Tape"
     },
     finishes: ["Neon Yellow", "High-Vis Orange", "Dual Chest Pockets"]
+  },
+  {
+    id: "personalised-metal-rollerball-pens",
+    slug: "personalised-metal-rollerball-pens",
+    name: "Personalised Executive Metal Pens",
+    category: "made-by-you",
+    categoryName: "Made by You & Stationery",
+    subcategory: "Personalised Pens",
+    featured: true,
+    badge: "Popular",
+    shortDesc: "Matte metal rollerball pens with laser-engraved names or brand logos, smooth German ink, and gift box.",
+    description: "Executive metal ballpoint and rollerball pens with smooth-flowing Swiss-grade ink. Features high-precision 360-degree laser engraving of individual names or corporate logos, durable spring clip, and weighted brass barrel.",
+    image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=1000&auto=format&fit=crop",
+    backupImage: "https://images.unsplash.com/photo-1585336261026-4186685799b8?q=80&w=1000&auto=format&fit=crop",
+    moq: "50 Units",
+    turnaround: "2 – 3 Days",
+    specs: {
+      "Material": "Anodized Matte Aluminum / Weighted Brass",
+      "Ink": "German 0.7mm Blue / Black Rollerball",
+      "Branding": "Fiber Laser Engraving / Screen Print",
+      "Packaging": "Individual Matte Black Gift Box"
+    },
+    finishes: ["Laser Engraving", "Matte Black", "Brushed Silver", "Rose Gold Trim"]
+  },
+  {
+    id: "custom-die-cut-fridge-magnets",
+    slug: "custom-die-cut-fridge-magnets",
+    name: "Custom Die-Cut Brand Magnets",
+    category: "made-by-you",
+    categoryName: "Made by You & Stationery",
+    subcategory: "Magnets",
+    featured: false,
+    badge: "Branding",
+    shortDesc: "High-strength flexible magnetic sheets with glossy vinyl print, custom contour die-cutting, and UV protection.",
+    description: "Keep your brand visible on office cabinets, refrigerators, and metal surfaces. Printed on heavy 0.8mm magnetic substrate with high-definition vibrant inks and scratch-resistant glossy lamination.",
+    image: "https://images.unsplash.com/photo-1589384267710-7a170981ca78?q=80&w=1000&auto=format&fit=crop",
+    backupImage: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000&auto=format&fit=crop",
+    moq: "100 Units",
+    turnaround: "2 – 4 Days",
+    specs: {
+      "Thickness": "0.8mm Heavy-Duty Flexible Magnetic Rubber",
+      "Finish": "High-Gloss Waterproof Vinyl Lamination",
+      "Cutting": "Custom CNC Contour Die-Cut to Any Shape",
+      "Use": "Indoor Refrigerators, Metal Partitions & Desks"
+    },
+    finishes: ["Gloss UV Lamination", "Matte Velvet", "Custom Shape Die-Cut"]
+  },
+  {
+    id: "premium-cotton-printed-t-shirts",
+    slug: "premium-cotton-printed-t-shirts",
+    name: "Premium Round Neck Printed T-Shirts",
+    category: "clothing-caps-bags",
+    categoryName: "Clothing, Caps & Bags",
+    subcategory: "Printed T-Shirts",
+    featured: false,
+    badge: "Essential",
+    shortDesc: "180 GSM 100% bio-washed combed cotton t-shirts with vibrant non-fading screen and DTF printing.",
+    description: "Breathable round-neck t-shirts ideal for corporate events, hackathons, startups, and everyday staff uniforms. Made from premium combed cotton with lycra ribbed collar and double-stitched hems.",
+    image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop",
+    backupImage: "https://ganeshaenterprises.in/assets/imgs/prodact/Basic-Polyester-Polo-T-Shirts_Category-page.jpeg",
+    moq: "25 Units",
+    turnaround: "3 – 5 Days",
+    specs: {
+      "Fabric": "180 GSM 100% Super-Combed Cotton",
+      "Processing": "Bio-Washed & Silicon Softened",
+      "Branding": "Vibrant Screen Print / High-Density DTF",
+      "Sizes": "S, M, L, XL, 2XL, 3XL"
+    },
+    finishes: ["Multi-Color Screen Print", "High-Density Rubber Print", "Direct to Film (DTF)"]
+  },
+  {
+    id: "executive-formal-office-shirts",
+    slug: "executive-formal-office-shirts",
+    name: "Executive Formal Office Shirts",
+    category: "clothing-caps-bags",
+    categoryName: "Clothing, Caps & Bags",
+    subcategory: "Office Shirts",
+    featured: false,
+    badge: "Corporate",
+    shortDesc: "Crisp cotton-rich formal corporate shirts with subtle embroidered logo on pocket or cuff.",
+    description: "Wrinkle-resistant luxury formal shirts tailored for frontline teams, airline staff, and corporate executives. Available in classic white, corporate blue, and micro-checks with customized buttons.",
+    image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=1000&auto=format&fit=crop",
+    backupImage: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop",
+    moq: "20 Units",
+    turnaround: "4 – 6 Days",
+    specs: {
+      "Fabric": "60% Cotton, 40% Polyester Oxford Weave",
+      "Collar": "Stiffened Cutaway / Button-Down Collar",
+      "Branding": "Precision German Madeira Embroidery",
+      "Fit": "Regular & Slim Fit Options"
+    },
+    finishes: ["Pocket Embroidery", "Cuff Monogram", "Branded Buttons"]
+  },
+  {
+    id: "heavy-duty-event-banners",
+    slug: "heavy-duty-event-banners",
+    name: "Heavy-Duty Vinyl Event Banners",
+    category: "signage-and-more",
+    categoryName: "Signage, Awards & More",
+    subcategory: "Event Banners",
+    featured: false,
+    badge: "Signage",
+    shortDesc: "Weatherproof star flex banners with high-DPI solvent printing, reinforced brass eyelets, and heat-welded hems.",
+    description: "Outdoor and indoor exhibition banners designed to withstand rain, wind, and sun. Printed with UV-resistant Japanese inks on tear-resistant blackout flex.",
+    image: "https://ganeshaenterprises.in/assets/imgs/About/flex-printing-services-1696244803-7104957.jpg",
+    backupImage: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1000&auto=format&fit=crop",
+    moq: "1 Banner",
+    turnaround: "24 – 48 Hours",
+    specs: {
+      "Material": "440 GSM Heavy Blackout Star Flex",
+      "Inks": "Outdoor UV-Curable Weatherproof Inks",
+      "Finishing": "Brass Grommets Every 2 Feet + Hemmed Edges",
+      "Sizes": "Custom Dimensions up to 10 Feet Seamless"
+    },
+    finishes: ["Brass Eyelets", "Reinforced Hemming", "Pole Pockets"]
+  },
+  {
+    id: "self-inking-corporate-stamps",
+    slug: "self-inking-corporate-stamps",
+    name: "Self-Inking Corporate Rubber Stamps",
+    category: "business-essentials",
+    categoryName: "Business Essentials",
+    subcategory: "Stamps & Ink",
+    featured: false,
+    badge: "Office",
+    shortDesc: "Pre-inked automatic stamps with laser-engraved rubber die, 10,000+ clean impressions, and refillable ink.",
+    description: "Quick and clean document authorization for corporate offices, directors, and finance departments. Features precision laser-cut rubber text, dust cover, and clear indexing window.",
+    image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&w=1000&auto=format&fit=crop",
+    backupImage: "https://ganeshaenterprises.in/assets/imgs/prodact/IN_Standard-Visiting-Cards_Overview.jpeg",
+    moq: "1 Unit",
+    turnaround: "24 Hours",
+    specs: {
+      "Mechanism": "Heavy-Duty Self-Inking Spring Mechanism",
+      "Ink Colors": "Blue, Black, Red, Violet",
+      "Impressions": "10,000+ Sharp Impressions Before Refill",
+      "Shape": "Rectangular, Round, Oval & Date Stamp"
+    },
+    finishes: ["Pre-Inked", "Laser Die-Cut", "Pocket Stamp Option"]
+  },
+  {
+    id: "executive-presentation-folders",
+    slug: "executive-presentation-folders",
+    name: "Executive Presentation Folders",
+    category: "business-essentials",
+    categoryName: "Business Essentials",
+    subcategory: "Office Supplies",
+    featured: false,
+    badge: "Stationery",
+    shortDesc: "350 GSM laminated corporate document folders with dual inner pockets, business card slit, and foil logo.",
+    description: "Deliver proposals, contracts, and audit reports with executive authority. Crafted from heavyweight cardstock with soft-touch lamination, metallic foil logo, and custom inner die-cut pockets.",
+    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=1000&auto=format&fit=crop",
+    backupImage: "https://ganeshaenterprises.in/assets/imgs/prodact/IN_Standard-Visiting-Cards_Overview.jpeg",
+    moq: "100 Folders",
+    turnaround: "3 – 4 Days",
+    specs: {
+      "Paper": "350 – 400 GSM Art Card with Velvet Lamination",
+      "Pockets": "Single or Dual Deep Pockets with Visiting Card Slit",
+      "Dimensions": "A4 Capacity (Holds up to 30 Sheets)",
+      "Finishing": "Spot UV + Gold / Silver Foil Stamping"
+    },
+    finishes: ["Velvet Matte Lamination", "Gold Foil Stamping", "Spot UV"]
+  },
+  {
+    id: "luxury-wedding-invitation-suite",
+    slug: "luxury-wedding-invitation-suite",
+    name: "Luxury Bespoke Wedding Invitation Suite",
+    category: "signage-and-more",
+    categoryName: "Signage, Awards & More",
+    subcategory: "Wedding Printing",
+    featured: false,
+    badge: "Bespoke",
+    shortDesc: "Handcrafted 600 GSM deckle-edge wedding cards with real gold foil, wax seals, and velvet presentation boxes.",
+    description: "Royal invitation suites crafted for celebratory weddings. Features handcrafted cotton rag paper with deckle edges, multi-level foil stamping, laser-cut acrylic inserts, and hand-poured custom wax seal stamps.",
+    image: "https://ganeshaenterprises.in/assets/imgs/wedding/WhatsApp-Image-2023-09-08-at-12.02.43-PM.jpeg",
+    backupImage: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop",
+    moq: "50 Suites",
+    turnaround: "5 – 7 Days",
+    specs: {
+      "Board": "600 GSM Imported Handmade Deckle Edge Board",
+      "Process": "Deep Letterpress + Real Hot Foil Stamping",
+      "Enclosure": "Bespoke Rigid Box or Velvet Folio",
+      "Accessories": "Custom Monogram Brass Wax Seal"
+    },
+    finishes: ["Hot Foil Stamping", "Deckle Edge", "Wax Seal", "Letterpress"]
   }
 ];
 

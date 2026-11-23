@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { 
   Search, 
@@ -19,11 +19,39 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
+  const headerRef = useRef(null);
+  const megaCloseTimer = useRef(null);
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
   const currentLanguageLabel = supportedLanguages.find(([code]) => code === language)?.[1] || 'English';
 
   const isHome = location.pathname === '/';
+
+  const handleMegaOpen = () => {
+    if (megaCloseTimer.current) {
+      clearTimeout(megaCloseTimer.current);
+      megaCloseTimer.current = null;
+    }
+    setMegaMenuOpen(true);
+  };
+
+  const handleMegaClose = (delay = 250) => {
+    if (megaCloseTimer.current) {
+      clearTimeout(megaCloseTimer.current);
+    }
+    megaCloseTimer.current = setTimeout(() => {
+      setMegaMenuOpen(false);
+    }, delay);
+  };
+
+  const handleMegaToggle = (e) => {
+    e.preventDefault();
+    if (megaCloseTimer.current) {
+      clearTimeout(megaCloseTimer.current);
+      megaCloseTimer.current = null;
+    }
+    setMegaMenuOpen((prev) => !prev);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +65,32 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
   useEffect(() => {
     setMobileMenuOpen(false);
     setMegaMenuOpen(false);
+    if (megaCloseTimer.current) clearTimeout(megaCloseTimer.current);
   }, [location.pathname]);
+
+  // Click outside and escape key listeners
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (headerRef.current && !headerRef.current.contains(e.target)) {
+        setMegaMenuOpen(false);
+        setLanguageMenuOpen(false);
+      }
+    };
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setMegaMenuOpen(false);
+        setLanguageMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+      if (megaCloseTimer.current) clearTimeout(megaCloseTimer.current);
+    };
+  }, []);
 
   const navLinks = [
     { name: t('nav', 'home'), path: '/' },
@@ -53,6 +106,7 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
   return (
     <>
       <header
+        ref={headerRef}
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isTransparent
             ? 'bg-[#f7f9fc]/95 backdrop-blur-md text-[#0f2a4a] py-3 border-b border-[#dbe4ee]'
@@ -72,13 +126,26 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
                 <div 
                   key={link.name} 
                   className="relative"
-                  onMouseEnter={() => link.hasMega && setMegaMenuOpen(true)}
+                  onMouseEnter={() => {
+                    if (link.hasMega) {
+                      handleMegaOpen();
+                    } else {
+                      if (megaCloseTimer.current) clearTimeout(megaCloseTimer.current);
+                      setMegaMenuOpen(false);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (link.hasMega) {
+                      handleMegaClose(250);
+                    }
+                  }}
                 >
                   <NavLink
                     to={link.path}
+                    onClick={link.hasMega ? handleMegaToggle : undefined}
                     className={({ isActive }) =>
-                      `px-3.5 py-2 text-xs font-semibold whitespace-nowrap uppercase tracking-wider transition-all duration-200 inline-flex items-center gap-1 rounded-full ${
-                        isActive
+                      `px-3.5 py-2 text-xs font-semibold whitespace-nowrap uppercase tracking-wider transition-all duration-200 inline-flex items-center gap-1 rounded-full cursor-pointer ${
+                        isActive || (link.hasMega && megaMenuOpen)
                           ? 'text-[#15b498] bg-[#e8f4f2]'
                           : isTransparent
                             ? 'text-[#0f2a4a] hover:text-[#15b498] hover:bg-black/5'
@@ -175,9 +242,7 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle Menu"
-                className={`p-2 rounded-xl transition-colors ${
-                  isTransparent ? 'text-white hover:bg-white/10' : 'text-[#0f2a4a] hover:bg-black/5'
-                }`}
+                className="p-2 rounded-xl text-[#0f2a4a] hover:bg-black/5 transition-colors"
               >
                 
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -189,7 +254,9 @@ export default function Navbar({ onOpenSearch, onOpenQuote }) {
         {/* Mega Menu Dropdown */}
         <MegaMenu 
           isOpen={megaMenuOpen} 
-          onClose={() => setMegaMenuOpen(false)} 
+          onClose={() => setMegaMenuOpen(false)}
+          onMouseEnter={handleMegaOpen}
+          onMouseLeave={() => handleMegaClose(250)}
         />
       </header>
 

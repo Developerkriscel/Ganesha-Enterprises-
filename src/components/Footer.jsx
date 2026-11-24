@@ -30,7 +30,7 @@ export default function Footer({ onOpenQuote }) {
   };
 
   return (
-    <footer className="bg-[#0f2a4a] text-[#f7f9fc] border-t border-white/10 pt-4 sm:pt-8 pb-3 overflow-hidden relative">
+    <footer className="site-footer bg-[#0f2a4a] text-[#f7f9fc] border-t border-white/10 pt-4 sm:pt-8 pb-3 overflow-hidden relative">
       {/* Decorative Subtle Ambient Glow */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#15b498]/5 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -160,7 +160,7 @@ export default function Footer({ onOpenQuote }) {
               Get occasional print and merchandise updates.
             </p>
 
-            <form onSubmit={handleSubscribe} className="space-y-2">
+            <form onSubmit={handleSubscribe} className="footer-newsletter-form space-y-2">
               <div className="relative">
                 <input
                   type="email"

@@ -188,7 +188,7 @@ export default function Contact() {
 
             {/* Right Contact / Quote Request Form */}
             <div className="lg:col-span-7">
-              <div className="bg-[#f7f9fc] rounded-3xl p-8 sm:p-10 border border-[#dbe4ee] shadow-xl">
+              <div className="contact-form-card bg-[#f7f9fc] rounded-3xl p-8 sm:p-10 border border-[#dbe4ee] shadow-xl">
                 <div className="space-y-2.5 mb-8">
                   <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#0f2a4a] tracking-tight leading-tight">
                     Request a Customized <span className="bg-gradient-to-r from-[#1f66a8] via-[#15b498] to-[#1f66a8] bg-clip-text text-transparent">Print Estimate</span>
@@ -246,7 +246,7 @@ export default function Contact() {
                     </div>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                  <form onSubmit={handleSubmit} className="contact-form space-y-5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-xs font-semibold uppercase tracking-wider text-[#0f2a4a] mb-1.5">

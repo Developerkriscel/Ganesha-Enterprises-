@@ -511,13 +511,16 @@ export default function CategoryInfographic() {
             type="button"
             onClick={() => navigate(`/products?category=${steps[selectedMobileIdx].id}`)}
             aria-label={`Open ${steps[selectedMobileIdx].name} products`}
-            className="absolute inset-0 z-[1] flex cursor-pointer flex-col items-center justify-center border-0 bg-transparent px-10 text-center outline-none transition-transform duration-300 hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-[#15b498] focus-visible:ring-inset"
+            className="group absolute inset-0 z-[1] flex cursor-pointer flex-col items-center justify-center border-0 bg-transparent px-10 text-center outline-none transition-transform duration-300 hover:scale-[1.02] focus-visible:ring-2 focus-visible:ring-[#15b498] focus-visible:ring-inset"
           >
             <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#15b498]">Product Matrix</span>
             <span className="mt-1 font-serif text-3xl font-bold drop-shadow-sm animate-[pulse_2.4s_ease-in-out_infinite]" style={{ color: steps[selectedMobileIdx].color }}>{steps[selectedMobileIdx].step}</span>
             <h3 className="mt-1 text-[13px] font-bold leading-tight text-[#0f2a4a]">{tr(steps[selectedMobileIdx].name)}</h3>
             <span className="mt-1 text-[9px] font-bold uppercase tracking-wider" style={{ color: steps[selectedMobileIdx].color }}>{steps[selectedMobileIdx].count}</span>
             <p className="mt-2 line-clamp-3 text-[10px] leading-snug text-[#64748b]">{tr(steps[selectedMobileIdx].description)}</p>
+            <span className="mt-3 inline-flex items-center gap-1 rounded-full bg-[#0f2a4a] px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-white shadow-sm transition-all duration-300 group-hover:scale-105">
+              {tr('Learn More')} <span aria-hidden="true">→</span>
+            </span>
           </button>
 
           {steps.map((item, idx) => {

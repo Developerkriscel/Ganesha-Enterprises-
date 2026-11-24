@@ -1,3 +1,45 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
@@ -22,7 +64,6 @@ import {
   Sparkles,
   X
 } from 'lucide-react';
-import { company } from '../data/company';
 import { products, productCategories } from '../data/products';
 import { services } from '../data/services';
 import { portfolioItems } from '../data/portfolio';
@@ -34,6 +75,26 @@ import Carousel from '../components/Carousel';
 import StandardsInfographic from '../components/StandardsInfographic';
 import CategoryInfographic from '../components/CategoryInfographic';
 import { useLanguage } from '../context/LanguageContext';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { company } from '../data/company';
 
 // ── Animation Variants ──────────────────────────────────────
 const fadeUp = {

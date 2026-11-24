@@ -111,13 +111,13 @@ export default function QuoteModal({ isOpen, onClose, initialProduct = '', initi
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-2 sm:p-4 bg-black/60 backdrop-blur-md overflow-y-auto animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/60 backdrop-blur-md overflow-y-auto animate-fadeIn">
       <div 
-        className="w-[calc(100vw-2rem)] max-w-2xl max-h-[calc(100dvh-2rem)] sm:w-full sm:max-h-[90vh] bg-[#f7f9fc] rounded-2xl sm:rounded-3xl shadow-2xl border border-[#dbe4ee] overflow-y-auto my-4 sm:my-8"
+        className="quote-modal-shell w-[calc(100vw-2rem)] max-w-2xl max-h-[calc(100dvh-2rem)] sm:w-full sm:max-h-[90vh] bg-[#f7f9fc] rounded-2xl sm:rounded-3xl shadow-2xl border border-[#dbe4ee] overflow-y-auto my-5 sm:my-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-start justify-between gap-2 px-3 py-3 sm:gap-3 sm:px-8 sm:py-6 bg-white border-b border-[#dbe4ee]">
+        <div className="quote-modal-header flex items-start justify-between gap-2 px-3 py-3 sm:gap-3 sm:px-8 sm:py-6 bg-white border-b border-[#dbe4ee]">
           <div>
             <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#edf3f9] text-[#1f66a8] text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-1">
               Direct Studio Inquiries
@@ -321,11 +321,11 @@ export default function QuoteModal({ isOpen, onClose, initialProduct = '', initi
               {errors.message && <p className="text-xs text-red-500 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{errors.message}</p>}
             </div>
 
-            <div className="pt-2 flex flex-col sm:flex-row gap-3 items-center justify-between border-t border-[#dbe4ee]">
+            <div className="quote-form-actions pt-2 flex flex-row gap-2 items-center border-t border-[#dbe4ee]">
               <button
                 type="button"
                 onClick={handleWhatsAppRedirect}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-[#25D366]/40 text-[#128C7E] bg-white hover:bg-[#25D366]/10 text-xs font-semibold transition-all"
+                className="flex-1 min-w-0 inline-flex items-center justify-center gap-1 px-2 py-2 rounded-xl border border-[#25D366]/40 text-[#128C7E] bg-white hover:bg-[#25D366]/10 text-[10px] sm:text-xs font-semibold transition-all"
               >
                 <MessageSquare className="w-4 h-4 text-[#25D366]" />
                 <span>WhatsApp Inquiry</span><span className="hidden sm:inline"> (+91 96500 44234)</span>
@@ -334,7 +334,7 @@ export default function QuoteModal({ isOpen, onClose, initialProduct = '', initi
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-[#0f2a4a] text-white hover:bg-[#15b498] text-xs font-semibold uppercase tracking-wider transition-all duration-300 disabled:opacity-50"
+                className="flex-1 min-w-0 inline-flex items-center justify-center gap-1 px-2 py-2 rounded-xl bg-[#0f2a4a] text-white hover:bg-[#15b498] text-[10px] sm:text-xs font-semibold uppercase tracking-wider transition-all duration-300 disabled:opacity-50"
               >
                 {isSubmitting ? (
                   <span>Processing...</span>
